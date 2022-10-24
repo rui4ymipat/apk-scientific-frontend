@@ -70,7 +70,12 @@ function AdminLogin(props) {
         container
         justifyContent="center"
         alignItems="center"
-        // sx={{ height: "100vh" }}
+        sx={{
+          height: {
+            xs: "100vh",
+            sm: "100vh",
+          },
+        }}
         mx="auto"
         mt={{
           xs: 10,
