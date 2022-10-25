@@ -11,6 +11,8 @@ import Navbar from "./components/Navbar";
 import AdminLogin from "./pages/AdminLogin";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 const firebaseConfig = {
   apiKey: "AIzaSyDWTVbq_cSmk6Tol9xcVofQm3FhhyZL80k",
   authDomain: "apk-scientific.firebaseapp.com",
@@ -27,13 +29,22 @@ const analytics = getAnalytics(app);
 function App() {
   return (
     <Router>
-      <Navbar></Navbar>
+      {/* Header */}
+      <Header /> 
+      
+      {/* Navbar menu */}
+      <Navbar />
+
+      {/* content */}
       <Routes>
         <Route exact path="/" element={<Home app={app} />} />
         <Route path="/admin" element={<Admin app={app} />} />
         <Route path="/admin-login" element={<AdminLogin app={app} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+
+      {/* footer */}
+      <Footer />
     </Router>
   );
 }
