@@ -13,7 +13,6 @@ import {
 import React, {
     useState
 } from 'react';
-
 import DrawerMenu from './DrawerMenu';
 
 const pages = ['หน้าหลัก (HOME)', 'สินค้าใหม่ (NEW PRODUCTS)', 'สินค้า', 'ข่าวสาร/บทความ (NEWS/ARTICLES)', 'เกี่ยวกับเรา', 'ติดต่อเรา (CONTACT US)'];
@@ -139,7 +138,6 @@ export default function Navbar() { // *************************************** fu
             </Container>
             {/* mobile mode menu */}
             <DrawerMenu anchor={'right'} />
-
         </AppBar>
     )
 }
