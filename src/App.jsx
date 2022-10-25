@@ -13,6 +13,13 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "./assets/css/custom.css";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDWTVbq_cSmk6Tol9xcVofQm3FhhyZL80k",
   authDomain: "apk-scientific.firebaseapp.com",

@@ -1,5 +1,5 @@
 
-import { ChevronLeft, ExpandCircleDown, ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import MenuHam from '@mui/icons-material/Menu';
 import {
     AppBar, Box, Button, Container,
@@ -14,8 +14,6 @@ import React, {
     useState
 } from 'react';
 import DrawerMenu from './DrawerMenu';
-
-const pages = ['หน้าหลัก (HOME)', 'สินค้าใหม่ (NEW PRODUCTS)', 'สินค้า', 'ข่าวสาร/บทความ (NEWS/ARTICLES)', 'เกี่ยวกับเรา', 'ติดต่อเรา (CONTACT US)'];
 
 export default function Navbar() { // *************************************** function main 
     const [actionMunuProducts, setActionMunuProducts] = React.useState(null);

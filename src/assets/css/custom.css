@@ -1,0 +1,20 @@
+.carousel-custom .swiper-button-next,
+.carousel-custom .swiper-button-prev{
+    background-color: rgba(50, 50, 50, 0.35);
+    border-radius: 7px;
+    transition: all 0.25s;
+    color: white;
+}
+.carousel-custom .swiper-button-next:hover,
+.carousel-custom .swiper-button-prev:hover{
+    background-color: rgba(50, 50, 50, 1);
+}
+.carousel-custom .swiper-button-next::after,
+.carousel-custom .swiper-button-prev::after{
+    font-size: 24px;
+}
+
+.carousel-custom .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    background-color: white;
+    box-shadow: 0.5px 0.5px 1px 0px gray;
+}
