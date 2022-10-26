@@ -1,24 +1,46 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import { Close, ExpandMore, FacebookSharp } from '@mui/icons-material';
+import { Accordion, AccordionDetails, AccordionSummary, IconButton, Typography } from '@mui/material';
 
-export default function DrawerMenu(props) {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
 
+const AccCusDrawMenu = ({data={id: 0, title: "", path: "",list: [{listTitle: '', listUrl: ""}]}}) => {
+  return (
+    <Accordion sx={{backgroundColor: '#0000', boxShadow: 'none', color:'white', width:'100%'}}>
+      <AccordionSummary
+        expandIcon={<ExpandMore sx={{color:'white'}} />}
+        aria-controls="panel1a-content"
+        id={"panel1a-header"+data.id}
+      >
+        <Typography>{data.title} {data.path}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+
+        <ListItemButton>
+          <Typography sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
+            สินค้าทั้งหมด
+          </Typography>
+        </ListItemButton>
+        {data.list.map(obj=>{
+          return (
+            <ListItemButton>
+              <Typography sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
+                {obj.listTitle}{data.path}{obj.listUrl}
+              </Typography>
+            </ListItemButton>
+          )
+        })}
+
+      </AccordionDetails>
+    </Accordion>
+  )
+}
+
+export default function DrawerMenu(props) { // ============================= function main
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -28,54 +50,58 @@ export default function DrawerMenu(props) {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    // setState({ ...state, [anchor]: open });
+    props.close(open);
   };
 
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+
+      <ListItem disablePadding>
+        <Box sx={{display:'flex', alignItems: 'center', justifyContent: 'end', px:2}}>
+          <IconButton onClick={toggleDrawer(anchor, false)}>
+            <Close sx={{color:'white'}} />
+          </IconButton>
+        </Box>
+      </ListItem>
+
+        {props.items.map(obj=>{
+          console.log(obj);
+          return obj.list.length < 1 ? (
+            <ListItem key={obj.id} disablePadding>
+              <ListItemButton className={obj.id === 1 ? "active" : ""}>
+                <Typography  sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
+                  {obj.title} {obj.path}
+                </Typography>
+              </ListItemButton>
+            </ListItem>
+          ):(
+            <AccCusDrawMenu key={obj.id} data={obj} />
+          )
+        })}
+      
       </List>
-      <Divider />
+      <Box sx={{marginTop: 3, display:'flex', justifyContent: 'center'}}>
+        <FacebookSharp sx={{fontSize: 30, color:'white'}} />
+      </Box>
     </Box>
   );
 
   return (
     <div>
-      {/* {['left', 'right', 'top', 'bottom'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <SwipeableDrawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}
-          >
-            {list(anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-      ))} */}
         <React.Fragment>
-          <Button onClick={toggleDrawer(props.anchor, true)}>{props.anchor}</Button>
           <SwipeableDrawer
             anchor={props.anchor}
-            open={state[props.anchor]}
+            open={props.open}
             onClose={toggleDrawer(props.anchor, false)}
-            onOpen={toggleDrawer(props.anchor, true)}
+            // onOpen={toggleDrawer(props.anchor, true)}
+            id={'content_drawmenu'}
           >
             {list(props.anchor)}
           </SwipeableDrawer>

@@ -8,15 +8,17 @@ import { Box,
     NativeSelect,
     FormControl,
     Button,
+    Modal,
 
 } from '@mui/material'
-import React from 'react'
+import React, {useState} from 'react'
 
-function Header() {
+function Header() { // ============= function main
+    const [modalToggle, setModalToggle] = useState(false);
   return (
     <Box >
         {/*  */}
-        <Grid container alignItems={'center'} paddingX={4} paddingY={1} sx={{borderBottom: '1px solid #d0d0d0'}} >
+        <Grid container alignItems={'center'} paddingY={1} sx={{paddingX:{xs:3, xl: 5}}} >
             <Grid item xs={6} >
                 <Typography variant="h1" color={"#00005f"} sx={{fontSize: 14, fontWeight: 1000}}>
                     บริษัท กขคง จำกัด
@@ -29,10 +31,44 @@ function Header() {
                 }}} >
                     <Facebook sx={{padding: '2px', fontSize: 24}} />
                 </IconButton>
-                <IconButton sx={{p:0, display: {xs: '', md: 'none'}}}>
+                <IconButton onClick={()=>setModalToggle(true)} sx={{p:0, display: {xs: '', md: 'none'}}}>
                     <Search sx={{padding: '2px', fontSize: 24}} />
                 </IconButton>
             </Grid>
+            <Modal
+            open={modalToggle}
+            onClose={()=>setModalToggle(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            >
+                <Box  sx={{ background:'#f4f4f4', borderRadius: 3, px:3, py:1, mt:2, mx:2 }}>
+                    <FormControl sx={{width: '100%',color:'red'}} size="small">
+                        {/* <InputLabel  variant="standard" htmlFor="uncontrolled-native">Age</InputLabel> */}
+                        <NativeSelect
+                            defaultValue={30}
+                            inputProps={{
+                            name: 'age',
+                            id: 'uncontrolled-native',
+                            }}
+                        >
+                            <option value={""}>All Category</option>
+                            <option value={10}>Ten</option>
+                            <option value={20}>Twenty</option>
+                            <option value={30}>Thirty</option>
+                        </NativeSelect>
+                    </FormControl>
+                    <Grid container sx={{my:1}}>
+                        <Grid item xs={10}>
+                            <TextField id="input-with-sx" fullWidth variant="standard" size='small' placeholder='Search...' />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Button sx={{width:'100%',color:'gray', my: 0, p:0}}>
+                                <Search sx={{ fontSize:30 }} />
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Modal>
         </Grid>
 
         {/* NavBanner */}

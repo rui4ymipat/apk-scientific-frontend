@@ -18,3 +18,21 @@
     background-color: white;
     box-shadow: 0.5px 0.5px 1px 0px gray;
 }
+
+#content_drawmenu .MuiDrawer-paper{
+    background-color: #00005f;
+}
+#content_drawmenu .MuiBox-root{
+    width: 290px;
+}
+#content_drawmenu .MuiButtonBase-root.MuiListItemButton-root p{
+    padding: 0.5rem 0;
+}
+#content_drawmenu .MuiListItem-root{
+    border-bottom: 0.75px solid rgba(150, 150, 150, 0.25);
+}
+#content_drawmenu .MuiButtonBase-root.MuiListItemButton-root:hover,
+#content_drawmenu .MuiButtonBase-root.MuiListItemButton-root.active,
+#content_drawmenu .MuiButtonBase-root.MuiListItemButton-root:focus{
+    background-color: #000079;
+}

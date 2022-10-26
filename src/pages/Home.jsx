@@ -1,4 +1,4 @@
-import { AccessTime, Call, Mail, MailOutline, Star } from "@mui/icons-material";
+import { AccessTime, Call, MailOutline, Star } from "@mui/icons-material";
 import { Box, Grid, Typography,
   ImageListItem,
   Card,
@@ -7,8 +7,6 @@ import { Box, Grid, Typography,
   CardContent
 } from "@mui/material";
 import React from "react";
-import {Swiper, SwiperSlide} from "swiper/react";
-import { Autoplay, EffectCreative, Navigation, Pagination } from "swiper";
 import HomeCate from "../components/home/HomeCate";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -97,7 +95,7 @@ function Home() { // === function main ===
     <Box sx={{paddingX:{xs:3, xl: 5}, paddingY:{xs:3, xl:5}}}>
 
       {/* phase 1 */}
-      <Grid container spacing={5} sx={{marginBottom:4}} >
+      <Grid container spacing={5} sx={{marginBottom:8}} >
 
         <Grid item xs={12} xl={3} sx={{borderRadius: 1, overflow: 'hidden'}}>
           <Typography variant="h6" component={'h1'} sx={{background:'#00005f', color:'white', px:2, py:1}} >
@@ -120,8 +118,8 @@ function Home() { // === function main ===
         <Grid item xs={12}>
           <Box>
             <Grid container>
-              <Grid item xs={12} md={6} xl={3}>
-                <Box sx={{display:'flex', alignItems:'center', justifyContent: 'center'}}>
+              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+                <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <Call sx={{fontSize: 48, color:'#1e73be'}} />
                   <Box sx={{ml:1}}>
                     <Typography component={'p'} sx={{fontSize:{xs:18, md:18, color:'#1e73be', fontWeight: 600}}} >โทรสั่งซื้อสินค้า</Typography>
@@ -129,8 +127,8 @@ function Home() { // === function main ===
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <Box sx={{display:'flex', alignItems:'center', justifyContent: 'center'}}>
+              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+                <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <ImageListItem>
                     <img src="https://snp-scientific.com/wp-content/uploads/2022/02/icon-line.png" style={{width: 48, height: 48}} alt="icon" />
                   </ImageListItem>
@@ -140,8 +138,8 @@ function Home() { // === function main ===
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <Box sx={{display:'flex', alignItems:'center', justifyContent: 'center'}}>
+              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+                <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <MailOutline sx={{fontSize: 48, color:'#dd8833'}} />
                   <Box sx={{ml:1}}>
                     <Typography component={'p'} sx={{fontSize:{xs:18, md:18, color:'#dd8833', fontWeight: 600}}} >อีเมล์</Typography>
@@ -149,8 +147,8 @@ function Home() { // === function main ===
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <Box sx={{display:'flex', alignItems:'center', justifyContent: 'center'}}>
+              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+                <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <AccessTime sx={{fontSize: 48, color:'#010a75'}} />
                   <Box sx={{ml:1}}>
                     <Typography component={'p'} sx={{fontSize:{xs:18, md:18, color:'#010a75', fontWeight: 600}}} >เวลาทำการ</Typography>
@@ -229,17 +227,17 @@ function Home() { // === function main ===
         <Grid item xs={12} xl={3} sx={{borderRadius: 1, overflow: 'hidden'}}>
           <Box>
             <ImageListItem sx={{width: '100%', height: 485}}>
-              <img src="https://snp-scientific.com/wp-content/uploads/2022/02/catalog-2022.jpg" style={{width: '100%', maxHeight: '100%'}} />
+              <img src="https://snp-scientific.com/wp-content/uploads/2022/02/catalog-2022.jpg" style={{width: '100%', maxHeight: '100%'}} alt="" />
             </ImageListItem>
           </Box>
           <Box>
             <ImageListItem sx={{display:'flex', justifyContent:'center'}}>
-              <img src="https://snp-scientific.com/wp-content/uploads/2022/02/catalog-qr-150x150.png" style={{width:'auto', height: 'auto'}} />
+              <img src="https://snp-scientific.com/wp-content/uploads/2022/02/catalog-qr-150x150.png" style={{width:'auto', height: 'auto'}} alt="" />
             </ImageListItem>
           </Box>
           <Box>
             <ImageListItem sx={{width: '100%', height: 485}}>
-              <img src="https://snp-scientific.com/wp-content/uploads/2022/02/Calendar2022-SNP-1.jpg" style={{width: '100%', maxHeight: '100%'}} />
+              <img src="https://snp-scientific.com/wp-content/uploads/2022/02/Calendar2022-SNP-1.jpg" style={{width: '100%', maxHeight: '100%'}} alt="" />
             </ImageListItem>
           </Box>
         </Grid>
