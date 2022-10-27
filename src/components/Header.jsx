@@ -25,21 +25,21 @@ function Header() { // ============= function main
                 </Typography>
             </Grid>
             <Grid item xs={6} textAlign={'end'} display='flex' justifyContent={'end'} >
-                <IconButton sx={{p:0, display: {xs: 'none', md: 'flex'}, '&:hover':{
+                <IconButton sx={{p:0, display: {xs: 'none', lg: 'flex'}, '&:hover':{
                     background: '#00005f',
                     color:'#fff',
                 }}} >
                     <Facebook sx={{padding: '2px', fontSize: 24}} />
                 </IconButton>
-                <IconButton onClick={()=>setModalToggle(true)} sx={{p:0, display: {xs: '', md: 'none'}}}>
+                <IconButton onClick={()=>setModalToggle(true)} sx={{p:0, display: {xs: '', lg: 'none'}}}>
                     <Search sx={{padding: '2px', fontSize: 24}} />
                 </IconButton>
             </Grid>
             <Modal
-            open={modalToggle}
-            onClose={()=>setModalToggle(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+                open={modalToggle}
+                onClose={()=>setModalToggle(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
             >
                 <Box  sx={{ background:'#f4f4f4', borderRadius: 3, px:3, py:1, mt:2, mx:2 }}>
                     <FormControl sx={{width: '100%',color:'red'}} size="small">
@@ -62,7 +62,7 @@ function Header() { // ============= function main
                             <TextField id="input-with-sx" fullWidth variant="standard" size='small' placeholder='Search...' />
                         </Grid>
                         <Grid item xs={2}>
-                            <Button sx={{width:'100%',color:'gray', my: 0, p:0}}>
+                            <Button sx={{width:'100%',color:'white', backgroundColor:'#00005f', my: 0, p:0}}>
                                 <Search sx={{ fontSize:30 }} />
                             </Button>
                         </Grid>
@@ -72,8 +72,8 @@ function Header() { // ============= function main
         </Grid>
 
         {/* NavBanner */}
-        <Grid container alignItems={'center'} paddingX={4} paddingY={5} sx={{display: {xs: 'none', md: 'flex'}}} >
-            <Grid item xs={12} xl={4} >
+        <Grid container alignItems={'center'} paddingX={4} paddingY={5} sx={{display: {xs: 'none', lg: 'flex'}}} >
+            <Grid item xs={12} lg={4} >
                 <Box sx={{display: 'flex', alignItems: 'center'}}>
                     <Typography component={'a'} href={'/'} >
                         <ImageListItem >
@@ -82,7 +82,7 @@ function Header() { // ============= function main
                     </Typography>
                 </Box>
             </Grid>
-            <Grid item xs={12} xl={4} sx={{ display: 'flex', alignItems: 'flex-end', background:'#f4f4f4', borderRadius: 15, px:3, py:1 }} >
+            <Grid item xs={12} lg={4} sx={{ display: 'flex', alignItems: 'flex-end', background:'#f4f4f4', borderRadius: 15, px:3, py:1 }} >
                 <TextField id="input-with-sx" fullWidth variant="standard" size='small' placeholder='Search...' />
                 <FormControl sx={{minWidth: 150,color:'red'}} size="small">
                     {/* <InputLabel  variant="standard" htmlFor="uncontrolled-native">Age</InputLabel> */}
@@ -103,7 +103,7 @@ function Header() { // ============= function main
                     <Search sx={{ fontSize:30 }} />
                 </Button>
             </Grid>
-            <Grid item sm={12} xl={4} >
+            <Grid item sm={12} lg={4} >
                 <Box>
                     <Typography component={'p'} color={"#d54500"} display={'flex'} alignItems={'center'} justifyContent={'flex-end'} >
                         สอบถามรายละเอียด

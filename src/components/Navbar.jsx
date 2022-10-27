@@ -1,9 +1,8 @@
 
-import { ExpandLess, ExpandMore, Preview } from '@mui/icons-material';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import MenuHam from '@mui/icons-material/Menu';
 import {
     AppBar, Box, Button, Container,
-    Grid,
     Typography,
     Menu,
     MenuItem,
@@ -12,7 +11,8 @@ import {
     Link
 } from '@mui/material';
 import React, {
-    useState
+    useState,
+    useEffect
 } from 'react';
 import DrawerMenu from './DrawerMenu';
 
@@ -52,7 +52,7 @@ const DropdownCusMenu = ({data={id: 0, title: "", path: "", list: [{listTitle: '
             >
                 {data.list.map((item, idx)=>(
                     <MenuItem key={idx} onClick={()=>setActionMunuProducts(null)}>
-                        <Link href={item.listUrl} underline={'none'}>
+                        <Link href={data.path} underline={'none'}>
                             {item.listTitle}{data.path}{item.listUrl}
                         </Link>
                     </MenuItem>
@@ -64,48 +64,51 @@ const DropdownCusMenu = ({data={id: 0, title: "", path: "", list: [{listTitle: '
 
 export default function Navbar() { // *************************************** function main 
     const [actionHamburger, setActionHamburger] = useState(false);
-    const [data, setData] = useState([
-        {
-            id: 1,
-            title: "หน้าหลัก (HOME)",
-            path: "/",
-            list: []
-        },
-        {
-            id: 2,
-            title: "สินค้าใหม่ (NEW PRODUCTS)",
-            path: "/category",
-            list: []
-        },
-        {
-            id: 3,
-            title: "สินค้า",
-            path: "/products",
-            list: [{listTitle: 'เครื่องมือทางการใช้ 1', listUrl: "/tools1"}]
-        },
-        {
-            id: 4,
-            title: "ข่าวสาร/บทความ (NEWS/ARTICLES)",
-            path: "/new-articles",
-            list: []
-        },
-        {
-            id: 5,
-            title: "เกี่ยวกับเรา",
-            path: "/about-us",
-            list: []
-        },
-        {
-            id: 6,
-            title: "ติดต่อเรา (CONTACT US)",
-            path: "/contact-us",
-            list: []
-        },
-    ]);
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        setData([
+            {
+                id: 1,
+                title: "หน้าหลัก (HOME)",
+                path: "/",
+                list: []
+            },
+            {
+                id: 2,
+                title: "สินค้าใหม่ (NEW PRODUCTS)",
+                path: "/category",
+                list: []
+            },
+            {
+                id: 3,
+                title: "สินค้า",
+                path: "/category",
+                list: [{listTitle: 'เครื่องมือทางการใช้ 1', listUrl: "/tools1"}]
+            },
+            {
+                id: 4,
+                title: "ข่าวสาร/บทความ (NEWS/ARTICLES)",
+                path: "/new-articles",
+                list: []
+            },
+            {
+                id: 5,
+                title: "เกี่ยวกับเรา",
+                path: "/about-us",
+                list: []
+            },
+            {
+                id: 6,
+                title: "ติดต่อเรา (CONTACT US)",
+                path: "/contact-us",
+                list: []
+            },
+        ]);
+    }, []);
     return (
         <AppBar position='sticky' color='inherit' sx={{ boxShadow: 'none', borderTop: '0.75px solid #e0e0e0', borderBottom: '0.75px solid #e0e0e0'}}>
             <Container maxWidth={'100%'} sx={{borderRight: 'none', borderLeft: 'none', paddingX:{xs:3, xl: 5}}}>
-                <Box sx={{display: {xs: 'none', md: 'block'}}}>
+                <Box sx={{display: {xs: 'none', lg: 'block'}}}>
                     {data.map(obj=>{
                         return obj.list.length < 1 ? (
                         <Button href={obj.path} key={obj.id} sx={{
@@ -128,7 +131,7 @@ export default function Navbar() { // *************************************** fu
                 </Box>
 
                 {/* Mobile Mode */}
-                <Box sx={{display: {xs:'flex', md: 'none'}, justifyContent: 'space-between', alignItems: 'center', paddingY: 2}}>
+                <Box sx={{display: {xs:'flex', lg: 'none'}, justifyContent: 'space-between', alignItems: 'center', paddingY: 2}}>
                     <Typography component={'a'} href={'/'} >
                         <ImageListItem >
                             <img src='https://snp-scientific.com/wp-content/uploads/2022/02/snp-logo04.png' style={{width: 250}} alt='logo' loading='lazy' />

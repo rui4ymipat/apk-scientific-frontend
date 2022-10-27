@@ -97,7 +97,7 @@ function Home() { // === function main ===
       {/* phase 1 */}
       <Grid container spacing={5} sx={{marginBottom:8}} >
 
-        <Grid item xs={12} xl={3} sx={{borderRadius: 1, overflow: 'hidden'}}>
+        <Grid item xs={12} md={4} xl={3} sx={{borderRadius: 1, overflow: 'hidden'}}>
           <Typography variant="h6" component={'h1'} sx={{background:'#00005f', color:'white', px:2, py:1}} >
             หมวดหมู่สินค้า
           </Typography>
@@ -110,7 +110,7 @@ function Home() { // === function main ===
           </Box>
         </Grid>
 
-        <Grid item xs={12} xl={9}>
+        <Grid item xs={12} md={8} xl={9}>
           {/* Carousel */}
           <HomeBanner data={banner} />
         </Grid>
@@ -118,7 +118,7 @@ function Home() { // === function main ===
         <Grid item xs={12}>
           <Box>
             <Grid container>
-              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+              <Grid item xs={12} sm={6} lg={3} sx={{marginBottom: 2}}>
                 <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <Call sx={{fontSize: 48, color:'#1e73be'}} />
                   <Box sx={{ml:1}}>
@@ -127,7 +127,7 @@ function Home() { // === function main ===
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+              <Grid item xs={12} sm={6} lg={3} sx={{marginBottom: 2}}>
                 <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <ImageListItem>
                     <img src="https://snp-scientific.com/wp-content/uploads/2022/02/icon-line.png" style={{width: 48, height: 48}} alt="icon" />
@@ -138,7 +138,7 @@ function Home() { // === function main ===
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+              <Grid item xs={12} sm={6} lg={3} sx={{marginBottom: 2}}>
                 <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <MailOutline sx={{fontSize: 48, color:'#dd8833'}} />
                   <Box sx={{ml:1}}>
@@ -147,7 +147,7 @@ function Home() { // === function main ===
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} xl={3} sx={{marginBottom: 2}}>
+              <Grid item xs={12} sm={6} lg={3} sx={{marginBottom: 2}}>
                 <Box sx={{display:'flex', alignItems:'center', justifyContent:{xs: 'start', xl: 'center'}}}>
                   <AccessTime sx={{fontSize: 48, color:'#010a75'}} />
                   <Box sx={{ml:1}}>
@@ -167,7 +167,7 @@ function Home() { // === function main ===
       {/* phase 2 */}
       <Grid container spacing={5} >
 
-        <Grid item xs={12} xl={9}>
+        <Grid item xs={12} sm={8} xl={9}>
           {/* Best Seller */}
           <Box sx={{mb:4}}>
             <Typography component={'h3'} variant={'h3'} sx={{fontSize:{xs:18, md:22, xl: 26}, color:'#39cd00', borderBottom:'0.75px solid #d0d0d0', pb:2, mb:2}} >
@@ -224,7 +224,7 @@ function Home() { // === function main ===
         </Grid>
 
 
-        <Grid item xs={12} xl={3} sx={{borderRadius: 1, overflow: 'hidden'}}>
+        <Grid item xs={12} sm={4} xl={3} sx={{borderRadius: 1, overflow: 'hidden'}}>
           <Box>
             <ImageListItem sx={{width: '100%', height: 485}}>
               <img src="https://snp-scientific.com/wp-content/uploads/2022/02/catalog-2022.jpg" style={{width: '100%', maxHeight: '100%'}} alt="" />

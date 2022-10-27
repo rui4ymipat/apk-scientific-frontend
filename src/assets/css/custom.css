@@ -36,3 +36,12 @@
 #content_drawmenu .MuiButtonBase-root.MuiListItemButton-root:focus{
     background-color: #000079;
 }
+
+.content-menu-category .MuiAccordionSummary-content{
+    margin: 0;
+    width: 100%;
+}
+.content-menu-category .MuiButtonBase-root.MuiMenuItem-root{
+    padding-top: 0;
+    padding-bottom: 0;
+}

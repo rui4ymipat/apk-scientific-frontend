@@ -20,14 +20,14 @@ const AccCusDrawMenu = ({data={id: 0, title: "", path: "",list: [{listTitle: '',
       </AccordionSummary>
       <AccordionDetails>
 
-        <ListItemButton>
+        <ListItemButton href={'/category'}>
           <Typography sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
             สินค้าทั้งหมด
           </Typography>
         </ListItemButton>
         {data.list.map(obj=>{
           return (
-            <ListItemButton>
+            <ListItemButton href={data.path} >
               <Typography sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
                 {obj.listTitle}{data.path}{obj.listUrl}
               </Typography>
@@ -72,12 +72,11 @@ export default function DrawerMenu(props) { // ============================= fun
       </ListItem>
 
         {props.items.map(obj=>{
-          console.log(obj);
           return obj.list.length < 1 ? (
             <ListItem key={obj.id} disablePadding>
-              <ListItemButton className={obj.id === 1 ? "active" : ""}>
+              <ListItemButton href={obj.path} className={obj.id === 1 ? "active" : ""}>
                 <Typography  sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
-                  {obj.title} {obj.path}
+                  {obj.title}{obj.path}
                 </Typography>
               </ListItemButton>
             </ListItem>
