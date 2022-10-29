@@ -137,7 +137,7 @@ export default function Navbar() { // *************************************** fu
                             <img src='https://snp-scientific.com/wp-content/uploads/2022/02/snp-logo04.png' style={{width: 250}} alt='logo' loading='lazy' />
                         </ImageListItem>
                     </Typography>
-                    <IconButton onClick={()=>setActionHamburger(true)} sx={{background: '#00005f', color:'white', borderRadius: 2}}>
+                    <IconButton onClick={()=>setActionHamburger(true)} sx={{background: '#00005f', color:'white', borderRadius: 2, ":hover":{color:'#00005f', boxShadow:'0 0 0 1px #00005f'}}}>
                         <MenuHam sx={{fontSize: 25}} />
                     </IconButton>
                 </Box>

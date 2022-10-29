@@ -20,6 +20,7 @@ import "swiper/css/navigation";
 
 import "./assets/css/custom.css";
 import Category from "./pages/Category";
+import Basket from "./components/Basket";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDWTVbq_cSmk6Tol9xcVofQm3FhhyZL80k",
@@ -43,6 +44,9 @@ function App() {
       {/* Navbar menu */}
       <Navbar />
 
+      {/* basket products */}
+      <Basket />
+
       {/* content */}
       <Routes>
         <Route exact path="/" element={<Home app={app} />} />
@@ -54,6 +58,7 @@ function App() {
 
       {/* footer */}
       <Footer />
+
     </Router>
   );
 }
