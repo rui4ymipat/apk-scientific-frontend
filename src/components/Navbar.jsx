@@ -11,6 +11,7 @@ import {
   ImageListItem,
   IconButton,
   Link,
+  ListItemButton,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import DrawerMenu from "./DrawerMenu";
@@ -19,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 const DropdownCusMenu = ({
   data = { id: 0, title: "", path: "", list: [{ listTitle: "", listUrl: "" }] },
 }) => {
+    const navigate = useNavigate();
   const [actionMunuProducts, setActionMunuProducts] = React.useState(null);
   return (
     <>
@@ -56,12 +58,10 @@ const DropdownCusMenu = ({
         }}
       >
         {data.list.map((item, idx) => (
-          <MenuItem key={idx} onClick={() => setActionMunuProducts(null)}>
-            <Link href={data.path} underline={"none"}>
-              {item.listTitle}
+          <MenuItem key={idx} onClick={() => {setActionMunuProducts(null);navigate(data.path)}}>
+            {item.listTitle}
               {data.path}
               {item.listUrl}
-            </Link>
           </MenuItem>
         ))}
       </Menu>
@@ -135,7 +135,7 @@ export default function Navbar() {
           paddingX: { xs: 3, xl: 5 },
         }}
       >
-        <Box sx={{ display: { xs: "none", lg: "block" } }}>
+        <Box sx={{ display: { xs: "none", lg: "block" }, overflowX:'auto', maxWidth: '100%' }}>
           {data.map((obj) => {
             return obj.list.length < 1 ? (
               <Button

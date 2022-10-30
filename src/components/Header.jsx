@@ -1,4 +1,4 @@
-import { Call, Facebook, Search } from "@mui/icons-material";
+import { Call, ExpandMore, ExpandRounded, Facebook, More, Search } from "@mui/icons-material";
 import {
   Box,
   Grid,
@@ -10,18 +10,49 @@ import {
   FormControl,
   Button,
   Modal,
+  Menu,
+  MenuItem,
+  InputLabel,
+  Select,
 } from "@mui/material";
 import React, { useState } from "react";
 
-function Header() {
-  // ============= function main
+
+
+const options = [
+    'จานเพาะเชื้อ (Petri Dish) / กระจกนาฬิกา (Watch Glass)',
+    'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
+    'วัสดุสิ้นเปลือง (Consumable Products)',
+    'Dione',
+    'Ganymede',
+    'Hangouts Call',
+    'Luna',
+    'Oberon',
+    'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
+    'วัสดุสิ้นเปลือง (Consumable Products)',
+    'Phobos',
+    'Pyxis',
+    'Sedna',
+    'Titania',
+    'Triton',
+    'จานเพาะเชื้อ (Petri Dish) / กระจกนาฬิกา (Watch Glass)',
+    'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
+    'วัสดุสิ้นเปลือง (Consumable Products)',
+    'Umbriel',
+  ];
+  
+  const ITEM_HEIGHT = 48;
+
+function Header() {// ============= function main
   const [modalToggle, setModalToggle] = useState(false);
+  const [textSearchList, setTextSearchList] = useState("allCategory");
   const path = window.location.pathname;
+
 
   if (path.search("admin") === 1) return null;
   return (
     <Box>
-      {/*  */}
+      {/*  mobile */}
       <Grid
         container
         alignItems={"center"}
@@ -79,8 +110,7 @@ function Header() {
               mx: 2,
             }}
           >
-            <FormControl sx={{ width: "100%", color: "red" }} size="small">
-              {/* <InputLabel  variant="standard" htmlFor="uncontrolled-native">Age</InputLabel> */}
+            {/* <FormControl sx={{ width: "100%", color: "red" }} size="small">
               <NativeSelect
                 defaultValue={30}
                 inputProps={{
@@ -93,21 +123,43 @@ function Header() {
                 <option value={20}>Twenty</option>
                 <option value={30}>Thirty</option>
               </NativeSelect>
-            </FormControl>
+              
+            </FormControl> */}
+              <FormControl className="input-cut-line" fullWidth size={'small'} >
+                  <Select
+                    id="demo-simple-select"
+                    value={textSearchList}
+                    onChange={evt=>setTextSearchList(evt.target.value)}
+                  >
+                    <MenuItem value="allCategory">
+                        All Category
+                    </MenuItem>
+                    {options.map((option, idx)=>(
+                        <MenuItem key={idx} value={option} >{option}</MenuItem>
+                    ))}
+                  </Select>
+              </FormControl>
             <Grid container sx={{ my: 1 }}>
-              <Grid item xs={10}>
-                <TextField
-                  id="input-with-sx"
-                  fullWidth
-                  variant="standard"
-                  size="small"
-                  placeholder="Search..."
+              <Grid item xs={8} md={10}>
+              <TextField
+                    id="input-with-sx-mobile"
+                    fullWidth
+                    className="input-cut-line"
+                    variant='outlined'
+                    size={'small'}
+                    placeholder="Search..."
+                    sx={{
+                        border:'none',
+                        boxShadow: 'none',
+                        height:'100%',
+                    }}
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={4} md={2} paddingLeft={1} >
                 <Button
                   sx={{
                     width: "100%",
+                    height: '100%',
                     color: "white",
                     backgroundColor: "#00005f",
                     my: 0,
@@ -148,40 +200,52 @@ function Header() {
           item
           xs={12}
           lg={4}
-          sx={{
-            display: "flex",
-            alignItems: "flex-end",
-            background: "#f4f4f4",
-            borderRadius: 15,
-            px: 3,
-            py: 1,
-          }}
         >
-          <TextField
-            id="input-with-sx"
-            fullWidth
-            variant="standard"
-            size="small"
-            placeholder="Search..."
-          />
-          <FormControl sx={{ minWidth: 150, color: "red" }} size="small">
-            {/* <InputLabel  variant="standard" htmlFor="uncontrolled-native">Age</InputLabel> */}
-            <NativeSelect
-              defaultValue={30}
-              inputProps={{
-                name: "age",
-                id: "uncontrolled-native",
-              }}
+            <Box
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                alignSelf:'stretch',
+                background: "#f4f4f4",
+                borderRadius: 15,
+                overflow:'hidden'
+            }}
             >
-              <option value={""}>All Category</option>
-              <option value={10}>Ten</option>
-              <option value={20}>Twenty</option>
-              <option value={30}>Thirty</option>
-            </NativeSelect>
-          </FormControl>
-          <Button sx={{ color: "gray", my: 0, p: 0 }}>
-            <Search sx={{ fontSize: 30 }} />
-          </Button>
+                <TextField
+                    id="input-with-sx"
+                    fullWidth
+                    className="input-cut-line"
+                    variant='outlined'
+                    size={'small'}
+                    placeholder="Search..."
+                    sx={{
+                        border:'none',
+                        boxShadow: 'none',
+                        height:'100%',
+                        'fieldset':{
+                            border:'none'
+                        },
+                        borderRight: '0.5px solid #e6e6e6'
+                    }}
+                />
+                <FormControl className="input-cut-line" sx={{width: 250, 'fieldset': {border:'none'},borderRight: '0.5px solid #e6e6e6'}} size={'small'} >
+                    <Select
+                      id="demo-simple-select"
+                      value={textSearchList}
+                      onChange={evt=>setTextSearchList(evt.target.value)}
+                    >
+                      <MenuItem value="allCategory">
+                          All Category
+                      </MenuItem>
+                      {options.map((option, idx)=>(
+                          <MenuItem key={idx} value={option} >{option}</MenuItem>
+                      ))}
+                    </Select>
+                </FormControl>
+                <IconButton sx={{ color: "gray", my: 0, p: 1, height:'100%' }}>
+                    <Search sx={{ fontSize: 24 }} />
+                </IconButton>
+            </Box>
         </Grid>
         <Grid item sm={12} lg={4}>
           <Box>

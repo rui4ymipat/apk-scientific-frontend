@@ -6,9 +6,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import { Close, ExpandMore, FacebookSharp } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary, IconButton, Typography } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 
 const AccCusDrawMenu = ({data={id: 0, title: "", path: "",list: [{listTitle: '', listUrl: ""}]}}) => {
+  const navigate = useNavigate();
   return (
     <Accordion sx={{backgroundColor: '#0000', boxShadow: 'none', color:'white', width:'100%'}}>
       <AccordionSummary
@@ -20,14 +22,14 @@ const AccCusDrawMenu = ({data={id: 0, title: "", path: "",list: [{listTitle: '',
       </AccordionSummary>
       <AccordionDetails>
 
-        <ListItemButton href={'/category'}>
+        <ListItemButton onClick={() => navigate(data.path)}>
           <Typography sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
             สินค้าทั้งหมด
           </Typography>
         </ListItemButton>
         {data.list.map(obj=>{
           return (
-            <ListItemButton href={data.path} >
+            <ListItemButton onClick={() => navigate(data.path)}>
               <Typography sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
                 {obj.listTitle}{data.path}{obj.listUrl}
               </Typography>
@@ -41,6 +43,7 @@ const AccCusDrawMenu = ({data={id: 0, title: "", path: "",list: [{listTitle: '',
 }
 
 export default function DrawerMenu(props) { // ============================= function main
+  const navigate = useNavigate();
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -74,7 +77,7 @@ export default function DrawerMenu(props) { // ============================= fun
         {props.items.map(obj=>{
           return obj.list.length < 1 ? (
             <ListItem key={obj.id} disablePadding>
-              <ListItemButton href={obj.path} className={obj.id === 1 ? "active" : ""}>
+              <ListItemButton onClick={() => navigate(obj.path)} className={obj.id === 1 ? "active" : ""}>
                 <Typography  sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
                   {obj.title}{obj.path}
                 </Typography>
