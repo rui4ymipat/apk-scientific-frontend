@@ -1,26 +1,34 @@
-import { ShoppingBasket } from '@mui/icons-material'
-import { Badge, Fab } from '@mui/material'
-import { Box } from '@mui/system'
-import React from 'react'
+import { ShoppingBasket } from "@mui/icons-material";
+import { Badge, Fab } from "@mui/material";
+import { Box } from "@mui/system";
+import React from "react";
 
 function Basket() {
+  const path = window.location.pathname;
+
+  if (path.search("admin") === 1) return null;
   return (
-    <Box sx={{
-        position: 'fixed',
+    <Box
+      sx={{
+        position: "fixed",
         bottom: 20,
         left: 20,
-        zIndex: 99
-    }}>
-        <Fab sx={{
-            color:'white', background:'#00005f',
-            ':hover':{ color:'#00005f' }
-            }} >
-            <Badge color='error' badgeContent={10} max={9} >
-                <ShoppingBasket/>
-            </Badge>
-        </Fab>
+        zIndex: 99,
+      }}
+    >
+      <Fab
+        sx={{
+          color: "white",
+          background: "#00005f",
+          ":hover": { color: "#00005f" },
+        }}
+      >
+        <Badge color="error" badgeContent={10} max={9}>
+          <ShoppingBasket />
+        </Badge>
+      </Fab>
     </Box>
-  )
+  );
 }
 
-export default Basket
+export default Basket;

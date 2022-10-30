@@ -29,6 +29,12 @@ import ModalCategory from "../components/ModalCategory";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import {
+  getCategory,
+  addCategory,
+  updateCategory,
+  deleteCategory,
+} from "../services/category_service";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -68,7 +74,12 @@ function Admin(props) {
   const auth = getAuth(props.app);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
+
   const [openModalCategory, setOpenModalCategory] = React.useState(false);
+  const [onEditCategory, setOnEditCategory] = React.useState(false);
+  const [categoryName, setCategoryName] = React.useState("");
+  const [category, setCategory] = React.useState([]);
+
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -91,6 +102,35 @@ function Admin(props) {
       }
     }
   });
+
+  React.useEffect(() => {
+    getCategory().then((res) => {
+      setCategory(res);
+    });
+  }, []);
+
+  const onClickCreateCategory = async () => {
+    await addCategory({
+      categoy_name: categoryName,
+    });
+    getCategory().then((res) => {
+      setCategory(res);
+    });
+    setCategoryName("");
+  };
+
+  const onClickUpdateCategory = async (index) => {
+    setOnEditCategory(true);
+    setCategoryName(category[index].category_name);
+  };
+
+  const onClickDeleteCategory = async (index) => {
+    await deleteCategory(category[index].id);
+    getCategory().then((res) => {
+      setCategory(res);
+    });
+  };
+
   return (
     <Container>
       <Box sx={{ width: "100%" }}>
@@ -180,80 +220,62 @@ function Admin(props) {
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Grid container mx="auto">
-            <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Grid container mx="auto" alignItems="center">
+            <Grid item xs={5}>
+              <TextField
+                variant="outlined"
+                label="Category Name"
+                value={categoryName}
+                onChange={(e) => setCategoryName(e.target.value)}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={6} ml={2}>
               <Button variant="contained">
-                <Typography
-                  variant="button"
-                  onClick={() => {
-                    setOpenModalCategory(true);
-                  }}
-                >
+                <Typography variant="button" onClick={onClickCreateCategory}>
                   Add Category
                 </Typography>
               </Button>
             </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={12} mt={2}>
+            <Grid item xs={7} mt={2}>
               <TableContainer component={Paper}>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Id</TableCell>
-                    <TableCell align="center">Product Name</TableCell>
-                    <TableCell align="center">Category</TableCell>
-                    <TableCell align="center">Price</TableCell>
+                    <TableCell align="center"> Category Name</TableCell>
+                    <TableCell align="center"></TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  <TableCell align="center" sx={{ width: "10%" }}>
-                    Id
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "30%" }}>
-                    Product Name
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "30%" }}>
-                    Category
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "20%" }}>
-                    Price
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "10%" }}>
-                    <IconButton
-                      aria-label="more"
-                      id="long-button"
-                      aria-controls={open ? "long-menu" : undefined}
-                      aria-expanded={open ? "true" : undefined}
-                      aria-haspopup="true"
-                      onClick={handleClick}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
-                    <Menu
-                      id="long-menu"
-                      MenuListProps={{
-                        "aria-labelledby": "long-button",
-                      }}
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      // PaperProps={{
-                      //   style: {
-                      //     maxHeight: ITEM_HEIGHT * 4.5,
-                      //     width: "20ch",
-                      //   },
-                      // }}
-                    >
-                      <MenuItem
-                        onClick={() => {
-                          setOpenModal(true);
-                        }}
-                      >
-                        Edit
-                      </MenuItem>
-                      <MenuItem>Delete</MenuItem>
-                    </Menu>
-                  </TableCell>
-                </TableBody>
+                {category.map((item, idx) => {
+                  return (
+                    <TableBody key={idx}>
+                      <TableCell align="center" sx={{ width: "30%" }}>
+                        {item.categoy_name}
+                      </TableCell>
+                      <TableCell align="center" sx={{ width: "5%" }}>
+                        <Button
+                          onClick={() => {
+                            onClickUpdateCategory(idx);
+                          }}
+                          variant="contained"
+                          fullWidth
+                        >
+                          Edit
+                        </Button>
+                      </TableCell>
+                      <TableCell align="center" sx={{ width: "5%" }}>
+                        <Button
+                          variant="contained"
+                          onClick={() => {
+                            onClickDeleteCategory(idx);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableBody>
+                  );
+                })}
               </TableContainer>
             </Grid>
           </Grid>
