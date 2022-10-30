@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import DrawerMenu from "./DrawerMenu";
+import { useNavigate } from "react-router-dom";
 
 const DropdownCusMenu = ({
   data = { id: 0, title: "", path: "", list: [{ listTitle: "", listUrl: "" }] },
@@ -72,6 +73,7 @@ export default function Navbar() {
   // *************************************** function main
   const [actionHamburger, setActionHamburger] = useState(false);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     setData([
       {
@@ -137,7 +139,8 @@ export default function Navbar() {
           {data.map((obj) => {
             return obj.list.length < 1 ? (
               <Button
-                href={obj.path}
+                onClick={() => navigate(obj.path)}
+                // href={obj.path}
                 key={obj.id}
                 sx={{
                   color: "#00005f",
