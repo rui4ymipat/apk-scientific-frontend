@@ -1,4 +1,4 @@
-import { Call, ExpandMore, ExpandRounded, Facebook, More, Search } from "@mui/icons-material";
+import { Call, Facebook, Search } from "@mui/icons-material";
 import {
   Box,
   Grid,
@@ -6,13 +6,10 @@ import {
   Typography,
   ImageListItem,
   TextField,
-  NativeSelect,
   FormControl,
   Button,
   Modal,
-  Menu,
   MenuItem,
-  InputLabel,
   Select,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -41,13 +38,10 @@ const options = [
     'Umbriel',
   ];
   
-  const ITEM_HEIGHT = 48;
-
 function Header() {// ============= function main
   const [modalToggle, setModalToggle] = useState(false);
   const [textSearchList, setTextSearchList] = useState("allCategory");
   const path = window.location.pathname;
-
 
   if (path.search("admin") === 1) return null;
   return (
@@ -110,26 +104,13 @@ function Header() {// ============= function main
               mx: 2,
             }}
           >
-            {/* <FormControl sx={{ width: "100%", color: "red" }} size="small">
-              <NativeSelect
-                defaultValue={30}
-                inputProps={{
-                  name: "age",
-                  id: "uncontrolled-native",
-                }}
-              >
-                <option value={""}>All Category</option>
-                <option value={10}>Ten</option>
-                <option value={20}>Twenty</option>
-                <option value={30}>Thirty</option>
-              </NativeSelect>
-              
-            </FormControl> */}
               <FormControl className="input-cut-line" fullWidth size={'small'} >
                   <Select
-                    id="demo-simple-select"
+                    id="select-dd-custom-mobile"
+                    sx={{color:'#707070'}}
                     value={textSearchList}
                     onChange={evt=>setTextSearchList(evt.target.value)}
+                    onFocus={()=>{}}
                   >
                     <MenuItem value="allCategory">
                         All Category
@@ -230,11 +211,12 @@ function Header() {// ============= function main
                 />
                 <FormControl className="input-cut-line" sx={{width: 250, 'fieldset': {border:'none'},borderRight: '0.5px solid #e6e6e6'}} size={'small'} >
                     <Select
-                      id="demo-simple-select"
+                      id="select-dd-custom-des"
+                      className="select-dd-custom"
                       value={textSearchList}
                       onChange={evt=>setTextSearchList(evt.target.value)}
                     >
-                      <MenuItem value="allCategory">
+                      <MenuItem className="custom-search-haed" value="allCategory">
                           All Category
                       </MenuItem>
                       {options.map((option, idx)=>(
