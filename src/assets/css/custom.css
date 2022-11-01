@@ -1,3 +1,7 @@
+:root{
+    --color-primary: #00005f;
+    --color-gray: #757575;
+}
 .carousel-custom .swiper-button-next,
 .carousel-custom .swiper-button-prev{
     background-color: rgba(50, 50, 50, 0.35);
@@ -20,7 +24,7 @@
 }
 
 #content_drawmenu .MuiDrawer-paper{
-    background-color: #00005f;
+    background-color: var(--color-primary);
 }
 #content_drawmenu .MuiBox-root{
     width: 290px;
@@ -51,4 +55,19 @@
 }
 #select-dd-custom-des.MuiSelect-select, #select-dd-custom-mobile.MuiSelect-select{
     color: #727272;
+}
+.t-btn-link-category{
+    color: #222222;
+    font-weight: 600 !important;
+    transition: all 0.25s;
+    font-size: 14px !important;
+    cursor: pointer;
+}
+.t-btn-link-category:hover{
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+img.t-img-fluid{
+    max-width: 100%;
+    height: auto;
 }
