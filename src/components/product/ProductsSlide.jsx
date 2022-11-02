@@ -53,6 +53,10 @@ function ProductsSlide() {
             spaceBetween: 10,
         },
         1024: {
+            slidesPerView: 4,
+            spaceBetween: 5,
+        },
+        1366: {
             slidesPerView: 5,
             spaceBetween: 10,
         },
@@ -60,7 +64,7 @@ function ProductsSlide() {
         className="carousel-custom">
             {[1,2,3,4,5,6].map((obj)=>{
                 return(
-                <SwiperSlide>
+                <SwiperSlide key={obj}>
                     <Box sx={{px:{xs:0, md:2}, pt:3}}>
                         <div onClick={()=>{navigate('/product')}}>
                             <Paper elevation={0} sx={[styleCard]} >

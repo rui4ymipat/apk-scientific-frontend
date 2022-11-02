@@ -102,7 +102,7 @@ export default function DrawerMenu(props) { // ============================= fun
             anchor={props.anchor}
             open={props.open}
             onClose={toggleDrawer(props.anchor, false)}
-            // onOpen={toggleDrawer(props.anchor, true)}
+            onOpen={toggleDrawer(props.anchor, true)}
             id={'content_drawmenu'}
           >
             {list(props.anchor)}

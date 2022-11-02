@@ -8,7 +8,7 @@ import Details from '../components/product/Details'
 import Gallery from '../components/product/Gallery'
 import ProductsSlide from '../components/product/ProductsSlide'
 
-function Product() { // ======== function main
+function Product() { // ======== function main ======================
     const data = {
         title:"เครื่องดูดจ่ายสารละลายแบบอัตโนมัติ ชนิดไม่มีวาล์ว Dispenser Ceramus Classic",
         details: `
@@ -26,14 +26,14 @@ function Product() { // ======== function main
     }
     return (
         <Box sx={{paddingX:{xs:3, xl: 5}, paddingY:{xs:3, xl:5}}}>
-            <Grid container>
-                <Grid item xs={12} lg={6} xl={5} >
-                    <Gallery />
+            <Grid container justifyContent={'center'}>
+                <Grid item xs={12} sm={7} lg={6} xl={5} sx={{px:{xs:2, md:4}, mb:{xs:5, xl:3}}} >
+                    <Gallery data={["https://snp-scientific.com/wp-content/uploads/2021/05/KG2911-1.jpg", "https://snp-scientific.com/wp-content/uploads/2021/05/KG2111-1.jpg", "https://snp-scientific.com/wp-content/uploads/2021/02/148-155-300x300.jpg","https://snp-scientific.com/wp-content/uploads/2021/05/KG2911-1.jpg", "https://snp-scientific.com/wp-content/uploads/2021/05/KG2111-1.jpg", "https://snp-scientific.com/wp-content/uploads/2021/02/148-155-300x300.jpg","https://snp-scientific.com/wp-content/uploads/2021/05/KG2911-1.jpg", "https://snp-scientific.com/wp-content/uploads/2021/05/KG2111-1.jpg", "https://snp-scientific.com/wp-content/uploads/2021/02/148-155-300x300.jpg"]} />
                 </Grid>
-                <Grid item xs={12} lg={6} xl={7} >
+                <Grid item xs={12} lg={6} xl={7} sx={{px:{xs:2, md:4}}} >
                     <Details title={data.title} list={data.list} details={data.details} />
                 </Grid>
-                <Grid item xs={12} >
+                <Grid item xs={12} mt={5}>
                     <Typography sx={{fontSize:14, textTransform:'uppercase', fontWeight:'600', color:'#444', borderBottom:'1px solid #e0e0e0', pb:1}}>
                         Related products
                     </Typography>

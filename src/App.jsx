@@ -14,11 +14,13 @@ import { getAnalytics } from "firebase/analytics";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 // Import Swiper styles
+// import "swiper/css/bundle";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./assets/css/custom.css";
+import "./assets/css/responsive.css";
 import Category from "./pages/Category";
 import Basket from "./components/Basket";
 import Product from "./pages/Product";
