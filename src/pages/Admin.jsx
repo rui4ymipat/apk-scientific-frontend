@@ -35,6 +35,10 @@ import {
   updateCategory,
   deleteCategory,
 } from "../services/category_service";
+import { getProducts, deleteProduct } from "../services/product_service";
+import Chip from "@mui/material/Chip";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -76,10 +80,17 @@ function Admin(props) {
   const [openModal, setOpenModal] = React.useState(false);
 
   const [openModalCategory, setOpenModalCategory] = React.useState(false);
+  const [indexCategory, setIndexCategory] = React.useState(0);
+  const [categoryEditName, setOnEditCategoryName] = React.useState("");
   const [onEditCategory, setOnEditCategory] = React.useState(false);
   const [categoryName, setCategoryName] = React.useState("");
   const [category, setCategory] = React.useState([]);
 
+  const [products, setProducts] = React.useState([]);
+  const [productValue, setProductValue] = React.useState();
+  const [editMode, setEditMode] = React.useState(false);
+
+  const [fetchDataFirst, setFetchDataFirst] = React.useState(true);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -104,14 +115,20 @@ function Admin(props) {
   });
 
   React.useEffect(() => {
-    getCategory().then((res) => {
-      setCategory(res);
-    });
+    if (fetchDataFirst) {
+      getCategory().then((res) => {
+        setCategory(res);
+      });
+      getProducts().then((res) => {
+        setProducts(res);
+      });
+      setFetchDataFirst(false);
+    }
   }, []);
 
   const onClickCreateCategory = async () => {
     await addCategory({
-      categoy_name: categoryName,
+      category_name: categoryName,
     });
     getCategory().then((res) => {
       setCategory(res);
@@ -121,15 +138,46 @@ function Admin(props) {
 
   const onClickUpdateCategory = async (index) => {
     setOnEditCategory(true);
-    setCategoryName(category[index].category_name);
+    setOnEditCategoryName(category[index].category_name);
+    setIndexCategory(index);
+  };
+
+  const onClickEditCategory = async () => {
+    console.log(category[indexCategory]);
+    await updateCategory({
+      category_name: categoryEditName,
+      id: category[indexCategory].id,
+    });
+    getCategory().then((res) => {
+      setCategory(res);
+    });
+    setOnEditCategory(false);
+    setOnEditCategoryName("");
   };
 
   const onClickDeleteCategory = async (index) => {
     await deleteCategory(category[index].id);
+
     getCategory().then((res) => {
       setCategory(res);
     });
   };
+
+  const editProduct = async (index) => {
+    setProductValue(products[index]);
+    setOpenModal(true);
+    setEditMode(true);
+  };
+
+  const deleteProducts = async (index) => {
+    console.log(products[index].id);
+    await deleteProduct(products[index].id);
+    getProducts().then((res) => {
+      setProducts(res);
+    });
+  };
+
+  if (fetchDataFirst) return <div>Loading...</div>;
 
   return (
     <Container>
@@ -158,7 +206,6 @@ function Admin(props) {
               <TableContainer component={Paper}>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Id</TableCell>
                     <TableCell align="center">Product Name</TableCell>
                     <TableCell align="center">Category</TableCell>
                     <TableCell align="center">Price</TableCell>
@@ -166,54 +213,36 @@ function Admin(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableCell align="center" sx={{ width: "10%" }}>
-                    Id
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "30%" }}>
-                    Product Name
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "30%" }}>
-                    Category
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "20%" }}>
-                    Price
-                  </TableCell>
-                  <TableCell align="center" sx={{ width: "10%" }}>
-                    <IconButton
-                      aria-label="more"
-                      id="long-button"
-                      aria-controls={open ? "long-menu" : undefined}
-                      aria-expanded={open ? "true" : undefined}
-                      aria-haspopup="true"
-                      onClick={handleClick}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
-                    <Menu
-                      id="long-menu"
-                      MenuListProps={{
-                        "aria-labelledby": "long-button",
-                      }}
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      // PaperProps={{
-                      //   style: {
-                      //     maxHeight: ITEM_HEIGHT * 4.5,
-                      //     width: "20ch",
-                      //   },
-                      // }}
-                    >
-                      <MenuItem
-                        onClick={() => {
-                          setOpenModal(true);
-                        }}
-                      >
-                        Edit
-                      </MenuItem>
-                      <MenuItem>Delete</MenuItem>
-                    </Menu>
-                  </TableCell>
+                  {products.map((product, index) => (
+                    <TableRow key={index}>
+                      <TableCell align="center" sx={{ width: "30%" }}>
+                        {product.name}
+                      </TableCell>
+                      <TableCell align="center" sx={{ width: "30%" }}>
+                        <Stack direction="row" spacing={1}>
+                          {product.category.map((cat) => {
+                            const findData = category.find((c) => c.id === cat);
+                            return <Chip label={findData.category_name} />;
+                          })}
+                        </Stack>
+                      </TableCell>
+                      <TableCell align="center" sx={{ width: "20%" }}>
+                        {product.price}
+                      </TableCell>
+                      <TableCell align="center" sx={{ width: "10%" }}>
+                        <Stack direction="row" spacing={1}>
+                          <IconButton onClick={() => editProduct(index)}>
+                            <EditRoundedIcon />
+                          </IconButton>
+                          <IconButton>
+                            <DeleteRoundedIcon
+                              onClick={() => deleteProducts(index)}
+                            />
+                          </IconButton>
+                        </Stack>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </TableContainer>
             </Grid>
@@ -237,6 +266,26 @@ function Admin(props) {
                 </Typography>
               </Button>
             </Grid>
+            {onEditCategory && (
+              <>
+                <Grid item xs={5} mt={2}>
+                  <TextField
+                    variant="outlined"
+                    label="Category Name"
+                    value={categoryEditName}
+                    onChange={(e) => setOnEditCategoryName(e.target.value)}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6} ml={2}>
+                  <Button variant="contained">
+                    <Typography variant="button" onClick={onClickEditCategory}>
+                      Edit
+                    </Typography>
+                  </Button>
+                </Grid>
+              </>
+            )}
             <Grid item xs={7} mt={2}>
               <TableContainer component={Paper}>
                 <TableHead>
@@ -250,7 +299,7 @@ function Admin(props) {
                   return (
                     <TableBody key={idx}>
                       <TableCell align="center" sx={{ width: "30%" }}>
-                        {item.categoy_name}
+                        {item.category_name}
                       </TableCell>
                       <TableCell align="center" sx={{ width: "5%" }}>
                         <Button
@@ -282,7 +331,20 @@ function Admin(props) {
         </TabPanel>
       </Box>
 
-      <ModalProduct open={openModal} handleClose={() => setOpenModal(false)} />
+      <ModalProduct
+        open={openModal}
+        app={props.app}
+        handleClose={() => {
+          setOpenModal(false);
+          setProductValue({});
+          getProducts().then((res) => {
+            setProducts(res);
+          });
+        }}
+        category={category}
+        editValue={productValue}
+        edit={editMode}
+      />
       <ModalCategory
         open={openModalCategory}
         handleClose={() => setOpenModalCategory(false)}
