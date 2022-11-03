@@ -6,6 +6,7 @@ import { Grid,
     Link
 } from '@mui/material';
 import { WarningAmber } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 
 const styleCard = {
@@ -28,9 +29,8 @@ const styleOtherCate = {
     textOverflow: 'ellipsis'
 };
 function ListCateItem({data = [{id: 0, product_name:"", img: "", categoryOther: [{ id:0, title: '' }]}], showGrid = true}) { // ======================== function main
-
     // coding......
-    
+    const navigate = useNavigate();
 
     return data.length > 0 ? (
         <Box>
@@ -39,22 +39,24 @@ function ListCateItem({data = [{id: 0, product_name:"", img: "", categoryOther: 
             <Grid container spacing={3}>
                 {data.map((obj)=>{
                     return (
-                        <Grid item xs={6} md={4} lg={3} mb={3} >
-                            <Paper elevation={0} sx={[styleCard]} >
-                                <Box mb={2}>
-                                    <img src={obj.img} alt={obj.product_name} style={{maxWidth:'100%', height: 'auto'}} />
-                                </Box>
-                                <Box textAlign={'center'}>
-                                    <Box sx={[styleOtherCate]}>
-                                        {obj.categoryOther.map((objOther, idx)=>(
-                                            <Link key={idx} sx={[{fontSize: 12,color:'gray', ':hover':{color:'#00005f'},}]} >{objOther.title} </Link>
-                                        ))}
+                        <Grid key={obj.id} item xs={6} md={4} lg={3} mb={3} >
+                            <div onClick={()=>{navigate('/product')}}>
+                                <Paper elevation={0} sx={[styleCard]} >
+                                    <Box mb={2}>
+                                        <img src={obj.img} alt={obj.product_name} style={{maxWidth:'100%', height: 'auto'}} />
                                     </Box>
-                                    <Typography component={'p'} sx={{fontSize:14, color:'#444', ':hover':{color:'#00005f'}}} >
-                                        {obj.product_name}
-                                    </Typography>
-                                </Box>
-                            </Paper>
+                                    <Box textAlign={'center'}>
+                                        <Box sx={[styleOtherCate]}>
+                                            {obj.categoryOther.map((objOther, idx)=>(
+                                                <Link key={idx} sx={[{fontSize: 12,color:'gray', ':hover':{color:'#00005f'},}]} >{objOther.title} </Link>
+                                            ))}
+                                        </Box>
+                                        <Typography component={'p'} sx={{fontSize:14, color:'#444', ':hover':{color:'#00005f'}}} >
+                                            {obj.product_name}
+                                        </Typography>
+                                    </Box>
+                                </Paper>
+                            </div>
                         </Grid>
                     )
                 })}
@@ -64,28 +66,30 @@ function ListCateItem({data = [{id: 0, product_name:"", img: "", categoryOther: 
             <Grid container spacing={3}> 
                 {data.map((obj)=>{
                     return (
-                        <Grid item xs={12} mb={3} >
-                            <Paper elevation={0} sx={[styleCard, {borderBottom: '0.5px solid #e0e0e0'}]} >
-                                <Grid container>
-                                    <Grid item xs={12} lg={4} xl={3}>
-                                        <Box mb={2}>
-                                            <img src={obj.img} alt={obj.product_name} style={{maxWidth:'100%', height: 'auto'}} />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={12} lg={8} xl={9} sx={{display:'flex', alignItems:'center'}} >
-                                        <Box>
-                                            <Box sx={[styleOtherCate]}>
-                                                {obj.categoryOther.map((objOther, idx)=>(
-                                                    <Link key={idx} sx={[{fontSize: 12,color:'gray', ':hover':{color:'#00005f'},}]} >{objOther.title} </Link>
-                                                ))}
+                        <Grid key={obj.id} item xs={12} mb={3} >
+                            <div onClick={()=>{navigate('/product')}}>
+                                <Paper elevation={0} sx={[styleCard, {borderBottom: '0.5px solid #e0e0e0'}]} >
+                                    <Grid container>
+                                        <Grid item xs={12} lg={4} xl={3}>
+                                            <Box mb={2}>
+                                                <img src={obj.img} alt={obj.product_name} style={{maxWidth:'100%', height: 'auto'}} />
                                             </Box>
-                                            <Typography component={'p'} sx={{fontSize:14, color:'#444', ':hover':{color:'#00005f'}}} >
-                                                {obj.product_name}
-                                            </Typography>
-                                        </Box>
+                                        </Grid>
+                                        <Grid item xs={12} lg={8} xl={9} sx={{display:'flex', alignItems:'center'}} >
+                                            <Box>
+                                                <Box sx={[styleOtherCate]}>
+                                                    {obj.categoryOther.map((objOther, idx)=>(
+                                                        <Link key={idx} sx={[{fontSize: 12,color:'gray', ':hover':{color:'#00005f'},}]} >{objOther.title} </Link>
+                                                    ))}
+                                                </Box>
+                                                <Typography component={'p'} sx={{fontSize:14, color:'#444', ':hover':{color:'#00005f'}}} >
+                                                    {obj.product_name}
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Paper>
+                                </Paper>
+                            </div>
                         </Grid>
                     )
                 })}

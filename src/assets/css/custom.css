@@ -1,3 +1,7 @@
+:root{
+    --color-primary: #00005f;
+    --color-gray: #757575;
+}
 .carousel-custom .swiper-button-next,
 .carousel-custom .swiper-button-prev{
     background-color: rgba(50, 50, 50, 0.35);
@@ -20,7 +24,7 @@
 }
 
 #content_drawmenu .MuiDrawer-paper{
-    background-color: #00005f;
+    background-color: var(--color-primary);
 }
 #content_drawmenu .MuiBox-root{
     width: 290px;
@@ -44,4 +48,59 @@
 .content-menu-category .MuiButtonBase-root.MuiMenuItem-root{
     padding-top: 0;
     padding-bottom: 0;
+}
+.MuiList-root.MuiMenu-list:has(.custom-search-haed){
+    max-height: 200px !important;
+    background-color: red !important;
+}
+#select-dd-custom-des.MuiSelect-select, #select-dd-custom-mobile.MuiSelect-select{
+    color: #727272;
+}
+.t-btn-link-category{
+    color: #222222;
+    font-weight: 600 !important;
+    transition: all 0.25s;
+    font-size: 14px !important;
+    cursor: pointer;
+}
+.t-btn-link-category:hover{
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+img.t-img-fluid, .t-img-fluid > img{
+    max-width: 100%;
+    height: auto;
+}
+.t-thumbs-preview .t-img-fluid > img{
+    cursor: zoom-in !important;
+}
+.t-thumbs-preview [data-rmiz-content="found"] > img.t-img-fluid{
+    object-fit: none;
+    width: 100%;
+    cursor: zoom-in !important;
+}
+/* zoom image product */
+.t-thumbs-preview{
+    margin-bottom: 1rem;
+}
+.t-thumbs-gallery .swiper-slide.swiper-slide-visible::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 99.99%;
+    height: 97%;
+    background-color: rgba(150, 150, 150, 0.55);
+    box-shadow: 0 0 0 4px inset #0000;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+.t-thumbs-gallery .swiper-slide.swiper-slide-visible.swiper-slide-thumb-active::before{
+    background-color: rgba(150, 150, 150, 0);
+    box-shadow: 0 0 0 4px inset var(--color-primary);
+}
+.t-thumbs-gallery .swiper-wrapper > .swiper-slide > img{
+    width: 100%;
+    height: 110px;
+    object-fit: fill;
 }

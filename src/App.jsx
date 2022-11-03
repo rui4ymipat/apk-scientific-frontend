@@ -14,13 +14,16 @@ import { getAnalytics } from "firebase/analytics";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 // Import Swiper styles
+// import "swiper/css/bundle";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./assets/css/custom.css";
+import "./assets/css/responsive.css";
 import Category from "./pages/Category";
 import Basket from "./components/Basket";
+import Product from "./pages/Product";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDWTVbq_cSmk6Tol9xcVofQm3FhhyZL80k",
@@ -51,6 +54,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home app={app} />} />
         <Route path="/category" element={<Category app={app} />} />
+        <Route path="/product" element={<Product app={app} />} />
         <Route path="/admin" element={<Admin app={app} />} />
         <Route path="/admin-login" element={<AdminLogin app={app} />} />
         <Route path="*" element={<Navigate to="/" />} />

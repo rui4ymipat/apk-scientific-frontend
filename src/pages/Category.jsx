@@ -141,7 +141,7 @@ function Category() { // ================================= function main
                                             native: true,
                                         }}
                                         variant="standard"
-                                        sx={{border:'1px solid #e0e0e0', '&::before':{borderBottom:'none'}}}
+                                        sx={{border:'1px solid #e0e0e0', borderRadius:1, '::before':{borderBottom:'none'},'::after':{borderBottom:'none'}}}
                                     >
                                         <option value="popularity" selected >Sort by popularity</option>
                                         {[{value:'1', label:"Title"},{value:'2', label:"Title"},].map((option) => (
@@ -163,7 +163,7 @@ function Category() { // ================================= function main
                                             native: true,
                                         }}
                                         variant="standard"
-                                        sx={{border:'1px solid #e0e0e0', '&::before':{borderBottom:'none'}}}
+                                        sx={{border:'1px solid #e0e0e0', borderRadius:1, '&::before':{borderBottom:'none'}}}
                                     >
                                         <option value="10" selected >10</option>
                                         {[{value:'1', label:"20"},{value:'2', label:"35"},].map((option) => (
