@@ -22,3 +22,8 @@ export const deleteProduct = async (id) => {
   const response = await axios.delete(`/product_manage?id=${id}`);
   return response.data;
 };
+
+export const getProductById = async (id) => {
+  const response = await axios.get(`/get_product_by_id?id=${id}`);
+  return response.data;
+};

@@ -39,6 +39,7 @@ import { getProducts, deleteProduct } from "../services/product_service";
 import Chip from "@mui/material/Chip";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import CategoryList from "../components/CategoryList";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -186,6 +187,7 @@ function Admin(props) {
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Product" {...a11yProps(0)} />
             <Tab label="Category" {...a11yProps(1)} />
+            <Tab label="Category list" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -328,6 +330,9 @@ function Admin(props) {
               </TableContainer>
             </Grid>
           </Grid>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <CategoryList category={category} />
         </TabPanel>
       </Box>
 

@@ -42,8 +42,8 @@ function App() {
   return (
     <Router>
       {/* Header */}
-      <Header /> 
-      
+      <Header />
+
       {/* Navbar menu */}
       <Navbar />
 
@@ -54,7 +54,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home app={app} />} />
         <Route path="/category" element={<Category app={app} />} />
-        <Route path="/product" element={<Product app={app} />} />
+        <Route path="/product/:id" element={<Product app={app} />} />
         <Route path="/admin" element={<Admin app={app} />} />
         <Route path="/admin-login" element={<AdminLogin app={app} />} />
         <Route path="*" element={<Navigate to="/" />} />
@@ -62,7 +62,6 @@ function App() {
 
       {/* footer */}
       <Footer />
-
     </Router>
   );
 }
