@@ -47,7 +47,7 @@ function Header() {// ============= function main
   return (
     <Box>
       {/*  mobile */}
-      <Grid
+      {/* <Grid
         container
         alignItems={"center"}
         paddingY={1}
@@ -153,7 +153,7 @@ function Header() {// ============= function main
             </Grid>
           </Box>
         </Modal>
-      </Grid>
+      </Grid> */}
 
       {/* NavBanner */}
       <Grid
@@ -177,7 +177,7 @@ function Header() {// ============= function main
             </Typography>
           </Box>
         </Grid>
-        <Grid
+        {/* <Grid
           item
           xs={12}
           lg={4}
@@ -228,8 +228,8 @@ function Header() {// ============= function main
                     <Search sx={{ fontSize: 24 }} />
                 </IconButton>
             </Box>
-        </Grid>
-        <Grid item sm={12} lg={4}>
+        </Grid> */}
+        <Grid item sm={12} lg={8} sx={{display:'flex', justifyContent:'end'}}>
           <Box>
             <Typography
               component={"p"}

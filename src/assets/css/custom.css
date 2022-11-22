@@ -104,3 +104,40 @@ img.t-img-fluid, .t-img-fluid > img{
     height: 110px;
     object-fit: fill;
 }
+
+
+/* list menu category */
+.t-custom-listmenu .MuiTreeItem-content{
+    width: auto;
+    padding: .25rem;
+    /* border-radius: 0 1rem 1rem 0; */
+    margin-bottom: 0.35rem;
+    box-shadow: 0 1px 0 0 #eee;
+    background-color: #0000 !important;
+}
+.t-custom-listmenu .MuiTreeItem-content.Mui-focused,
+.t-custom-listmenu .MuiTreeItem-content.Mui-selected{
+    box-shadow: 0 2px 0 0 var(--color-primary);
+}
+.t-custom-listmenu .t-text-listmenu{
+    color: var(--color-gray);
+    font-weight: 400;
+}
+.t-custom-listmenu .MuiTreeItem-content.Mui-selected .t-text-listmenu,
+.t-custom-listmenu .MuiTreeItem-content.Mui-focused .t-text-listmenu{
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* card product */
+.t-img-product{
+    width: 100%;
+    height: 230px;
+    object-fit: scale-down;
+}
+.t-text-wrap-3{
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}

@@ -105,7 +105,7 @@ function Category() {
                     borderBottom: "0.5px solid #e0e0e0",
                   }}
                 >
-                  <div
+                  {/* <div
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -144,7 +144,7 @@ function Category() {
                         </option>
                       ))}
                     </TextField>
-                  </div>
+                  </div> */}
                   <div
                     style={{
                       display: "flex",
@@ -153,9 +153,9 @@ function Category() {
                     }}
                   >
                     <label htmlFor="seleted-sort" style={{ marginRight: 5 }}>
-                      Sort by :
+                      Display :
                     </label>
-                    <TextField
+                    {/* <TextField
                       id="seleted-sort"
                       select
                       // label="Sort"
@@ -182,7 +182,7 @@ function Category() {
                           {option.label}
                         </option>
                       ))}
-                    </TextField>
+                    </TextField> */}
                     <Button onClick={() => setShowDataGrid(!showDataGrid)}>
                       {showDataGrid ? <FormatListBulleted /> : <Widgets />}
                     </Button>

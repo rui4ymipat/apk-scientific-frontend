@@ -23,4 +23,7 @@
         height: 70px;
         object-fit: fill;
     }
+    .t-img-product{
+        height: 200px;
+    }
 }

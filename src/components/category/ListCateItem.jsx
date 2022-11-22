@@ -8,6 +8,11 @@ const styleCard = {
   cursor: "pointer",
   transition: "all 0.35s",
   p: 2,
+  height: {
+    xs: 320,
+    md: 350,
+    lg: 380
+  },
   ":hover": {
     transform: "translate(0px, -25px)",
     boxShadow: "2px 2px 15px 0px rgba(0,0,0,0.25)",
@@ -50,7 +55,8 @@ function ListCateItem({
                       <img
                         src={obj.img}
                         alt={obj.product_name}
-                        style={{ maxWidth: "100%", height: "auto" }}
+                        style={{ maxWidth: "100%" }}
+                        className='t-img-product'
                       />
                     </Box>
                     <Box textAlign={"center"}>
@@ -72,6 +78,7 @@ function ListCateItem({
                       </Box>
                       <Typography
                         component={"p"}
+                        className='t-text-wrap-3'
                         sx={{
                           fontSize: 14,
                           color: "#444",
@@ -108,7 +115,8 @@ function ListCateItem({
                           <img
                             src={obj.img}
                             alt={obj.product_name}
-                            style={{ maxWidth: "100%", height: "auto" }}
+                            style={{ maxWidth: "100%" }}
+                            className='t-img-product'
                           />
                         </Box>
                       </Grid>
@@ -138,6 +146,7 @@ function ListCateItem({
                           </Box>
                           <Typography
                             component={"p"}
+                            className='t-text-wrap-3'
                             sx={{
                               fontSize: 14,
                               color: "#444",
