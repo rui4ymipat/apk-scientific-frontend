@@ -1,6 +1,6 @@
 :root{
     --color-primary: #00005f;
-    --color-gray: #757575;
+    --color-gray: #595959;
 }
 .carousel-custom .swiper-button-next,
 .carousel-custom .swiper-button-prev{
@@ -109,15 +109,21 @@ img.t-img-fluid, .t-img-fluid > img{
 /* list menu category */
 .t-custom-listmenu .MuiTreeItem-content{
     width: auto;
-    padding: .25rem;
+    padding: 0rem .35rem;
     /* border-radius: 0 1rem 1rem 0; */
-    margin-bottom: 0.35rem;
-    box-shadow: 0 1px 0 0 #eee;
+    margin-bottom: 0.25rem;
     background-color: #0000 !important;
+}
+.t-custom-listmenu .MuiTreeItem-label .MuiTypography-root{
+    font-size: 14px;
+    color: #222222;
 }
 .t-custom-listmenu .MuiTreeItem-content.Mui-focused,
 .t-custom-listmenu .MuiTreeItem-content.Mui-selected{
     box-shadow: 0 2px 0 0 var(--color-primary);
+}
+.t-custom-listmenu .MuiTreeItem-content.Mui-expanded + ul{
+    border-left: 2px dotted #eee;
 }
 .t-custom-listmenu .t-text-listmenu{
     color: var(--color-gray);
@@ -140,4 +146,19 @@ img.t-img-fluid, .t-img-fluid > img{
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+}
+
+.t-brand-link.MuiButtonBase-root.MuiMenuItem-root{
+    margin-bottom: .5rem;
+    border-radius: .15rem;
+    padding: .25rem .5rem;
+    color: var(--color-gray);
+}
+.t-brand-link.MuiButtonBase-root.MuiMenuItem-root:hover{
+    background-color: #0000;
+    color: var(--color-primary);
+}
+.t-brand-link.MuiButtonBase-root.MuiMenuItem-root .MuiTypography-root{
+    font-size: 16px;
+    text-transform: uppercase;
 }

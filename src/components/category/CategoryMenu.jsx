@@ -7,10 +7,12 @@ import { Box,
     AccordionSummary,
     AccordionDetails,
     Badge,
-
+    MenuItem,
+    ListItem,
 } from '@mui/material'
 import React, { useState } from 'react'
 import $ from 'jquery';
+
 
 const style = {
     callapseHead:{
@@ -19,118 +21,144 @@ const style = {
     },
     linkMenu:{
         color:'#696969', ':hover':{color:'#00005f'}, textDecoration:'none', width:'100%', height:'100%'
+    },
+    badegeBrand:{
+        width:'100%'
     }
 };
 
 
-function CategoryMenu({data1 = [{id:0, title:'', main_path: '', list:[{id:0, listTitle: ''}]}]}) { // ================ function main
+function CategoryMenu({data1 = [{ id_node: '1', node_parent: null, id:1, title:'', path: '', sub_menu:[] }]}) { // ================ function main
     // coding......
     const data = [
         {
             id_node: '1',
+            node_parent: null,
             id:1, 
-            title:'Test1', 
-            path: '', 
+            title:'สินค้าใหม่ (New Products)', 
+            path: 'main_1',
             sub_menu:[
                 {
-                    id_node: '1.1',
+                    id_node: '1-1',
+                    node_parent: '1',
                     id:2, 
-                    title: 'Test2',
-                    path: '', 
+                    title: 'อุปกรณ์พลาสติกสำหรับห้อง',
+                    path: 'main_1/sub_1_1/',
                     sub_menu:[
                         {
-                            id_node: '1.1.1',
+                            id_node: '1-1-1',
+                            node_parent: '1-1',
                             id:3, 
-                            title:'Test3', 
-                            path: '', 
+                            title:'อุปกรณ์พลาสติกสำหรับห้อง', 
+                            path: 'main_1/sub_1_1_1/',
                             sub_menu:[]
                         },
                     ],
                 },
                 {
-                    id_node: '1.2',
+                    id_node: '1-2',
+                    node_parent: '1',
                     id:2, 
-                    title: 'Test2',
-                    path: '', 
+                    title: 'อุปกรณ์พลาสติกสำหรับห้อง',
+                    path: 'main_1/sub_1_2/',
                     sub_menu:[
                         {
-                            id_node: '1.2.1',
+                            id_node: '1-2-1',
+                            node_parent: '1-2',
                             id:3, 
-                            title:'Test3', 
-                            path: '', 
-                            sub_menu:[]
+                            title:'อุปกรณ์พลาสติกสำหรับห้อง', 
+                            path: 'main_1/sub_1_2_1/',
+                            sub_menu:[
+                                {
+                                    id_node: '1-2-1-1',
+                                    node_parent: '1-2-1',
+                                    id:2, 
+                                    title: 'อุปกรณ์พลาสติกสำหรับห้อง',
+                                    path: 'main_1/sub_1_2_1_1/',
+                                    sub_menu:[
+                                        {
+                                            id_node: '1-2-1-1-1',
+                                            node_parent: '1-2-1-1',
+                                            id:3, 
+                                            title:'อุปกรณ์พลาสติกสำหรับห้อง', 
+                                            path: 'main_1/sub_1_2_1_1_1/',
+                                            sub_menu:[]
+                                        },
+                                    ],
+                                },
+                            ]
                         },
                     ],
                 },
             ],
         },
         {
-            id_node: '2',
+            id_node: 'dsdpkmgsd',
+            node_parent: null,
             id:1, 
-            title:'Test1', 
-            path: '', 
+            title:'เครื่องแก้ววิทยาศาสตร์', 
+            path: 'main_2',
             sub_menu:[
                 {
-                    id_node: '2.1',
+                    id_node: 'sppmdpskp',
+                    node_parent: 'dsdpkmgsd',
                     id:2, 
-                    title: 'Test2',
-                    path: '', 
-                    sub_menu:[]
-                },
-                {
-                    id_node: '2.2',
-                    id:2, 
-                    title: 'Test3',
-                    path: '', 
-                    sub_menu:[]
-                },
-                {
-                    id_node: '2.3',
-                    id:2, 
-                    title: 'Test4',
-                    path: '', 
+                    title: 'จานเพาะเชื้อ',
+                    path: 'main_2/sub_2_1/',
                     sub_menu:[]
                 },
             ],
         },
-    ]
+    ];
+    const data_brand = [
+        {
+            id_brand: 1,
+            name: 'Brand',
+            amount: 35,
+        },
+        {
+            id_brand: 2,
+            name: 'Brand2',
+            amount: 35,
+        },
+    ];
     const [expanded, setExpanded] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
 
-    const handleToggle = (event, nodeIds) => {
-        console.log(nodeIds);
-        // console.log($(".t-custom-listmenu"));
-        setExpanded(nodeIds);
-    };
-    const createHandler = async(id) => {
-        // if node was collapsed, add to expanded list
-        if(!expanded.includes(id)) {
-            let arrnew = [];
-            arrnew = expanded.filter(async(r)=>{
-                const globalRegex = new RegExp('^['+r+']{'+r.length+'}', 'g');
-                if(globalRegex.test(id)){
-                    return r;
+    console.log(data1);
+    // function stack list path Treeview
+    const createHandler = async(id, nodeParent, path) => {
+        // console.log(`node: ${id} parent: ${nodeParent}`);
+        if(!expanded.includes(id)){
+            const last_ar = expanded.filter((row, idx)=> idx === expanded.length-1 );
+            if(last_ar[0] === nodeParent){
+                setExpanded([...expanded, id]);
+            }else if(last_ar.length === 0){
+                setExpanded([...expanded, id]);
+            }else{
+                if(nodeParent === null){
+                    setExpanded([id])
                 }else{
-                    return id;
+                    setExpanded([nodeParent, id]);
                 }
-            });
-            console.log(arrnew);
-            setExpanded([...expanded, id]);
-        } else {
-          // remove clicked node, and children of clicked node from expanded list
-          setExpanded(expanded.filter(i => i !== id && !i.startsWith(`${id}.`)));
+            }
+        }else{
+            setExpanded(expanded.filter(i => i !== id && !i.startsWith(`${id}.`)));
         }
-      };
+
+    };
+
 
     const handleSelect = (event, nodeIds) => {
         // console.log(event.currentTarget);
         setSelected(nodeIds);
     };
     const [expandCate, setExpandCate] = useState(true);
+    const [expandBrand, setExpandBrand] = useState(true);
 
     const TreeCusItem = (nodes) =>{
         return(
-            <TreeItem key={nodes.id_node} className="t-custom-listmenu" onClick={()=>createHandler(nodes.id_node)} nodeId={nodes.id_node} label={
+            <TreeItem key={nodes.id_node} className="t-custom-listmenu" onClick={()=>createHandler(nodes.id_node, nodes.node_parent, nodes.path)} nodeId={nodes.id_node} label={
                 <Box sx={{display:'flex', alignItems:'center', justifyContent:'space-between', p:0.5, pr:0}}>
                     <Typography className='t-text-listmenu'>
                         {nodes.title}
@@ -150,8 +178,8 @@ function CategoryMenu({data1 = [{id:0, title:'', main_path: '', list:[{id:0, lis
                 <Grid item xs={12}>
                     <Accordion sx={style.callapseHead} expanded={expandCate} onChange={()=>setExpandCate(!expandCate)} >
                         <AccordionSummary sx={{'.MuiAccordionSummary-content.Mui-expanded':{color:'#00005f'}}} id="cate_header" expandIcon={<ExpandMore />} aria-controls="cate_header_content" >
-                            <Typography component={'p'}>
-                                ค้นหาสินค้าตามชนิดสินค้า
+                            <Typography component={'p'} sx={{textTransform:'uppercase'}}>
+                                Product categories
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -160,15 +188,41 @@ function CategoryMenu({data1 = [{id:0, title:'', main_path: '', list:[{id:0, lis
                                 //   aria-label="controlled"
                                   defaultCollapseIcon={<Remove />}
                                   defaultExpandIcon={<Add />}
+                                //   expanded={expanded}
                                   expanded={expanded}
                                   selected={selected}
                                 //   onNodeToggle={handleToggle}
                                   onNodeSelect={handleSelect}
+                                  
                             >
                                 {
                                     data.map(row=>TreeCusItem(row))
                                 }
                             </TreeView>
+
+                        </AccordionDetails>
+                    </Accordion>
+                </Grid>
+
+                {/* Brand */}
+                <Grid item xs={12}>
+                    <Accordion sx={style.callapseHead} expanded={expandBrand} onChange={()=>setExpandBrand(!expandBrand)} >
+                        <AccordionSummary sx={{'.MuiAccordionSummary-content.Mui-expanded':{color:'#00005f'}}} id="cate_header" expandIcon={<ExpandMore />} aria-controls="cate_header_content" >
+                            <Typography component={'p'} sx={{textTransform:'uppercase'}} >
+                                Product categories
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+
+                            {data_brand.map((listBrand, idx)=>{
+                                return(
+                                    <MenuItem key={idx} className='t-brand-link'>
+                                        <Typography>
+                                        {listBrand.name} <span style={{marginLeft:5}} >({listBrand.amount})</span>
+                                        </Typography>
+                                    </MenuItem>
+                                )
+                            })}
 
                         </AccordionDetails>
                     </Accordion>

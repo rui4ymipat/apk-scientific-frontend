@@ -6,6 +6,10 @@ import ListCateItem from "../components/category/ListCateItem";
 import { getCategoryList } from "../services/list_category_service";
 import { getCategory } from "../services/category_service";
 import { getProducts } from "../services/product_service";
+
+
+let xIndex = 0;
+
 function Category() {
   // ================================= function main
   const [sortBy, setSortBy] = useState("popularity");
@@ -15,6 +19,26 @@ function Category() {
 
   const [products, setproducts] = useState([]);
   const [menuCategory, setMenuCategory] = useState([]);
+
+  const loopListMenu = (list) => {
+    xIndex++;
+    console.log(xIndex);
+    let newLoop = [];
+    if(Array.isArray(list.sub_list)){
+      newLoop = list.sub_list.map((item, idx)=>{
+        xIndex++;
+        return loopListMenu(item)});
+    }else{
+      newLoop = [];
+    }
+    return {
+      id_node: xIndex+1,
+      node_parent: xIndex,
+      title: list.name, 
+      path: "/category/" + list.name,
+      sub_menu: newLoop,
+    }
+  };
 
   useEffect(() => {
     getCategory().then((res) => {
@@ -38,6 +62,10 @@ function Category() {
       });
     });
     getCategoryList().then((res) => {
+      console.log(res);
+      res.map((listItem, idx)=>{
+        console.log(loopListMenu(listItem, idx));
+      })
       setMenuCategory(
         res.map((list, idx) => {
           return {
@@ -53,6 +81,21 @@ function Category() {
           };
         })
       );
+      // setMenuCategory(
+      //   res.map((list, idx) => {
+      //     return {
+      //       id: idx + 1,
+      //       title: list.name,
+      //       main_path: "/category/" + list.name,
+      //       list: list.sub_list.map((sub) => {
+      //         return {
+      //           listTitle: sub.name,
+      //           path: "/category/" + sub.name,
+      //         };
+      //       }),
+      //     };
+      //   })
+      // );
     });
   }, []);
 
@@ -80,9 +123,9 @@ function Category() {
                             <Typography>ค้าหา</Typography>
                         </Button>
                     </Box> */}
-            <Box border={"0.5px solid #e0e0e0"}>
+            <Box>
               {menuCategory.length > 0 ? (
-                <CategoryMenu data={menuCategory} />
+                <CategoryMenu data1={menuCategory} />
               ) : (
                 <></>
               )}
