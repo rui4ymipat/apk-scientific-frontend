@@ -162,3 +162,12 @@ img.t-img-fluid, .t-img-fluid > img{
     font-size: 16px;
     text-transform: uppercase;
 }
+
+/* unput multi selected */
+.t-multiselect .MuiInputBase-root.Mui-focused fieldset.MuiOutlinedInput-notchedOutline{
+    border-color: var(--color-primary) !important;
+}
+.t-multiselect label.MuiInputLabel-root.Mui-focused{
+    color: var(--color-primary) !important;
+}
+

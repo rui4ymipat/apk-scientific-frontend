@@ -42,7 +42,7 @@ function App() {
   return (
     <Router>
       {/* Header */}
-      <Header />
+      {/* <Header /> */}
 
       {/* Navbar menu */}
       <Navbar />

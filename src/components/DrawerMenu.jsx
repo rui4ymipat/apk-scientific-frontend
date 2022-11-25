@@ -27,9 +27,9 @@ const AccCusDrawMenu = ({data={id: 0, title: "", path: "",list: [{listTitle: '',
             สินค้าทั้งหมด
           </Typography>
         </ListItemButton>
-        {data.list.map(obj=>{
+        {data.list.map((obj, idx)=>{
           return (
-            <ListItemButton onClick={() => navigate(data.path)}>
+            <ListItemButton key={"mn_"+idx} onClick={() => navigate(data.path)}>
               <Typography sx={{fontSize: 13, fontWeight: 'bold', color:'white'}} component={'p'}>
                 {obj.listTitle}{data.path}{obj.listUrl}
               </Typography>

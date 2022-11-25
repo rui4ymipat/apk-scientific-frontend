@@ -165,30 +165,47 @@ export default function Navbar() {
           paddingX: { xs: 3, xl: 5 },
         }}
       >
-        <Box sx={{ display: { xs: "none", lg: "block" }, overflowX:'auto', maxWidth: '100%' }}>
-          {data.map((obj) => {
-            return obj.list.length < 1 ? (
-              <Button
-                onClick={() => navigate(obj.path)}
-                // href={obj.path}
-                key={obj.id}
-                sx={{
-                  color: "#00005f",
-                  borderRadius: 0,
-                  py: 2,
-                  px: 3,
-                  "&:hover": {
-                    background: "#00005f",
-                    color: "white",
-                  },
-                }}
-              >
-                {obj.title}
-              </Button>
-            ) : (
-              <DropdownCusMenu key={obj.id} data={obj} />
-            );
-          })}
+        <Box sx={{ display: { xs: "none", lg: "block" }}}>
+          <Grid container>
+            <Grid item xs={12} md={2} >
+              <Box sx={{display:'flex', justifyContent:'center', alignItems: 'center', height:'100%'}}>
+                <img
+                  src="https://snp-scientific.com/wp-content/uploads/2022/02/snp-logo04.png"
+                  style={{ maxWidth:'80%' }}
+                  alt="logo"
+                  loading="lazy"
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={10}>
+              <Box sx={{overflowX:'auto', maxWidth: '100%' }}>
+                {data.map((obj) => {
+                  return obj.list.length < 1 ? (
+                    <Button
+                      onClick={() => navigate(obj.path)}
+                      // href={obj.path}
+                      key={obj.id}
+                      sx={{
+                        color: "#00005f",
+                        borderRadius: 0,
+                        height:60,
+                        py: 2,
+                        px: 3,
+                        "&:hover": {
+                          background: "#00005f",
+                          color: "white",
+                        },
+                      }}
+                    >
+                      {obj.title}
+                    </Button>
+                  ) : (
+                    <DropdownCusMenu key={obj.id} data={obj} />
+                  );
+                })}
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
 
         {/* Mobile Mode */}
@@ -200,43 +217,50 @@ export default function Navbar() {
             paddingY: 2,
           }}
         >
-          <Typography component={"a"} href={"/"}>
-            <ImageListItem>
-              <img
-                src="https://snp-scientific.com/wp-content/uploads/2022/02/snp-logo04.png"
-                style={{ width: 250 }}
-                alt="logo"
-                loading="lazy"
-              />
-            </ImageListItem>
-          </Typography>
-          <Box>
-            <IconButton
-              onClick={() => setModalToggle(true)}
-              sx={{
-                display: { xs: "", lg: "none" },
-                marginRight: 1,
-                background: "#00005f",
-                color: "white",
-                borderRadius: 2,
-                ":hover": { color: "#00005f", boxShadow: "0 0 0 1px #00005f" },
-              }}
-            >
-              <Search sx={{ fontSize: 25 }} />
-            </IconButton>
-            <IconButton
-              onClick={() => setActionHamburger(true)}
-              sx={{
-                background: "#00005f",
-                color: "white",
-                borderRadius: 2,
-                ":hover": { color: "#00005f", boxShadow: "0 0 0 1px #00005f" },
-              }}
-            >
-              <MenuHam sx={{ fontSize: 25 }} />
-            </IconButton>
-          </Box>
+          <Grid container spacing={1}>
+            <Grid item xs={2} sx={{display:'flex', justifyContent:'start'}} >
+              <IconButton
+                onClick={() => setModalToggle(true)}
+                sx={{
+                  display: { xs: "", lg: "none" },
+                  marginRight: 1,
+                  background: "#00005f",
+                  color: "white",
+                  borderRadius: 2,
+                  ":hover": { color: "#00005f", boxShadow: "0 0 0 1px #00005f" },
+                }}
+              >
+                <Search sx={{ fontSize: 25 }} />
+              </IconButton>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography component={"a"} href={"/"} sx={{display:'flex', justifyContent:'center'}}>
+                <Box sx={{ width: {xs:160, lg:250} }}>
+                  <img
+                    src="https://snp-scientific.com/wp-content/uploads/2022/02/snp-logo04.png"
+                    style={{ width:'100%'}}
+                    alt="logo"
+                    loading="lazy"
+                  />
+                </Box>
+              </Typography>
+            </Grid>
+            <Grid item xs={2} sx={{display:'flex', justifyContent:'end'}}>
+              <IconButton
+                onClick={() => setActionHamburger(true)}
+                sx={{
+                  background: "#00005f",
+                  color: "white",
+                  borderRadius: 2,
+                  ":hover": { color: "#00005f", boxShadow: "0 0 0 1px #00005f" },
+                }}
+              >
+                <MenuHam sx={{ fontSize: 25 }} />
+              </IconButton>
+            </Grid>
+          </Grid>
         </Box>
+
         <Modal
           open={modalToggle}
           onClose={() => setModalToggle(false)}
@@ -305,7 +329,7 @@ export default function Navbar() {
       </Container>
       {/* mobile mode menu */}
       <DrawerMenu
-        anchor={"right"}
+        anchor={"left"}
         open={actionHamburger}
         close={setActionHamburger}
         items={data}

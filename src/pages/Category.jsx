@@ -1,5 +1,5 @@
 import { FormatListBulleted, Widgets } from "@mui/icons-material";
-import { Grid, Box, TextField, Button, Typography } from "@mui/material";
+import { Grid, Box, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategoryMenu from "../components/category/CategoryMenu";
 import ListCateItem from "../components/category/ListCateItem";
@@ -62,9 +62,9 @@ function Category() {
       });
     });
     getCategoryList().then((res) => {
-      console.log(res);
+      // console.log(res);
       res.map((listItem, idx)=>{
-        console.log(loopListMenu(listItem, idx));
+        // console.log(loopListMenu(listItem, idx));
       })
       setMenuCategory(
         res.map((list, idx) => {
@@ -125,7 +125,7 @@ function Category() {
                     </Box> */}
             <Box>
               {menuCategory.length > 0 ? (
-                <CategoryMenu data1={menuCategory} />
+                <CategoryMenu brand={products} data1={menuCategory} />
               ) : (
                 <></>
               )}
