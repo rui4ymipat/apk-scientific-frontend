@@ -4,7 +4,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import { Close, ExpandMore, FacebookSharp } from '@mui/icons-material';
+import { Close, ExpandMore, FacebookSharp, Search } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary, IconButton, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
@@ -67,7 +67,20 @@ export default function DrawerMenu(props) { // ============================= fun
       <List>
 
       <ListItem disablePadding>
-        <Box sx={{display:'flex', alignItems: 'center', justifyContent: 'end', px:2}}>
+        <Box sx={{display:'flex', alignItems: 'center', justifyContent: 'space-between', px:2}}>
+          <IconButton
+                onClick={() => props.setModalToggle(true)}
+                sx={{
+                  display: { xs: "", lg: "none" },
+                  marginRight: 1,
+                  background: "#00005f",
+                  color: "white",
+                  borderRadius: 2,
+                  ":hover": { color: "#00005f", boxShadow: "0 0 0 1px #00005f" },
+                }}
+              >
+                <Search sx={{ fontSize: 25 }} />
+          </IconButton>
           <IconButton onClick={toggleDrawer(anchor, false)}>
             <Close sx={{color:'white'}} />
           </IconButton>
@@ -105,6 +118,7 @@ export default function DrawerMenu(props) { // ============================= fun
             onOpen={toggleDrawer(props.anchor, true)}
             id={'content_drawmenu'}
           >
+
             {list(props.anchor)}
           </SwipeableDrawer>
         </React.Fragment>

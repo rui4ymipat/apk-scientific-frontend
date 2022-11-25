@@ -7,9 +7,6 @@ import { getCategoryList } from "../services/list_category_service";
 import { getCategory } from "../services/category_service";
 import { getProducts } from "../services/product_service";
 
-
-let xIndex = 0;
-
 function Category() {
   // ================================= function main
   const [sortBy, setSortBy] = useState("popularity");
@@ -20,20 +17,17 @@ function Category() {
   const [products, setproducts] = useState([]);
   const [menuCategory, setMenuCategory] = useState([]);
 
-  const loopListMenu = (list) => {
-    xIndex++;
-    console.log(xIndex);
+  const loopListMenu = (list, index, parentNode) => {
     let newLoop = [];
     if(Array.isArray(list.sub_list)){
       newLoop = list.sub_list.map((item, idx)=>{
-        xIndex++;
-        return loopListMenu(item)});
+        return loopListMenu(item, )});
     }else{
       newLoop = [];
     }
     return {
-      id_node: xIndex+1,
-      node_parent: xIndex,
+      id_node: index,
+      node_parent: parentNode,
       title: list.name, 
       path: "/category/" + list.name,
       sub_menu: newLoop,
@@ -64,8 +58,14 @@ function Category() {
     getCategoryList().then((res) => {
       // console.log(res);
       res.map((listItem, idx)=>{
-        // console.log(loopListMenu(listItem, idx));
-      })
+        // console.log(loopListMenu(listItem, idx, null));
+      });
+      const idMapping = res.reduce((acc, el, i) => {
+        console.log(el, i);
+        // acc[el.id] = i;
+        // return acc;
+      }, {});
+      
       setMenuCategory(
         res.map((list, idx) => {
           return {

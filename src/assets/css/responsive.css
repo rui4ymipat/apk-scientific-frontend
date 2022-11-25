@@ -5,7 +5,7 @@
         justify-content: center;
     }
     .t-thumbs-preview [data-rmiz-content="found"] > img.t-img-fluid {
-        max-height: 500px;
+        max-height: 260px;
         max-width: 400px;
         object-fit: scale-down;
     }
@@ -24,6 +24,7 @@
         object-fit: fill;
     }
     .t-img-product{
-        height: 200px;
+        height: 160px;
+        object-fit: contain;
     }
 }

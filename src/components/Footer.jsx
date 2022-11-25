@@ -1,7 +1,6 @@
 import {
   Call,
   Facebook,
-  ImportContactsOutlined,
   Instagram,
   Mail,
   Room,
@@ -33,7 +32,7 @@ function Footer() {
         <Grid
           container
           sx={{
-            minHeight: { xl: 260 },
+            // minHeight: { xl: 260 },
             py: 3,
             px: 3,
             background:
@@ -41,7 +40,7 @@ function Footer() {
             color: "white",
           }}
         >
-          <Grid item xs={12} xl={3} sx={{ mb: { xs: 2, sm: 0 } }}>
+          <Grid item xs={12} lg={3} sx={{ mb: { xs: 2, sm: 0 } }}>
             <Typography component={"p"} sx={{ fontWeight: 1000 }}>
               บริษัท เอสเอ็นพี ไซเเอนติฟิค จำกัด
             </Typography>
@@ -72,7 +71,7 @@ function Footer() {
               </ListItem>
             </List>
           </Grid>
-          <Grid item xs={12} xl={4} sx={{ mb: { xs: 2, sm: 0 } }}>
+          <Grid item xs={12} lg={4} sx={{ mb: { xs: 2, sm: 0 } }}>
             <Typography component={"p"} sx={{ fontWeight: 1000 }}>
               สนใจสินค้ากรุณาติดต่อ ฝ่ายขาย (please contact)
             </Typography>
@@ -95,7 +94,7 @@ function Footer() {
               />
             </ImageListItem>
           </Grid>
-          <Grid item xs={12} xl={3} sx={{ mb: { xs: 2, sm: 0 } }}>
+          <Grid item xs={12} lg={3} sx={{ mb: { xs: 2, sm: 0 } }}>
             <Typography component={"p"} mb={1}>
               Follow Us
             </Typography>
@@ -134,7 +133,7 @@ function Footer() {
               </Tooltip>
             </Box>
           </Grid>
-          <Grid item xs={12} xl={2} sx={{ mb: { xs: 2, sm: 0 } }}>
+          <Grid item xs={12} lg={2} sx={{ mb: { xs: 2, sm: 0 } }}>
             <ImageListItem>
               <img
                 src="https://snp-scientific.com/wp-content/uploads/2021/02/line-238x300.jpg"

@@ -8,10 +8,7 @@ import {
   Typography,
   Menu,
   MenuItem,
-  ImageListItem,
   IconButton,
-  Link,
-  ListItemButton,
   Modal,
   Select,
   FormControl,
@@ -218,21 +215,7 @@ export default function Navbar() {
           }}
         >
           <Grid container spacing={1}>
-            <Grid item xs={2} sx={{display:'flex', justifyContent:'start'}} >
-              <IconButton
-                onClick={() => setModalToggle(true)}
-                sx={{
-                  display: { xs: "", lg: "none" },
-                  marginRight: 1,
-                  background: "#00005f",
-                  color: "white",
-                  borderRadius: 2,
-                  ":hover": { color: "#00005f", boxShadow: "0 0 0 1px #00005f" },
-                }}
-              >
-                <Search sx={{ fontSize: 25 }} />
-              </IconButton>
-            </Grid>
+            <Grid item xs={2} sx={{display:'flex', justifyContent:'start'}} ></Grid>
             <Grid item xs={8}>
               <Typography component={"a"} href={"/"} sx={{display:'flex', justifyContent:'center'}}>
                 <Box sx={{ width: {xs:160, lg:250} }}>
@@ -333,6 +316,7 @@ export default function Navbar() {
         open={actionHamburger}
         close={setActionHamburger}
         items={data}
+        setModalToggle={setModalToggle}
       />
     </AppBar>
   );

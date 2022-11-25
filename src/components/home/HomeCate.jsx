@@ -15,7 +15,7 @@ function HomeCate(props) {
                             color: 'white'
                         },
                         borderBottom: '0.75px solid #d0d0d0',
-                        py: 1.5
+                        py: 1
                     }}
                 >
                     <ListItemIcon>

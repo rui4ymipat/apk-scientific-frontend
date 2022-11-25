@@ -19,19 +19,18 @@ function ListCateItem({
           {data.map((obj) => {
             return (
               <Grid key={obj.id} item xs={6} md={4} lg={3} mb={3}>
-                <CardProduct data={obj} />
+                <CardProduct showGrid={true} data={obj} />
               </Grid>
             );
           })}
         </Grid>
       ) : (
-
         //  **************************** show data to list
         <Grid container spacing={3}>
           {data.map((obj) => {
             return (
               <Grid key={obj.id} item xs={12} mb={3}>
-                <CardProduct data={obj} />
+                <CardProduct showGrid={false} data={obj} />
                 {/* <div
                   onClick={() => {
                     navigate(obj.path);

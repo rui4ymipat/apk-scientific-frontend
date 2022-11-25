@@ -24,6 +24,9 @@ import "./assets/css/responsive.css";
 import Category from "./pages/Category";
 import Basket from "./components/Basket";
 import Product from "./pages/Product";
+import ArticleNews from "./pages/ArticleNews";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDWTVbq_cSmk6Tol9xcVofQm3FhhyZL80k",
@@ -42,7 +45,7 @@ function App() {
   return (
     <Router>
       {/* Header */}
-      {/* <Header /> */}
+      <Header />
 
       {/* Navbar menu */}
       <Navbar />
@@ -54,6 +57,10 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home app={app} />} />
         <Route path="/category" element={<Category app={app} />} />
+        <Route path="/new-articles" element={<ArticleNews app={app} />} />
+        <Route path="/about-us" element={<AboutUs app={app} />} />
+        <Route path="/contact-us" element={<ContactUs app={app} />} />
+
         <Route path="/product/:id" element={<Product app={app} />} />
         <Route path="/admin" element={<Admin app={app} />} />
         <Route path="/admin-login" element={<AdminLogin app={app} />} />

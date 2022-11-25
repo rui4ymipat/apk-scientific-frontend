@@ -2,6 +2,9 @@
     --color-primary: #00005f;
     --color-gray: #595959;
 }
+.t-bg-primary{
+    background-color: var(--color-primary) !important;
+}
 .carousel-custom .swiper-button-next,
 .carousel-custom .swiper-button-prev{
     background-color: rgba(50, 50, 50, 0.35);
@@ -115,7 +118,7 @@ img.t-img-fluid, .t-img-fluid > img{
     background-color: #0000 !important;
 }
 .t-custom-listmenu .MuiTreeItem-label .MuiTypography-root{
-    font-size: 14px;
+    font-size: 16px;
     color: #222222;
 }
 .t-custom-listmenu .MuiTreeItem-content.Mui-focused,
@@ -139,9 +142,15 @@ img.t-img-fluid, .t-img-fluid > img{
 .t-img-product{
     width: 100%;
     height: 230px;
-    object-fit: scale-down;
+    object-fit: cover;
+}
+.t-img-product.list{
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
 }
 .t-text-wrap-3{
+    line-height: 1.8 !important;
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
@@ -171,3 +180,37 @@ img.t-img-fluid, .t-img-fluid > img{
     color: var(--color-primary) !important;
 }
 
+/* img detail product */
+.t-img-detailproduct img{
+    width: 100%;
+    height: 430px;
+    object-fit: scale-down;
+}
+
+
+
+/* animated */
+@keyframes fadeLeftShow{
+    from{
+        opacity: 0;
+        transform: translateX(-10px);
+        width: 0px;
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+        width: auto;
+    }
+}
+@-webkit-keyframes fadeLeftShow{
+    from{
+        opacity: 0;
+        transform: translateX(-10px);
+        width: 0px;
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+        width: auto;
+    }
+}

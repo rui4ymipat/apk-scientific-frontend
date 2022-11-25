@@ -30,17 +30,17 @@ const style = {
 // ================ function main
 function CategoryMenu({
     data1={
-        id_node: '1',
+        id_node: '',
         node_parent: null,
-        id:1, 
-        title:'สินค้าใหม่ (New Products)', 
-        path: 'main_1',
+        id:0, 
+        title:'', 
+        path: '',
         sub_menu:[]
     },
     brand={
         id_brand: 1,
-        name: 'Brand',
-        amount: 35,
+        name: '',
+        amount: 0,
     },
 }) {
     // coding......
@@ -125,18 +125,6 @@ function CategoryMenu({
             ],
         },
     ];
-    const data_brand = [
-        {
-            id_brand: 1,
-            name: 'Brand',
-            amount: 35,
-        },
-        {
-            id_brand: 2,
-            name: 'Brand2',
-            amount: 35,
-        },
-    ];
     const [expanded, setExpanded] = React.useState([]);
     const [selected, setSelected] = React.useState([]);
 
@@ -195,8 +183,8 @@ function CategoryMenu({
                     limitTags={2}
                     id="multiple-search-category"
                     className='t-multiselect'
-                    options={[{title:'Bottle', id:11}, {title:'Fan', id:12}, {title:'Nootebook', id:12}]}
-                    getOptionLabel={(option) => option.title}
+                    options={brand}
+                    getOptionLabel={(option) => option.product_name}
                     defaultValue={[]}
                     size={'small'}
                     sx={{
@@ -250,7 +238,7 @@ function CategoryMenu({
                         <AccordionDetails>
                             <Box component={'div'} sx={{height:4, width: {xs:'100%', lg:100}, background:'#efefef', maxWidth: '100%', marginBottom:1}} ></Box>
                             {brand.map((listBrand, idx)=>{
-                                console.log(listBrand);
+                                // console.log(listBrand);
                                 return(
                                     <MenuItem key={idx} className='t-brand-link'>
                                         <Typography noWrap={true}>
