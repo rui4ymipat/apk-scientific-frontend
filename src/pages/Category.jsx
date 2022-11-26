@@ -38,7 +38,7 @@ function Category() {
   const loopSetMenu = (data, idx) => {
     return data.map((sub, idx_sub) => {
       return {
-        id_node: idx_sub,
+        id_node: `${idx}-${idx_sub}`,
         node_parent: idx,
         id: idx_sub,
         title: sub.name,
@@ -73,19 +73,19 @@ function Category() {
       let newData = [];
       res.map((item, idx) => {
         newData.push({
-          id_node: idx,
+          id_node: `${idx}`,
           node_parent: null,
-          id: idx,
+          id: idx + 1,
           title: item.name,
           path: "/category/" + item.name,
           sub_menu: item.sub_list.map((sub, idx_sub) => {
             return {
-              id_node: idx_sub,
-              node_parent: idx,
-              id: idx_sub,
+              id_node: `${idx}-${idx_sub}`,
+              node_parent: `${idx}`,
+              id: idx_sub + 1,
               title: sub.name,
               path: "/category/" + sub.name,
-              sub_menu: loopSetMenu(sub.sub_list, idx),
+              sub_menu: loopSetMenu(sub.sub_list, `${idx}-${idx_sub}`),
             };
           }),
         });
