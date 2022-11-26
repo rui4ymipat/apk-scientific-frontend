@@ -19,19 +19,33 @@ function Category() {
 
   const loopListMenu = (list, index, parentNode) => {
     let newLoop = [];
-    if(Array.isArray(list.sub_list)){
-      newLoop = list.sub_list.map((item, idx)=>{
-        return loopListMenu(item, )});
-    }else{
+    if (Array.isArray(list.sub_list)) {
+      newLoop = list.sub_list.map((item, idx) => {
+        return loopListMenu(item);
+      });
+    } else {
       newLoop = [];
     }
     return {
       id_node: index,
       node_parent: parentNode,
-      title: list.name, 
+      title: list.name,
       path: "/category/" + list.name,
       sub_menu: newLoop,
-    }
+    };
+  };
+
+  const loopSetMenu = (data) => {
+    return data.map((sub, idx_sub) => {
+      return {
+        id_node: idx_sub,
+        node_parent: idx,
+        id: idx_sub,
+        title: sub.name,
+        path: "/category/" + sub.name,
+        sub_menu: [],
+      };
+    });
   };
 
   useEffect(() => {
@@ -56,8 +70,29 @@ function Category() {
       });
     });
     getCategoryList().then((res) => {
+      let newData = [];
+      res.map((item, idx) => {
+        newData.push({
+          id_node: idx,
+          node_parent: null,
+          id: idx,
+          title: item.name,
+          path: "/category/" + item.name,
+          sub_menu: item.sub_list.map((sub, idx_sub) => {
+            return {
+              id_node: idx_sub,
+              node_parent: idx,
+              id: idx_sub,
+              title: sub.name,
+              path: "/category/" + sub.name,
+              sub_menu: loopSetMenu(sub.sub_list),
+            };
+          }),
+        });
+      });
+      console.log("newData", newData);
       // console.log(res);
-      res.map((listItem, idx)=>{
+      res.map((listItem, idx) => {
         // console.log(loopListMenu(listItem, idx, null));
       });
       const idMapping = res.reduce((acc, el, i) => {
@@ -65,7 +100,7 @@ function Category() {
         // acc[el.id] = i;
         // return acc;
       }, {});
-      
+
       setMenuCategory(
         res.map((list, idx) => {
           return {
