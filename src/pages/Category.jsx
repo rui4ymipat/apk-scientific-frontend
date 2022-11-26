@@ -35,7 +35,7 @@ function Category() {
     };
   };
 
-  const loopSetMenu = (data) => {
+  const loopSetMenu = (data, idx) => {
     return data.map((sub, idx_sub) => {
       return {
         id_node: idx_sub,
@@ -85,7 +85,7 @@ function Category() {
               id: idx_sub,
               title: sub.name,
               path: "/category/" + sub.name,
-              sub_menu: loopSetMenu(sub.sub_list),
+              sub_menu: loopSetMenu(sub.sub_list, idx),
             };
           }),
         });
