@@ -13,27 +13,10 @@ function Category() {
   const [countProductShow, setcountProductShow] = useState(10);
   const [showDataGrid, setShowDataGrid] = useState(true);
   const [categoryList, setCategoryList] = useState([]);
+  const [productCategory, setProductCategory] = useState([]);
 
   const [products, setproducts] = useState([]);
   const [menuCategory, setMenuCategory] = useState([]);
-
-  const loopListMenu = (list, index, parentNode) => {
-    let newLoop = [];
-    if (Array.isArray(list.sub_list)) {
-      newLoop = list.sub_list.map((item, idx) => {
-        return loopListMenu(item);
-      });
-    } else {
-      newLoop = [];
-    }
-    return {
-      id_node: index,
-      node_parent: parentNode,
-      title: list.name,
-      path: "/category/" + list.name,
-      sub_menu: newLoop,
-    };
-  };
 
   const loopSetMenu = (data, idx) => {
     return data.map((sub, idx_sub) => {
@@ -89,18 +72,9 @@ function Category() {
             };
           }),
         });
-      });
-      console.log("newData", newData);
+      }); setProductCategory(newData);
+      
       // console.log(res);
-      res.map((listItem, idx) => {
-        // console.log(loopListMenu(listItem, idx, null));
-      });
-      const idMapping = res.reduce((acc, el, i) => {
-        console.log(el, i);
-        // acc[el.id] = i;
-        // return acc;
-      }, {});
-
       setMenuCategory(
         res.map((list, idx) => {
           return {
@@ -160,7 +134,7 @@ function Category() {
                     </Box> */}
             <Box>
               {menuCategory.length > 0 ? (
-                <CategoryMenu brand={products} data1={menuCategory} />
+                <CategoryMenu brand={products} data={productCategory} />
               ) : (
                 <></>
               )}

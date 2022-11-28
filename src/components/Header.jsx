@@ -1,51 +1,51 @@
-// import { Call, Facebook, Search } from "@mui/icons-material";
+import { Call, Facebook, Search } from "@mui/icons-material";
 import {
   Box,
-  // Grid,
-  // IconButton,
-  // Typography,
-  // ImageListItem,
-  // TextField,
-  // FormControl,
-  // Button,
-  // Modal,
-  // MenuItem,
-  // Select,
+  Grid,
+  IconButton,
+  Typography,
+  ImageListItem,
+  TextField,
+  FormControl,
+  Button,
+  Modal,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import React from "react";
 
 
 
-// const options = [
-//     'จานเพาะเชื้อ (Petri Dish) / กระจกนาฬิกา (Watch Glass)',
-//     'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
-//     'วัสดุสิ้นเปลือง (Consumable Products)',
-//     'Dione',
-//     'Ganymede',
-//     'Hangouts Call',
-//     'Luna',
-//     'Oberon',
-//     'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
-//     'วัสดุสิ้นเปลือง (Consumable Products)',
-//     'Phobos',
-//     'Pyxis',
-//     'Sedna',
-//     'Titania',
-//     'Triton',
-//     'จานเพาะเชื้อ (Petri Dish) / กระจกนาฬิกา (Watch Glass)',
-//     'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
-//     'วัสดุสิ้นเปลือง (Consumable Products)',
-//     'Umbriel',
-//   ];
+const options = [
+    'จานเพาะเชื้อ (Petri Dish) / กระจกนาฬิกา (Watch Glass)',
+    'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
+    'วัสดุสิ้นเปลือง (Consumable Products)',
+    'Dione',
+    'Ganymede',
+    'Hangouts Call',
+    'Luna',
+    'Oberon',
+    'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
+    'วัสดุสิ้นเปลือง (Consumable Products)',
+    'Phobos',
+    'Pyxis',
+    'Sedna',
+    'Titania',
+    'Triton',
+    'จานเพาะเชื้อ (Petri Dish) / กระจกนาฬิกา (Watch Glass)',
+    'อุปกรณ์พลาสติกสำหรับห้องปฏิบัติการ (Plasticware)',
+    'วัสดุสิ้นเปลือง (Consumable Products)',
+    'Umbriel',
+  ];
   
 function Header() {// ============= function main
-  // const [modalToggle, setModalToggle] = useState(false);
-  // const [textSearchList, setTextSearchList] = useState("allCategory");
+  const [modalToggle, setModalToggle] = React.useState(false);
+  const [textSearchList, setTextSearchList] = React.useState("allCategory");
   const path = window.location.pathname;
 
   if (path.search("admin") === 1) return null;
   return (
-    <Box className="t-bg-primary" >
+    <Box className="" >
 
       {/*  mobile */}
       {/* <Grid
@@ -157,9 +157,10 @@ function Header() {// ============= function main
       </Grid> */}
 
       {/* NavBanner */}
-      {/* <Grid
+      <Grid
         container
         alignItems={"center"}
+        justifyContent={'space-between'}
         paddingX={4}
         paddingY={5}
         sx={{ display: { xs: "none", lg: "flex" } }}
@@ -230,7 +231,7 @@ function Header() {// ============= function main
                 </IconButton>
             </Box>
         </Grid>
-        <Grid item sm={12} lg={8} sx={{display:'flex', justifyContent:'end'}}>
+        {/* <Grid item sm={12} lg={8} sx={{display:'flex', justifyContent:'end'}}>
           <Box>
             <Typography
               component={"p"}
@@ -252,8 +253,8 @@ function Header() {// ============= function main
               <Call sx={{ mr: 1 }} /> 02-1235678-90
             </Typography>
           </Box>
-        </Grid>
-      </Grid> */}
+        </Grid> */}
+      </Grid>
     </Box>
   );
 }

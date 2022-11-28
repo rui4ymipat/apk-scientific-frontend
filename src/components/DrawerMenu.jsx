@@ -4,8 +4,8 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import { Close, ExpandMore, FacebookSharp, Search } from '@mui/icons-material';
-import { Accordion, AccordionDetails, AccordionSummary, IconButton, Typography } from '@mui/material';
+import { Close, ExpandMore, FacebookSharp, Logout, PersonAdd, Search, Settings } from '@mui/icons-material';
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, IconButton, ListItemIcon, MenuItem, Tooltip, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
 
@@ -85,6 +85,47 @@ export default function DrawerMenu(props) { // ============================= fun
             <Close sx={{color:'white'}} />
           </IconButton>
         </Box>
+      </ListItem>
+
+      {/* account */}
+      <ListItem>
+        <Accordion sx={{width:'100%'}}>
+          <AccordionSummary id='menu_account' sx={{margin:0}}>
+          <Typography sx={{ width:'100%', display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+              <Avatar sx={{width:35, height:35}} src={""} alt="m" />
+              <Typography sx={{ minWidth: 100 }} className='t-text-primary'>Username</Typography>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <MenuItem>
+                <ListItemIcon>
+                <PersonAdd fontSize="small" />
+              </ListItemIcon>
+              Add another account
+            </MenuItem>
+
+            <Divider />
+
+            <MenuItem>
+              <ListItemIcon>
+                <PersonAdd fontSize="small" />
+              </ListItemIcon>
+              Add another account
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <Settings fontSize="small" />
+              </ListItemIcon>
+              Settings
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </AccordionDetails>
+        </Accordion>
       </ListItem>
 
         {props.items.map(obj=>{

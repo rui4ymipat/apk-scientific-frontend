@@ -11,6 +11,7 @@ import { Box,
     TextField,
 } from '@mui/material'
 import React, { useState } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 // import $ from 'jquery';
 
 
@@ -29,138 +30,147 @@ const style = {
 
 // ================ function main
 function CategoryMenu({
-    data1={
-        id_node: '',
-        node_parent: null,
-        id:0, 
-        title:'', 
-        path: '',
-        sub_menu:[]
-    },
-    brand={
-        id_brand: 1,
-        name: '',
-        amount: 0,
-    },
+    data=[
+        {
+            id_node: '',
+            node_parent: null,
+            id:0, 
+            title:'', 
+            path: '',
+            sub_menu:[]
+        }
+    ],
+    brand=[
+        {
+            id_brand: 1,
+            name: '',
+            amount: 0,
+        }
+    ],
 }) {
-    // coding......
-    // console.log(brand);
-    const data = [
+
+    const [expanded, setExpanded] = React.useState([]);
+    const [selected, setSelected] = React.useState([]);
+    const [nodeslist, setNodeslist] = useState([]);
+    const [pathProducts, setPathProducts] = useState([]);
+
+    const data2=[
         {
             id_node: '1',
             node_parent: null,
-            id:1, 
-            title:'สินค้าใหม่ (New Products)', 
-            path: 'main_1',
+            id:0, 
+            title:'dgass', 
+            path: '',
             sub_menu:[
                 {
-                    id_node: '1-1',
+                    id_node: '2',
                     node_parent: '1',
-                    id:2, 
-                    title: 'อุปกรณ์พลาสติกสำหรับห้อง',
-                    path: 'main_1/sub_1_1/',
+                    id:0, 
+                    title:'asd', 
+                    path: '',
                     sub_menu:[
                         {
-                            id_node: '1-1-1',
-                            node_parent: '1-1',
-                            id:3, 
-                            title:'อุปกรณ์พลาสติกสำหรับห้อง', 
-                            path: 'main_1/sub_1_1_1/',
-                            sub_menu:[]
-                        },
-                    ],
-                },
-                {
-                    id_node: '1-2',
-                    node_parent: '1',
-                    id:2, 
-                    title: 'อุปกรณ์พลาสติกสำหรับห้อง',
-                    path: 'main_1/sub_1_2/',
-                    sub_menu:[
-                        {
-                            id_node: '1-2-1',
-                            node_parent: '1-2',
-                            id:3, 
-                            title:'อุปกรณ์พลาสติกสำหรับห้อง', 
-                            path: 'main_1/sub_1_2_1/',
+                            id_node: '4',
+                            node_parent: '2',
+                            id:0, 
+                            title:'asd', 
+                            path: '',
                             sub_menu:[
                                 {
-                                    id_node: '1-2-1-1',
-                                    node_parent: '1-2-1',
-                                    id:2, 
-                                    title: 'อุปกรณ์พลาสติกสำหรับห้อง',
-                                    path: 'main_1/sub_1_2_1_1/',
+                                    id_node: '5',
+                                    node_parent: '4',
+                                    id:0, 
+                                    title:'asd', 
+                                    path: '',
                                     sub_menu:[
-                                        {
-                                            id_node: '1-2-1-1-1',
-                                            node_parent: '1-2-1-1',
-                                            id:3, 
-                                            title:'อุปกรณ์พลาสติกสำหรับห้อง', 
-                                            path: 'main_1/sub_1_2_1_1_1/',
-                                            sub_menu:[]
-                                        },
-                                    ],
-                                },
+                                        
+                                    ]
+                                }
                             ]
-                        },
-                    ],
+                        }
+                    ]
                 },
-            ],
-        },
-        {
-            id_node: 'dsdpkmgsd',
-            node_parent: null,
-            id:1, 
-            title:'เครื่องแก้ววิทยาศาสตร์', 
-            path: 'main_2',
-            sub_menu:[
                 {
-                    id_node: 'sppmdpskp',
-                    node_parent: 'dsdpkmgsd',
-                    id:2, 
-                    title: 'จานเพาะเชื้อ',
-                    path: 'main_2/sub_2_1/',
-                    sub_menu:[]
-                },
-            ],
-        },
-    ];
-    const [expanded, setExpanded] = React.useState([]);
-    const [selected, setSelected] = React.useState([]);
+                    id_node: '3',
+                    node_parent: '1',
+                    id:0, 
+                    title:'asd', 
+                    path: '',
+                    sub_menu:[
+                        {
+                            id_node: '6',
+                            node_parent: '3',
+                            id:0, 
+                            title:'asd', 
+                            path: '',
+                            sub_menu:[
+                                {
+                                    id_node: '7',
+                                    node_parent: '6',
+                                    id:0, 
+                                    title:'asd', 
+                                    path: '',
+                                    sub_menu:[
+                                        
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 
     // function stack list path Treeview
-    const createHandler = async(id, nodeParent, path) => {
+    const createHandler = async(item, idNode, nodeParent) => {
         // console.log(`node: ${id} parent: ${nodeParent}`);
-        if(!expanded.includes(id)){
+        if(selected === idNode){
+            setSelected([])
+        }else{
+            setSelected(idNode);
+        }
+        if(!expanded.includes(idNode)){
             const last_ar = expanded.filter((row, idx)=> idx === expanded.length-1 );
             if(last_ar[0] === nodeParent){
-                setExpanded([...expanded, id]);
+                if(item.sub_menu.length > 0) setExpanded([...expanded, idNode]);
             }else if(last_ar.length === 0){
-                setExpanded([...expanded, id]);
+                if(item.sub_menu.length > 0) setExpanded([...expanded, idNode]);
             }else{
                 if(nodeParent === null){
-                    setExpanded([id])
+                    setExpanded([idNode])
                 }else{
-                    setExpanded([nodeParent, id]);
+                    setExpanded([nodeParent, idNode]);
                 }
             }
         }else{
-            setExpanded(expanded.filter(i => i !== id && !i.startsWith(`${id}.`)));
+            console.log(item);
+            const newArr = item.sub_menu.map(irow=>{
+                console.log(irow.id_node);
+                if(irow.sub_menu.length > 0) {
+                    
+                }
+            })
+            setExpanded(expanded.filter(i => i !== idNode && !i.startsWith(`${idNode}.`)));
+        };
+    };
+
+    React.useEffect(() => {
+        console.log(selected, expanded);
+        if(expanded.includes(selected)){
+            setPathProducts([...expanded]);
+        }else{
+            setPathProducts([...expanded, selected])
         }
 
-    };
+    }, [selected]);
 
-
-    const handleSelect = (event, nodeIds) => {
-        // console.log(event.currentTarget);
-        setSelected(nodeIds);
-    };
     const [expandCate, setExpandCate] = useState(true);
     const [expandBrand, setExpandBrand] = useState(true);
 
     const TreeCusItem = (nodes) =>{
         return(
-            <TreeItem key={nodes.id_node} className="t-custom-listmenu" onClick={()=>createHandler(nodes.id_node, nodes.node_parent, nodes.path)} nodeId={nodes.id_node} label={
+            <TreeItem key={nodes.id_node} className="t-custom-listmenu" onClick={()=>{createHandler(nodes, nodes.id_node, nodes.node_parent, nodes.path);}} nodeId={nodes.id_node} label={
                 <Box sx={{display:'flex', alignItems:'center', justifyContent:'space-between', p:0.5, pr:0}}>
                     <Typography className='t-text-listmenu'>
                         {nodes.title}
@@ -176,6 +186,12 @@ function CategoryMenu({
 
     return data.length > 0 ? (
         <Box className='content-menu-category' >
+            <div>
+            ///
+            {pathProducts.map((row)=>{
+                return <span>{"=>"+row}</span>
+            })}
+            </div>
             <Grid container>
                 <Grid item xs={12} sx={{marginBottom:3}}>
                     <Autocomplete
@@ -214,12 +230,12 @@ function CategoryMenu({
                                 //   expanded={expanded}
                                   expanded={expanded}
                                   selected={selected}
-                                //   onNodeToggle={handleToggle}
-                                  onNodeSelect={handleSelect}
+                                //   onNodeToggle={(e, nodeIds)=>{}}
+                                //   onNodeSelect={handleSelect}
                                   
                             >
                                 {
-                                    data.map(row=>TreeCusItem(row))
+                                    data2.map(row=>TreeCusItem(row))
                                 }
                             </TreeView>
 
