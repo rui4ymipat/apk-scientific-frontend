@@ -1,4 +1,4 @@
-import { Call, Facebook, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import {
   Box,
   Grid,
@@ -39,7 +39,7 @@ const options = [
   ];
   
 function Header() {// ============= function main
-  const [modalToggle, setModalToggle] = React.useState(false);
+  // const [modalToggle, setModalToggle] = React.useState(false);
   const [textSearchList, setTextSearchList] = React.useState("allCategory");
   const path = window.location.pathname;
 
@@ -57,7 +57,7 @@ function Header() {// ============= function main
         <Grid item xs={6}>
           <Typography
             variant="h1"
-            color={"#00005f"}
+            color={"#f1132a"}
             sx={{ fontSize: 14, fontWeight: 1000 }}
           >
             บริษัท กขคง จำกัด
@@ -75,7 +75,7 @@ function Header() {// ============= function main
               p: 0,
               display: { xs: "none", lg: "flex" },
               "&:hover": {
-                background: "#00005f",
+                background: "#f1132a",
                 color: "#fff",
               },
             }}
@@ -143,7 +143,7 @@ function Header() {// ============= function main
                     width: "100%",
                     height: '100%',
                     color: "white",
-                    backgroundColor: "#00005f",
+                    backgroundColor: "#f1132a",
                     my: 0,
                     p: 0,
                   }}
@@ -162,7 +162,7 @@ function Header() {// ============= function main
         alignItems={"center"}
         justifyContent={'space-between'}
         paddingX={4}
-        paddingY={5}
+        paddingY={1}
         sx={{ display: { xs: "none", lg: "flex" } }}
       >
         <Grid item xs={12} lg={4}>
@@ -170,8 +170,8 @@ function Header() {// ============= function main
             <Typography component={"a"} href={"/"}>
               <ImageListItem>
                 <img
-                  src="https://snp-scientific.com/wp-content/uploads/2022/02/snp-logo04.png"
-                  style={{ width: 250 }}
+                  src="assets/images/logos/logo.png"
+                  style={{ width: 150 }}
                   alt="logo"
                   loading="lazy"
                 />

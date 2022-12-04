@@ -32,54 +32,52 @@ export default function ModalCategory(props) {
 
  
   return (
-    <div>
-      <Dialog
-        fullScreen
-        open={props.open}
-        onClose={props.handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: "relative" }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={props.handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Add Product
-            </Typography>
-            <Button autoFocus color="inherit" onClick={props.handleClose}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Grid container spacing={2} m={3}>
-          <Grid item xs={12}>
-            <TextField label="Product name" />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField label="Price" />
-          </Grid>
-          <Grid item xs={6}>
-            <Autocomplete
-              multiple
-              options={option}
-              getOptionLabel={(option) => option.name}
-            //   defaultValue={option.value}
-            //   onChange={(event, newValue) => {
-            //     setOption(newValue);
-            //   }}
-              renderInput={(params) => (
-                <TextField {...params} label="Categories" />
-              )}
-            />
-          </Grid>
-        </Grid>
-      </Dialog>
-    </div>
+    <Dialog
+    fullScreen
+    open={props.open}
+    onClose={props.handleClose}
+    TransitionComponent={Transition}
+  >
+    <AppBar sx={{ position: "relative" }}>
+      <Toolbar>
+        <IconButton
+          edge="start"
+          color="inherit"
+          onClick={props.handleClose}
+          aria-label="close"
+        >
+          <CloseIcon />
+        </IconButton>
+        <Typography sx={{ ml: 2, flex: 1 }} variant="h6">
+          Add Product
+        </Typography>
+        <Button autoFocus color="inherit" onClick={props.handleClose}>
+          save
+        </Button>
+      </Toolbar>
+    </AppBar>
+    <Grid container spacing={2} m={3}>
+      <Grid item xs={12}>
+        <TextField label="Product name" />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField label="Price" />
+      </Grid>
+      <Grid item xs={6}>
+        <Autocomplete
+          multiple
+          options={option}
+          getOptionLabel={(option) => option.name}
+        //   defaultValue={option.value}
+        //   onChange={(event, newValue) => {
+        //     setOption(newValue);
+        //   }}
+          renderInput={(params) => (
+            <TextField {...params} label="Categories" />
+          )}
+        />
+      </Grid>
+    </Grid>
+  </Dialog>
   );
 }

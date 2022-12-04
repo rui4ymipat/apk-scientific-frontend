@@ -128,7 +128,7 @@ function Category() {
                             marginBottom: 2
                         }}
                         id="search_input" label="Search" variant="standard" />
-                        <Button sx={{backgroundColor:'#00005f', color:'#fff', ':hover': {backgroundColor:'#00009f'}}}>
+                        <Button sx={{backgroundColor:'#f1132a', color:'#fff', ':hover': {backgroundColor:'#00009f'}}}>
                             <Typography>ค้าหา</Typography>
                         </Button>
                     </Box> */}
@@ -235,8 +235,8 @@ function Category() {
                         </option>
                       ))}
                     </TextField> */}
-                    <Button onClick={() => setShowDataGrid(!showDataGrid)}>
-                      {showDataGrid ? <FormatListBulleted /> : <Widgets />}
+                    <Button onClick={() => setShowDataGrid(!showDataGrid)} className={'t-text-primary'} >
+                      {showDataGrid ? <FormatListBulleted sx={{color:'inherit'}} /> : <Widgets sx={{color:'inherit'}} />}
                     </Button>
                   </div>
                 </Box>

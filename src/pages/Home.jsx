@@ -14,6 +14,14 @@ import HomeBanner from "../components/home/HomeBanner";
 import ShelfSlide from "../components/home/ShelfSlide";
 import BrandSlide from "../components/home/BrandSlide";
 
+const dataContact = {
+  name: 'APK Scientific',
+  address_th: '88/20 หมู่ 2 ตำบลไร่ขิง อำเภอสามพราน จังหวัดนครปฐม 73210',
+  address_en: '88/20 Moo 2, Rai Khing , Sam Phran , Nakhon Pathom 73210',
+  tel: '034-103-314 , 099-421-6688',
+  line: '@apkscien',
+  email: 'marketing@apk-scientific.com',
+}
 
 function Home() { // === function main ===
   const dataCateHome = [
@@ -98,7 +106,7 @@ function Home() { // === function main ===
       <Grid container spacing={5} sx={{marginBottom:8}} >
 
         <Grid item xs={12} md={4} xl={3} sx={{borderRadius: 1, overflow: 'hidden'}}>
-          <Typography variant="h6" component={'h1'} sx={{background:'#00005f', color:'white', px:2, py:1}} >
+          <Typography variant="h6" component={'h1'} sx={{background:'#f1132a', color:'white', px:2, py:1}} >
             หมวดหมู่สินค้า
           </Typography>
           <Box sx={{
@@ -123,7 +131,7 @@ function Home() { // === function main ===
                   <Call sx={{fontSize: 48, color:'#1e73be'}} />
                   <Box sx={{ml:1}}>
                     <Typography component={'p'} sx={{fontSize:{xs:18, md:18, color:'#1e73be', fontWeight: 600}}} >โทรสั่งซื้อสินค้า</Typography>
-                    <Typography component={'p'} sx={{fontSize:{xs:14, md:14}}} >02-5636196-99</Typography>
+                    <Typography component={'p'} sx={{fontSize:{xs:14, md:14}}} >{ dataContact.tel }</Typography>
                   </Box>
                 </Box>
               </Grid>
@@ -134,7 +142,7 @@ function Home() { // === function main ===
                   </ImageListItem>
                   <Box sx={{ml:1}}>
                     <Typography component={'p'} sx={{fontSize:{xs:18, md:18, color:'#39cd00', fontWeight: 600}}} >LINE OFFICIAL</Typography>
-                    <Typography component={'p'} sx={{fontSize:{xs:14, md:14}}} >@XXX-XXXX</Typography>
+                    <Typography component={'p'} sx={{fontSize:{xs:14, md:14}}} >{ dataContact.line }</Typography>
                   </Box>
                 </Box>
               </Grid>
@@ -143,7 +151,7 @@ function Home() { // === function main ===
                   <MailOutline sx={{fontSize: 48, color:'#dd8833'}} />
                   <Box sx={{ml:1}}>
                     <Typography component={'p'} sx={{fontSize:{xs:18, md:18, color:'#dd8833', fontWeight: 600}}} >อีเมล์</Typography>
-                    <Typography component={'p'} sx={{fontSize:{xs:14, md:14}}} >snp@snp-scientific.com</Typography>
+                    <Typography component={'p'} sx={{fontSize:{xs:14, md:14}}} >{ dataContact.email }</Typography>
                   </Box>
                 </Box>
               </Grid>
@@ -215,7 +223,7 @@ function Home() { // === function main ===
 
           {/* Brand Products */}
           <Box sx={{mb:4}}>
-            <Typography component={'h3'} variant={'h3'} sx={{fontSize:{xs:18, md:22, xl: 26}, color:'#00005f', borderBottom:'0.75px solid #d0d0d0', pb:2, mb:2}} >
+            <Typography component={'h3'} variant={'h3'} sx={{fontSize:{xs:18, md:22, xl: 26}, color:'#f1132a', borderBottom:'0.75px solid #d0d0d0', pb:2, mb:2}} >
               แบรนด์สินค้า
             </Typography>
             <BrandSlide data={brand_products} />

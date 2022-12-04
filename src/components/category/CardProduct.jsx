@@ -102,7 +102,7 @@ export default function CardProduct({data={}, showGrid=true}) {
                           {
                           fontSize: 12,
                           color: "gray",
-                          ":hover": { color: "#00005f" },
+                          ":hover": { color: "#f1132a" },
                           },
                       ]}
                   >
@@ -111,12 +111,11 @@ export default function CardProduct({data={}, showGrid=true}) {
                 ))}
               </Box>
               <Typography
-                component={"p"}
                 className='t-text-wrap-3'
                 sx={{
                   fontSize: 14,
                   color: "#444",
-                  ":hover": { color: "#00005f" },
+                  ":hover": { color: "#f1132a" },
                 }}
               >
               {data.product_name}
@@ -134,7 +133,7 @@ export default function CardProduct({data={}, showGrid=true}) {
         >
             <Paper elevation={0} sx={[styleCardList]} onMouseLeave={()=>SwiperModule.autoplay.stop()} onMouseOver={()=>SwiperModule.autoplay.start()}>
               <Grid container spacing={2}>
-                <Grid item xs={5} lg={4} xl={3} >
+                <Grid item xs={12} md={5} lg={4} xl={3} >
                   <Box mb={2}>
                     <Swiper
                     onSwiper={(swiper) => {setSwiperModule(swiper); swiper.autoplay.stop()}}
@@ -173,7 +172,7 @@ export default function CardProduct({data={}, showGrid=true}) {
                 </Grid>
     
     
-                <Grid item xs={7} lg={8} xl={9} >
+                <Grid item xs={12} md={7} lg={8} xl={9} >
                   <Box>
                     <Box>
                       <small style={{color:'#797979', textAlign:'start'}}>Brand</small>
@@ -186,7 +185,7 @@ export default function CardProduct({data={}, showGrid=true}) {
                                 {
                                 fontSize: 12,
                                 color: "gray",
-                                ":hover": { color: "#00005f" },
+                                ":hover": { color: "#f1132a" },
                                 },
                             ]}
                         >
@@ -195,12 +194,11 @@ export default function CardProduct({data={}, showGrid=true}) {
                       ))}
                     </Box>
                     <Typography
-                      component={"p"}
                       className='t-text-wrap-3'
                       sx={{
                         fontSize: 14,
                         color: "#444",
-                        ":hover": { color: "#00005f" },
+                        ":hover": { color: "#f1132a" },
                       }}
                     >
                     {data.product_name}

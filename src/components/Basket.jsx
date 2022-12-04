@@ -19,11 +19,11 @@ function Basket() {
       <Fab
         sx={{
           color: "white",
-          background: "#00005f",
-          ":hover": { color: "#00005f" },
+          background: "#f1132a",
+          ":hover": { color: "#f1132a" },
         }}
       >
-        <Badge color="error" badgeContent={10} max={9}>
+        <Badge badgeContent={10} max={9}>
           <ShoppingBasket />
         </Badge>
       </Fab>

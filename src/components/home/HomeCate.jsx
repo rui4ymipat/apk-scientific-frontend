@@ -8,7 +8,7 @@ function HomeCate(props) {
                 <MenuItem key={idx} href={item.action}
                     sx={{
                         '&:hover': {
-                            background: '#00005f',
+                            background: '#f1132a',
                             color: 'white'
                         },
                         '&:hover .MuiListItemIcon-root': {

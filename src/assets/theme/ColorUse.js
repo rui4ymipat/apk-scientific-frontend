@@ -1,5 +1,5 @@
 const ColorUse = {
-    colorPrimary: "#00005f",
-    colorGray: "#757575"
+    colorPrimary: "#f1132a",
+    colorGray: "#4c4c4c"
 };
 export default ColorUse;

@@ -107,7 +107,7 @@ function ProductsSlide(props) {
                                 {
                                   fontSize: 12,
                                   color: "gray",
-                                  ":hover": { color: "#00005f" },
+                                  ":hover": { color: "#f1132a" },
                                 },
                               ]}
                             >
@@ -120,7 +120,7 @@ function ProductsSlide(props) {
                       sx={{
                         fontSize: 14,
                         color: "#444",
-                        ":hover": { color: "#00005f" },
+                        ":hover": { color: "#f1132a" },
                       }}
                     >
                       {product.product_name}
@@ -175,7 +175,7 @@ const SlideHoverCard = ({props, product}) => {
                     {
                       fontSize: 12,
                       color: "gray",
-                      ":hover": { color: "#00005f" },
+                      ":hover": { color: "#f1132a" },
                     },
                   ]}
                 >
@@ -192,7 +192,7 @@ const SlideHoverCard = ({props, product}) => {
           sx={{
             fontSize: 14,
             color: "#444",
-            ":hover": { color: "#00005f" },
+            ":hover": { color: "#f1132a" },
           }}
         >
           {product.product_name}

@@ -1,12 +1,18 @@
 :root{
-    --color-primary: #00005f;
-    --color-gray: #595959;
+    --color-primary: #f1132a;
+    --color-gray: #4c4c4c;
 }
 .t-text-primary{
     color: var(--color-primary) !important;
 }
+.t-text-gray{
+    color: var(--color-gray) !important;
+}
 .t-bg-primary{
     background-color: var(--color-primary) !important;
+}
+.t-bg-gray{
+    background-color: var(--color-gray) !important;
 }
 .carousel-custom .swiper-button-next,
 .carousel-custom .swiper-button-prev{
@@ -30,7 +36,7 @@
 }
 
 #content_drawmenu .MuiDrawer-paper{
-    background-color: var(--color-primary);
+    background-color: var(--color-gray);
 }
 #content_drawmenu .MuiBox-root{
     width: 290px;
@@ -44,7 +50,7 @@
 #content_drawmenu .MuiButtonBase-root.MuiListItemButton-root:hover,
 #content_drawmenu .MuiButtonBase-root.MuiListItemButton-root.active,
 #content_drawmenu .MuiButtonBase-root.MuiListItemButton-root:focus{
-    background-color: #000079;
+    background-color: var(--color-primary);
 }
 
 .content-menu-category .MuiAccordionSummary-content{

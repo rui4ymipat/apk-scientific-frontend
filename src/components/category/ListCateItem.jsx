@@ -67,7 +67,7 @@ function ListCateItem({
                                   {
                                     fontSize: 12,
                                     color: "gray",
-                                    ":hover": { color: "#00005f" },
+                                    ":hover": { color: "#f1132a" },
                                   },
                                 ]}
                               >
@@ -81,7 +81,7 @@ function ListCateItem({
                             sx={{
                               fontSize: 14,
                               color: "#444",
-                              ":hover": { color: "#00005f" },
+                              ":hover": { color: "#f1132a" },
                             }}
                           >
                             {obj.product_name}
@@ -106,7 +106,7 @@ function ListCateItem({
               <WarningAmber sx={{ fontSize: 60 }} />
             </Box>
             <Box>
-              <Typography component={"p"} sx={{ fontSize: 28 }}>
+              <Typography component={"span"} sx={{ fontSize: 28 }}>
                 ไม่พบข้อมูลที่ต้องการ !
               </Typography>
             </Box>

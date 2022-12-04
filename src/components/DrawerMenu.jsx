@@ -7,6 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { Close, ExpandMore, FacebookSharp, Logout, PersonAdd, Search, Settings } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Divider, IconButton, ListItemIcon, MenuItem, Tooltip, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import ColorUse from '../assets/theme/ColorUse';
 
 
 const AccCusDrawMenu = ({data={id: 0, title: "", path: "",list: [{listTitle: '', listUrl: ""}]}}) => {
@@ -73,10 +74,10 @@ export default function DrawerMenu(props) { // ============================= fun
                 sx={{
                   display: { xs: "", lg: "none" },
                   marginRight: 1,
-                  background: "#00005f",
-                  color: "white",
+                  // background: "#f1132a",
+                  color: '#fff',
                   borderRadius: 2,
-                  ":hover": { color: "#00005f", boxShadow: "0 0 0 1px #00005f" },
+                  ":hover": { color: "#f1132a", boxShadow: "0 0 0 1px #f1132a" },
                 }}
               >
                 <Search sx={{ fontSize: 25 }} />
@@ -93,7 +94,7 @@ export default function DrawerMenu(props) { // ============================= fun
           <AccordionSummary id='menu_account' sx={{margin:0}}>
           <Typography sx={{ width:'100%', display: 'flex', alignItems: 'center', textAlign: 'center' }}>
               <Avatar sx={{width:35, height:35}} src={""} alt="m" />
-              <Typography sx={{ minWidth: 100 }} className='t-text-primary'>Username</Typography>
+              <Typography sx={{ minWidth: 100 }} className='t-text-gray'>Username</Typography>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -150,19 +151,17 @@ export default function DrawerMenu(props) { // ============================= fun
   );
 
   return (
-    <div>
-        <React.Fragment>
-          <SwipeableDrawer
-            anchor={props.anchor}
-            open={props.open}
-            onClose={toggleDrawer(props.anchor, false)}
-            onOpen={toggleDrawer(props.anchor, true)}
-            id={'content_drawmenu'}
-          >
+    <React.Fragment>
+      <SwipeableDrawer
+        anchor={props.anchor}
+        open={props.open}
+        onClose={toggleDrawer(props.anchor, false)}
+        onOpen={toggleDrawer(props.anchor, true)}
+        id={'content_drawmenu'}
+      >
 
-            {list(props.anchor)}
-          </SwipeableDrawer>
-        </React.Fragment>
-    </div>
+        {list(props.anchor)}
+      </SwipeableDrawer>
+    </React.Fragment>
   );
 }

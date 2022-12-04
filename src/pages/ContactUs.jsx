@@ -10,6 +10,14 @@ const styles = {
             maxWidth:'100%'
         }
     }
+};
+
+const dataContact = {
+    name: 'APK Scientific',
+    address_th: '88/20 หมู่ 2 ตำบลไร่ขิง อำเภอสามพราน จังหวัดนครปฐม 73210',
+    address_en: '88/20 Moo 2, Rai Khing , Sam Phran , Nakhon Pathom 73210',
+    tel: '034-103-314 , 099-421-6688',
+    email: 'marketing@apk-scientific.com',
 }
 
 export default function ContactUs() {
@@ -24,7 +32,7 @@ export default function ContactUs() {
                                     <Business />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={`บริษัท เอสเอ็นพี ไซเเอนติฟิค จำกัด`}
+                                    primary={dataContact.name}
                                 />
                             </ListItem>
                             <ListItem>
@@ -32,7 +40,8 @@ export default function ContactUs() {
                                     <LocationOn />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={`22,22/1-22/2-22/3 ซอยสายไหม 58 แขวงสายไหม เขตสายไหม กรุงเทพมหานคร 10220`}
+                                    primary={dataContact.address_th}
+                                    secondary={dataContact.address_en}
                                 />
                             </ListItem>
                             <ListItem>
@@ -40,7 +49,7 @@ export default function ContactUs() {
                                     <Phone />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={`02-5636196-99`}
+                                    primary={`โทร. ${dataContact.tel}`}
                                 />
                             </ListItem>
                             <ListItem>
@@ -48,7 +57,7 @@ export default function ContactUs() {
                                     <Mail />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={`snp@snp-scientific.com`}
+                                    primary={`Email: ${dataContact.email}`}
                                 />
                             </ListItem>
                         </List>

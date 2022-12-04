@@ -12,6 +12,7 @@ import { Box,
 } from '@mui/material'
 import React, { useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import ColorUse from '../../assets/theme/ColorUse';
 // import $ from 'jquery';
 
 
@@ -21,7 +22,7 @@ const style = {
         boxShadow:'none',
     },
     linkMenu:{
-        color:'#696969', ':hover':{color:'#00005f'}, textDecoration:'none', width:'100%', height:'100%'
+        color:'#696969', ':hover':{color:ColorUse.colorPrimary}, textDecoration:'none', width:'100%', height:'100%'
     },
     badegeBrand:{
         width:'100%'
@@ -144,19 +145,12 @@ function CategoryMenu({
                 }
             }
         }else{
-            console.log(item);
-            const newArr = item.sub_menu.map(irow=>{
-                console.log(irow.id_node);
-                if(irow.sub_menu.length > 0) {
-                    
-                }
-            })
             setExpanded(expanded.filter(i => i !== idNode && !i.startsWith(`${idNode}.`)));
         };
     };
 
+
     React.useEffect(() => {
-        console.log(selected, expanded);
         if(expanded.includes(selected)){
             setPathProducts([...expanded]);
         }else{
@@ -186,12 +180,6 @@ function CategoryMenu({
 
     return data.length > 0 ? (
         <Box className='content-menu-category' >
-            <div>
-            ///
-            {pathProducts.map((row)=>{
-                return <span>{"=>"+row}</span>
-            })}
-            </div>
             <Grid container>
                 <Grid item xs={12} sx={{marginBottom:3}}>
                     <Autocomplete
@@ -216,8 +204,8 @@ function CategoryMenu({
                 </Grid>
                 <Grid item xs={12} sx={{ marginBottom:2}}>
                     <Accordion sx={style.callapseHead} expanded={expandCate} onChange={()=>setExpandCate(!expandCate)} >
-                        <AccordionSummary sx={{ '&.MuiButtonBase-root':{minHeight:'auto'}, '.MuiAccordionSummary-content.Mui-expanded':{color:'#00005f', margin:0}}} id="cate_header" expandIcon={<ExpandMore />} aria-controls="cate_header_content" >
-                            <Typography component={'p'} sx={{textTransform:'uppercase'}}>
+                        <AccordionSummary sx={{ '&.MuiButtonBase-root':{minHeight:'auto'}, '.MuiAccordionSummary-content.Mui-expanded':{color:ColorUse.colorPrimary, margin:0}}} id="cate_header" expandIcon={<ExpandMore />} aria-controls="cate_header_content" >
+                            <Typography sx={{textTransform:'uppercase'}}>
                                 Product categories
                             </Typography>
                         </AccordionSummary>
@@ -235,7 +223,7 @@ function CategoryMenu({
                                   
                             >
                                 {
-                                    data2.map(row=>TreeCusItem(row))
+                                    data.map(row=>TreeCusItem(row))
                                 }
                             </TreeView>
 
@@ -246,8 +234,8 @@ function CategoryMenu({
                 {/* Brand */}
                 <Grid item xs={12} sx={{ marginBottom:2, }}>
                     <Accordion sx={style.callapseHead} expanded={expandBrand} onChange={()=>setExpandBrand(!expandBrand)} >
-                        <AccordionSummary sx={{'&.MuiButtonBase-root':{minHeight:'auto'}, '.MuiAccordionSummary-content.Mui-expanded':{color:'#00005f', margin:0}}} id="brand_header" expandIcon={<ExpandMore />} aria-controls="brand_header_content" >
-                            <Typography component={'p'} sx={{textTransform:'uppercase'}} >
+                        <AccordionSummary sx={{'&.MuiButtonBase-root':{minHeight:'auto'}, '.MuiAccordionSummary-content.Mui-expanded':{color:ColorUse.colorPrimary, margin:0}}} id="brand_header" expandIcon={<ExpandMore />} aria-controls="brand_header_content" >
+                            <Typography sx={{textTransform:'uppercase'}} >
                                 Brnad
                             </Typography>
                         </AccordionSummary>

@@ -22,6 +22,16 @@ import {
 import { Box } from "@mui/system";
 import React from "react";
 
+
+
+const dataContact = {
+  name: 'APK Scientific',
+  address_th: '88/20 หมู่ 2 ตำบลไร่ขิง อำเภอสามพราน จังหวัดนครปฐม 73210',
+  address_en: '88/20 Moo 2, Rai Khing , Sam Phran , Nakhon Pathom 73210',
+  tel: '034-103-314 , 099-421-6688',
+  email: 'marketing@apk-scientific.com',
+}
+
 function Footer() {
   const path = window.location.pathname;
 
@@ -42,7 +52,7 @@ function Footer() {
         >
           <Grid item xs={12} lg={3} sx={{ mb: { xs: 2, sm: 0 } }}>
             <Typography component={"p"} sx={{ fontWeight: 1000 }}>
-              บริษัท เอสเอ็นพี ไซเเอนติฟิค จำกัด
+              {dataContact.name}
             </Typography>
             <List sx={{ width: "100%" }} dense={true}>
               <ListItem sx={{ p: 0 }}>
@@ -51,7 +61,7 @@ function Footer() {
                     <Room />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="ที่อยู่: 22,22/1-22/2-22/3 ซอยสายไหม 58 แขวงสายไหม เขตสายไหม กทม 10220" />
+                <ListItemText primary={dataContact.address_th} />
               </ListItem>
               <ListItem sx={{ p: 0 }}>
                 <ListItemAvatar>
@@ -59,7 +69,7 @@ function Footer() {
                     <Call />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Phone: 02-5636196-99" />
+                <ListItemText primary={dataContact.tel} />
               </ListItem>
               <ListItem sx={{ p: 0 }}>
                 <ListItemAvatar>
@@ -67,11 +77,11 @@ function Footer() {
                     <Mail />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="Email: snp@snp-scientific.com" />
+                <ListItemText primary={"Email: "+dataContact.email} />
               </ListItem>
             </List>
           </Grid>
-          <Grid item xs={12} lg={4} sx={{ mb: { xs: 2, sm: 0 } }}>
+          {/* <Grid item xs={12} lg={4} sx={{ mb: { xs: 2, sm: 0 } }}>
             <Typography component={"p"} sx={{ fontWeight: 1000 }}>
               สนใจสินค้ากรุณาติดต่อ ฝ่ายขาย (please contact)
             </Typography>
@@ -93,8 +103,8 @@ function Footer() {
                 loading="lazy"
               />
             </ImageListItem>
-          </Grid>
-          <Grid item xs={12} lg={3} sx={{ mb: { xs: 2, sm: 0 } }}>
+          </Grid> */}
+          <Grid item xs={12} lg={2} sx={{ mb: { xs: 2, sm: 0 } }}>
             <Typography component={"p"} mb={1}>
               Follow Us
             </Typography>
@@ -136,7 +146,7 @@ function Footer() {
           <Grid item xs={12} lg={2} sx={{ mb: { xs: 2, sm: 0 } }}>
             <ImageListItem>
               <img
-                src="https://snp-scientific.com/wp-content/uploads/2021/02/line-238x300.jpg"
+                src="assets/images/lineQR.png"
                 style={{ width: 150 }}
                 alt="logo"
                 loading="lazy"
@@ -146,7 +156,7 @@ function Footer() {
         </Grid>
 
         {/* copyright */}
-        <Grid container sx={{ py: 3, px: 3 }}>
+        <Grid container sx={{ py: 1, px: 3 }}>
           <Grid item xs={12}>
             <Typography component={"p"}>
               © Copyright 2021. All Rights Reserved.
