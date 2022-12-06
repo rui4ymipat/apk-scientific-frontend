@@ -1,8 +1,7 @@
 import { Business, LocationOn, Mail, Phone } from '@mui/icons-material'
 import { Box, Grid, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
 import React from 'react'
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
 
 const styles = {
     boxImageMaps:{
@@ -21,6 +20,12 @@ const dataContact = {
 }
 
 export default function ContactUs() {
+    // lati and longti
+    const [center, setCenter] = React.useState({ lat: 13.729723205636661, lng: 100.2653296856315});
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: "AIzaSyC6j-S3iTqdyRCOfY9e31zvF37Qz1U34DA"
+    })
     return (
         <Box sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
             <Grid container spacing={3}>
@@ -63,12 +68,20 @@ export default function ContactUs() {
                         </List>
                     </Box>
                 </Grid>
+
                 <Grid item xs={12} lg={6} sx={styles.boxImageMaps}>
-                    <Box className='box-img-zoom'>
-                        <Zoom>
-                            <img className='img-wait-zoom' src="https://snp-scientific.com/wp-content/uploads/2022/03/map-2022.jpg" alt="map" />
-                        </Zoom>
-                    </Box>
+                    {
+                        isLoaded ? (
+                            <GoogleMap
+                              mapContainerStyle={{width:'100%', height:500}}
+                              center={center}
+                              zoom={15}
+                            >
+                              { /* Child components, such as markers, info windows, etc. */ }
+                              <MarkerF position={center} />
+                            </GoogleMap>
+                        ) : <></>
+                    }
                 </Grid>
             </Grid>
         </Box>

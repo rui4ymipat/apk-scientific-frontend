@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ColorUse from '../../assets/theme/ColorUse';
 
 
 const styleCard = {
@@ -17,8 +18,9 @@ const styleCard = {
       lg: 380
     },
     ":hover": {
-      transform: "translate(0px, -5px)",
-      boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.05)",
+      // transform: "translate(0px, -5px)",
+      border: '1px solid '+ColorUse.colorPrimary,
+      boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.1)",
     },
 };
 
@@ -29,7 +31,8 @@ const styleCardList = {
     border: '1px solid #efefef',
     p: 2,
     ":hover": {
-      transform: "translate(0px, -5px)",
+      // transform: "translate(0px, -5px)",
+      border: '1px solid '+ColorUse.colorPrimary,
       boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.05)",
     },
 };
@@ -102,7 +105,7 @@ export default function CardProduct({data={}, showGrid=true}) {
                           {
                           fontSize: 12,
                           color: "gray",
-                          ":hover": { color: "#f1132a" },
+                          ":hover": { color: ColorUse.colorPrimary },
                           },
                       ]}
                   >
@@ -115,7 +118,7 @@ export default function CardProduct({data={}, showGrid=true}) {
                 sx={{
                   fontSize: 14,
                   color: "#444",
-                  ":hover": { color: "#f1132a" },
+                  ":hover": { color: ColorUse.colorPrimary },
                 }}
               >
               {data.product_name}

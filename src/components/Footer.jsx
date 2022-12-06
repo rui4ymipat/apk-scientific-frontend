@@ -1,11 +1,7 @@
 import {
   Call,
-  Facebook,
-  Instagram,
   Mail,
   Room,
-  Twitter,
-  YouTube,
 } from "@mui/icons-material";
 import {
   Grid,
@@ -16,8 +12,6 @@ import {
   ListItemText,
   Avatar,
   ImageListItem,
-  Tooltip,
-  IconButton,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
@@ -50,7 +44,7 @@ function Footer() {
             color: "white",
           }}
         >
-          <Grid item xs={12} lg={3} sx={{ mb: { xs: 2, sm: 0 } }}>
+          <Grid item xs={12} lg={4} sx={{ mb: { xs: 2, sm: 0 } }}>
             <Typography component={"p"} sx={{ fontWeight: 1000 }}>
               {dataContact.name}
             </Typography>
@@ -81,69 +75,7 @@ function Footer() {
               </ListItem>
             </List>
           </Grid>
-          {/* <Grid item xs={12} lg={4} sx={{ mb: { xs: 2, sm: 0 } }}>
-            <Typography component={"p"} sx={{ fontWeight: 1000 }}>
-              สนใจสินค้ากรุณาติดต่อ ฝ่ายขาย (please contact)
-            </Typography>
-            <List sx={{ width: "100%" }} dense={true}>
-              <ListItem sx={{ p: 0 }}>
-                <ListItemAvatar>
-                  <Avatar sx={{ background: "none" }}>
-                    <Call />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="Phone: Tel: 02-5636196-99 ext.101-106,113-115" />
-              </ListItem>
-            </List>
-            <ImageListItem>
-              <img
-                src="https://snp-scientific.com/wp-content/uploads/2021/02/iso-300x115.png"
-                style={{ width: 150 }}
-                alt="logo"
-                loading="lazy"
-              />
-            </ImageListItem>
-          </Grid> */}
-          <Grid item xs={12} lg={2} sx={{ mb: { xs: 2, sm: 0 } }}>
-            <Typography component={"p"} mb={1}>
-              Follow Us
-            </Typography>
-            <Box>
-              <Tooltip title="Facebook">
-                <IconButton
-                  size={"small"}
-                  sx={{ mx: 0.5, color: "white", backgroundColor: "#3b5a9a" }}
-                >
-                  <Facebook />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Twitter">
-                <IconButton
-                  size={"small"}
-                  sx={{ mx: 0.5, color: "white", backgroundColor: "#1aa9e1" }}
-                >
-                  <Twitter />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="YouTube">
-                <IconButton
-                  size={"small"}
-                  sx={{ mx: 0.5, color: "white", backgroundColor: "#c3191e" }}
-                >
-                  <YouTube />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Instagram">
-                <IconButton
-                  size={"small"}
-                  sx={{ mx: 0.5, color: "white", backgroundColor: "#7c4a3a" }}
-                >
-                  <Instagram />
-                </IconButton>
-              </Tooltip>
-            </Box>
-          </Grid>
-          <Grid item xs={12} lg={2} sx={{ mb: { xs: 2, sm: 0 } }}>
+          <Grid item xs={12} lg={4} sx={{ mb: { xs: 2, sm: 0 }, px:3 }}>
             <ImageListItem>
               <img
                 src="assets/images/lineQR.png"
@@ -156,13 +88,13 @@ function Footer() {
         </Grid>
 
         {/* copyright */}
-        <Grid container sx={{ py: 1, px: 3 }}>
+        {/* <Grid container sx={{ py: 1, px: 3 }}>
           <Grid item xs={12}>
             <Typography component={"p"}>
               © Copyright 2021. All Rights Reserved.
             </Typography>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Box>
     </footer>
   );

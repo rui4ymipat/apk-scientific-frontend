@@ -1,4 +1,4 @@
-import { ExpandMore, Add, Remove } from '@mui/icons-material'
+import { ExpandMore, Add, Remove, Search } from '@mui/icons-material'
 import { TreeItem, TreeView } from '@mui/lab';
 import { Box,
     Typography,
@@ -9,9 +9,9 @@ import { Box,
     MenuItem,
     Autocomplete,
     TextField,
+    Button,
 } from '@mui/material'
 import React, { useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ColorUse from '../../assets/theme/ColorUse';
 // import $ from 'jquery';
 
@@ -46,6 +46,11 @@ function CategoryMenu({
             id_brand: 1,
             name: '',
             amount: 0,
+        }
+    ],
+    category=[
+        {
+
         }
     ],
 }) {
@@ -149,16 +154,6 @@ function CategoryMenu({
         };
     };
 
-
-    React.useEffect(() => {
-        if(expanded.includes(selected)){
-            setPathProducts([...expanded]);
-        }else{
-            setPathProducts([...expanded, selected])
-        }
-
-    }, [selected]);
-
     const [expandCate, setExpandCate] = useState(true);
     const [expandBrand, setExpandBrand] = useState(true);
 
@@ -182,79 +177,101 @@ function CategoryMenu({
         <Box className='content-menu-category' >
             <Grid container>
                 <Grid item xs={12} sx={{marginBottom:3}}>
-                    <Autocomplete
-                    multiple
-                    limitTags={2}
-                    id="multiple-search-category"
-                    className='t-multiselect'
-                    options={brand}
-                    getOptionLabel={(option) => option.product_name}
-                    defaultValue={[]}
-                    size={'small'}
-                    sx={{
-                        '& input.Mui-focused + .MuiOutlinedInput-notchedOutline':{
-                            borderColor:'red'
-                        }
-                    }}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Search" placeholder="Seach...." />
-                    )}
-                    
-                    />
-                </Grid>
-                <Grid item xs={12} sx={{ marginBottom:2}}>
-                    <Accordion sx={style.callapseHead} expanded={expandCate} onChange={()=>setExpandCate(!expandCate)} >
-                        <AccordionSummary sx={{ '&.MuiButtonBase-root':{minHeight:'auto'}, '.MuiAccordionSummary-content.Mui-expanded':{color:ColorUse.colorPrimary, margin:0}}} id="cate_header" expandIcon={<ExpandMore />} aria-controls="cate_header_content" >
-                            <Typography sx={{textTransform:'uppercase'}}>
-                                Product categories
-                            </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Box component={'div'} sx={{height:4, width: {xs:'100%', lg:100}, background:'#efefef', maxWidth: '100%', marginBottom:1}} ></Box>
-                            <TreeView
-                                //   aria-label="controlled"
-                                  defaultCollapseIcon={<Remove />}
-                                  defaultExpandIcon={<Add />}
-                                //   expanded={expanded}
-                                  expanded={expanded}
-                                  selected={selected}
-                                //   onNodeToggle={(e, nodeIds)=>{}}
-                                //   onNodeSelect={handleSelect}
-                                  
-                            >
-                                {
-                                    data.map(row=>TreeCusItem(row))
+                    <Box display={'flex'} alignItems="center" flexDirection={'row'}>
+                        <Box sx={{width: '80%'}}>
+                            <Autocomplete
+                            multiple
+                            limitTags={1}
+                            id="multiple-search-category"
+                            className='t-multiselect'
+                            options={brand}
+                            getOptionLabel={(option) => option.product_name}
+                            defaultValue={[]}
+                            size={'small'}
+                            sx={{
+                                maxWidth: '100%',
+                                '& input.Mui-focused + .MuiOutlinedInput-notchedOutline':{
+                                    borderColor:'red'
                                 }
-                            </TreeView>
-
-                        </AccordionDetails>
-                    </Accordion>
+                            }}
+                            renderInput={(params) => (
+                                <TextField {...params} label="" placeholder="Seach...." />
+                            )}
+                            
+                            />
+                        </Box>
+                        <Button variant='contained' sx={{width: '20%', height:'100%', m:0, color:'#fff', backgroundColor: ColorUse.colorPrimary+' !important', ml:1, border:'2px solid '+ColorUse.colorPrimary}} >
+                            <Search />
+                        </Button>
+                    </Box>
                 </Grid>
-
                 {/* Brand */}
                 <Grid item xs={12} sx={{ marginBottom:2, }}>
                     <Accordion sx={style.callapseHead} expanded={expandBrand} onChange={()=>setExpandBrand(!expandBrand)} >
                         <AccordionSummary sx={{'&.MuiButtonBase-root':{minHeight:'auto'}, '.MuiAccordionSummary-content.Mui-expanded':{color:ColorUse.colorPrimary, margin:0}}} id="brand_header" expandIcon={<ExpandMore />} aria-controls="brand_header_content" >
                             <Typography sx={{textTransform:'uppercase'}} >
-                                Brnad
+                                Brand
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Box component={'div'} sx={{height:4, width: {xs:'100%', lg:100}, background:'#efefef', maxWidth: '100%', marginBottom:1}} ></Box>
-                            {brand.map((listBrand, idx)=>{
-                                // console.log(listBrand);
+                            {[{id:1, brand_name:'Apple'}, {id:2, brand_name:'Samsung'},{id:3, brand_name:'Oppo'},{id:4, brand_name:'JVC'},].map((listBrand, idx)=>{
                                 return(
-                                    <MenuItem key={idx} className='t-brand-link'>
+                                    <MenuItem key={"brand_"+idx} className='t-brand-link'>
                                         <Typography noWrap={true}>
-                                        {listBrand.product_name} <span style={{marginLeft:5}} >({listBrand.id})</span>
+                                        {listBrand.brand_name} <span style={{marginLeft:5}} >({listBrand.id})</span>
                                         </Typography>
                                     </MenuItem>
                                 )
                             })}
-
                         </AccordionDetails>
                     </Accordion>
                 </Grid>
+
+                {/* Categry */}
+                <Grid item xs={12} sx={{ marginBottom:2}}>
+                    <Accordion sx={style.callapseHead} expanded={expandCate} onChange={()=>setExpandCate(!expandCate)} >
+                        <AccordionSummary sx={{ '&.MuiButtonBase-root':{minHeight:'auto'}, '.MuiAccordionSummary-content.Mui-expanded':{color:ColorUse.colorPrimary, margin:0}}} id="cate_header" expandIcon={<ExpandMore />} aria-controls="cate_header_content" >
+                            <Typography sx={{textTransform:'uppercase'}}>
+                                Category
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Box component={'div'} sx={{height:4, width: {xs:'100%', lg:100}, background:'#efefef', maxWidth: '100%', marginBottom:1}} ></Box>
+                            {category.map((listproduct, idx)=>{
+                                console.log(listproduct);
+                                return(
+                                    <MenuItem key={"brand_"+idx} className='t-brand-link'>
+                                        <Typography noWrap={true}>
+                                        {listproduct.product_name} <span style={{marginLeft:5}} >({listproduct.id})</span>
+                                        </Typography>
+                                    </MenuItem>
+                                )
+                            })}
+                        </AccordionDetails>
+                    </Accordion>
+                </Grid>
+
+                {/* products */}
+                <Grid item xs={12}>
+                    <Box component={'div'} sx={{height:3, width: {xs:'100%', lg:'100%'}, background:'#efefef', maxWidth: '100%', marginBottom:2}} ></Box>
+                    <TreeView
+                        //   aria-label="controlled"
+                            defaultCollapseIcon={<Remove />}
+                            defaultExpandIcon={<Add />}
+                        //   expanded={expanded}
+                            expanded={expanded}
+                            selected={selected}
+                        //   onNodeToggle={(e, nodeIds)=>{}}
+                        //   onNodeSelect={handleSelect}
+                            
+                    >
+                        {
+                            data.map(row=>TreeCusItem(row))
+                        }
+                    </TreeView>
+                </Grid>
+
             </Grid>
         </Box>
     ) : (

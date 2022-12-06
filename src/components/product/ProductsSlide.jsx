@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ColorUse from "../../assets/theme/ColorUse";
 
 const styleCard = {
   // width: '100%',
@@ -17,8 +18,9 @@ const styleCard = {
     lg: 350
   },
   ":hover": {
-    transform: "translate(0px, -5px)",
-    boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.05)",
+    // transform: "translate(0px, -5px)",
+    border: '1px solid '+ColorUse.colorPrimary,
+    boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.1)",
   },
   '& .box-img > img':{
     width: '100%',

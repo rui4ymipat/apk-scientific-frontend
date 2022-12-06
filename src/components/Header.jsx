@@ -7,12 +7,11 @@ import {
   ImageListItem,
   TextField,
   FormControl,
-  Button,
-  Modal,
   MenuItem,
   Select,
 } from "@mui/material";
 import React from "react";
+import ColorUse from "../assets/theme/ColorUse";
 
 
 
@@ -211,11 +210,24 @@ function Header() {// ============= function main
                         borderRight: '0.5px solid #e6e6e6'
                     }}
                 />
-                <FormControl className="input-cut-line" sx={{width: 250, 'fieldset': {border:'none'},borderRight: '0.5px solid #e6e6e6'}} size={'small'} >
+                <FormControl id="box_selectOptions" className="input-cut-line" sx={{width: 250, 'fieldset': {border:'none'},borderRight: '0.5px solid #e6e6e6'}} size={'small'} >
                     <Select
-                      id="select-dd-custom-des"
                       className="select-dd-custom"
                       value={textSearchList}
+                      MenuProps={{
+                        transformOrigin:{ horizontal: "center", vertical: 'top' },
+                        anchorOrigin:{ horizontal: "center", vertical: 'bottom' },
+                        PaperProps:{
+                          sx:{
+                            maxHeight:300,
+                            mt:1,
+                            '& .MuiButtonBase-root.Mui-selected':{
+                              backgroundColor: ColorUse.colorPrimary,
+                              color: '#fff'
+                            }
+                          },
+                        }
+                      }}
                       onChange={evt=>setTextSearchList(evt.target.value)}
                     >
                       <MenuItem className="custom-search-haed" value="allCategory">

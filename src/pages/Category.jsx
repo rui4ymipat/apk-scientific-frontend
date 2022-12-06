@@ -134,7 +134,7 @@ function Category() {
                     </Box> */}
             <Box>
               {menuCategory.length > 0 ? (
-                <CategoryMenu brand={products} data={productCategory} />
+                <CategoryMenu brand={products} category={products} data={productCategory} />
               ) : (
                 <></>
               )}
