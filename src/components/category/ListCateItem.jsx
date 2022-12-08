@@ -5,12 +5,21 @@ import CardProduct from "./CardProduct";
 
 // ======================== function main
 function ListCateItem({
-  data = [
-    { id: 0, product_name: "", img: "", categoryOther: [{ id: 0, title: "" }] },
-  ],
+  data = [{
+    category:[],
+    created_at: 0,
+    description: "",
+    id: "",
+    image: [],
+    name: "",
+    price: "",
+    tableColumn: [],
+    tableRow: []
+  }],
   showGrid = true,
+  dataShow = [],
+  handleChangeCategory=()=>{}
 }) {
-
   return data.length > 0 ? (
     <Box>
       {showGrid ? (
@@ -19,7 +28,7 @@ function ListCateItem({
           {data.map((obj) => {
             return (
               <Grid key={obj.id} item xs={6} md={4} lg={3} mb={3}>
-                <CardProduct showGrid={true} data={obj} />
+                <CardProduct showGrid={true} data={obj} dataShow={dataShow} handleChangeCategory={(id, name)=>{handleChangeCategory(id, name)}} />
               </Grid>
             );
           })}
@@ -30,7 +39,7 @@ function ListCateItem({
           {data.map((obj) => {
             return (
               <Grid key={obj.id} item xs={12} mb={3}>
-                <CardProduct showGrid={false} data={obj} />
+                <CardProduct showGrid={false} data={obj} dataShow={dataShow} handleChangeCategory={(id, name)=>{handleChangeCategory(id, name)}} />
                 {/* <div
                   onClick={() => {
                     navigate(obj.path);

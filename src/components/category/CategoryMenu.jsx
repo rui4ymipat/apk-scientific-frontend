@@ -13,9 +13,9 @@ import {
   Button,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import ColorUse from "../../assets/theme/ColorUse";
 // import $ from 'jquery';
-import { getPublicData } from "../../services/brand";
 
 const style = {
   callapseHead: {
@@ -53,97 +53,14 @@ function CategoryMenu({
       amount: 0,
     },
   ],
-  category = [{}],
+  onChangeCategory = ()=>{},
+  dataShow=[],
+  loader=false
 }) {
+  const { categoryId } = useParams();
   const [expanded, setExpanded] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
-  const [nodeslist, setNodeslist] = useState([]);
-  const [pathProducts, setPathProducts] = useState([]);
 
-  const [dataShow, setDataShow] = useState({
-    brand: [],
-    category: [],
-  });
-  const [loader, setLoader] = useState(false);
-  const fetchData = () => {
-    getPublicData().then((res) => {
-      setLoader(true);
-      setDataShow(res);
-      console.log(res);
-      if (!res.brand.includes(null)) {
-        setLoader(false);
-      } else {
-        fetchData();
-      }
-    });
-  };
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-  const data2 = [
-    {
-      id_node: "1",
-      node_parent: null,
-      id: 0,
-      title: "dgass",
-      path: "",
-      sub_menu: [
-        {
-          id_node: "2",
-          node_parent: "1",
-          id: 0,
-          title: "asd",
-          path: "",
-          sub_menu: [
-            {
-              id_node: "4",
-              node_parent: "2",
-              id: 0,
-              title: "asd",
-              path: "",
-              sub_menu: [
-                {
-                  id_node: "5",
-                  node_parent: "4",
-                  id: 0,
-                  title: "asd",
-                  path: "",
-                  sub_menu: [],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id_node: "3",
-          node_parent: "1",
-          id: 0,
-          title: "asd",
-          path: "",
-          sub_menu: [
-            {
-              id_node: "6",
-              node_parent: "3",
-              id: 0,
-              title: "asd",
-              path: "",
-              sub_menu: [
-                {
-                  id_node: "7",
-                  node_parent: "6",
-                  id: 0,
-                  title: "asd",
-                  path: "",
-                  sub_menu: [],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ];
 
   // function stack list path Treeview
   const createHandler = async (item, idNode, nodeParent) => {
@@ -252,6 +169,34 @@ function CategoryMenu({
             </Button>
           </Box>
         </Grid>
+
+
+        {/* products */}
+        <Grid item xs={12}>
+          <TreeView
+            //   aria-label="controlled"
+            defaultCollapseIcon={<Remove />}
+            defaultExpandIcon={<Add />}
+            //   expanded={expanded}
+            expanded={expanded}
+            selected={selected}
+            //   onNodeToggle={(e, nodeIds)=>{}}
+            //   onNodeSelect={handleSelect}
+          >
+            {data.map((row) => TreeCusItem(row))}
+          </TreeView>
+          <Box
+            component={"div"}
+            sx={{
+              height: 3,
+              width: { xs: "100%", lg: "100%" },
+              background: "#efefef",
+              maxWidth: "100%",
+              marginBottom: 2,
+            }}
+          ></Box>
+        </Grid>
+
         {/* Brand */}
         <Grid item xs={12} sx={{ marginBottom: 2 }}>
           <Accordion
@@ -286,9 +231,9 @@ function CategoryMenu({
               ></Box>
               {dataShow.brand.map((listBrand, idx) => {
                 return (
-                  <MenuItem key={"brand_" + idx} className="t-brand-link">
+                  <MenuItem key={"brand_" + idx} onClick={()=>{onChangeCategory(listBrand.id, listBrand.name)}} className="t-brand-link">
                     <Typography noWrap={true}>
-                      {listBrand.name}{" "}
+                      {listBrand.name}{""}
                       <span style={{ marginLeft: 5 }}>({listBrand.total})</span>
                     </Typography>
                   </MenuItem>
@@ -335,7 +280,7 @@ function CategoryMenu({
               {dataShow.category.map((listproduct, idx) => {
                 // console.log(listproduct);
                 return (
-                  <MenuItem key={"brand_" + idx} className="t-brand-link">
+                  <MenuItem key={"brand_" + idx} onClick={()=>onChangeCategory(listproduct.id, listproduct.name)}  className="t-brand-link">
                     <Typography noWrap={true}>
                       {listproduct.name}{" "}
                       <span style={{ marginLeft: 5 }}>
@@ -349,31 +294,6 @@ function CategoryMenu({
           </Accordion>
         </Grid>
 
-        {/* products */}
-        <Grid item xs={12}>
-          <Box
-            component={"div"}
-            sx={{
-              height: 3,
-              width: { xs: "100%", lg: "100%" },
-              background: "#efefef",
-              maxWidth: "100%",
-              marginBottom: 2,
-            }}
-          ></Box>
-          <TreeView
-            //   aria-label="controlled"
-            defaultCollapseIcon={<Remove />}
-            defaultExpandIcon={<Add />}
-            //   expanded={expanded}
-            expanded={expanded}
-            selected={selected}
-            //   onNodeToggle={(e, nodeIds)=>{}}
-            //   onNodeSelect={handleSelect}
-          >
-            {data.map((row) => TreeCusItem(row))}
-          </TreeView>
-        </Grid>
       </Grid>
     </Box>
   ) : (

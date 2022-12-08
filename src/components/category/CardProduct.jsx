@@ -46,15 +46,31 @@ const styleOtherCate = {
     textOverflow: "ellipsis",
 };
 
-export default function CardProduct({data={}, showGrid=true}) {
+export default function CardProduct({
+  data={
+    category:[],
+    created_at: 0,
+    description: "",
+    id: "",
+    image: [],
+    name: "",
+    price: "",
+    tableColumn: [],
+    tableRow: []
+  }, 
+showGrid=true,
+dataShow=[],
+handleChangeCategory=()=>{}
+}) {
     const navigate = useNavigate();
     const [SwiperModule, setSwiperModule] = useState(null);
-    // console.log(data);
+    console.log(dataShow);
     if(showGrid){
       return (
       <div
-      onClick={() => {
-          navigate(data.path);
+      onClick={(evt) => {
+          if(evt.target.classList.contains("t-remove-click")) return false;
+          navigate("/product/"+data.id);
       }}
       >
           <Paper elevation={0} sx={[styleCard]} onMouseLeave={()=>SwiperModule.autoplay.stop()} onMouseOver={()=>SwiperModule.autoplay.start()}>
@@ -70,23 +86,15 @@ export default function CardProduct({data={}, showGrid=true}) {
                   disableOnInteraction:false
               }}
               className="">
-                  <SwiperSlide>
-                      <img
-                          src={data.img}
-                          alt={data.product_name}
-                          style={{ maxWidth: "100%" }}
-                          className='t-img-product'
-                      />
-                  </SwiperSlide>
                   {/* ข้างล่าง mockup นะน้อง */}
-                  {[1,2].map((row)=>{
+                  {[data.image].map((row,idx)=>{
                       return (
-                          <SwiperSlide key={row}>
+                          <SwiperSlide key={"img_"+idx}>
                               <img
-                              src={'https://firebasestorage.googleapis.com/v0/b/apk-scientific.appspot.com/o/images%2FPicture1.png_1668174062232?alt=media&token=6e32f96f-424b-4ce6-b2a0-dfc00ce3ed75'}
-                              alt={'product'}
-                              style={{ maxWidth: "100%" }}
-                              className='t-img-product'
+                                src={row}
+                                alt={'product'}
+                                style={{ maxWidth: "100%" }}
+                                className='t-img-product'
                               />
                           </SwiperSlide>
                       )
@@ -98,20 +106,31 @@ export default function CardProduct({data={}, showGrid=true}) {
                 <small style={{color:'#797979', textAlign:'start'}}>Brand</small>
               </Box>
               <Box sx={[styleOtherCate]} textAlign={"center"}>
-                {data.categoryOther.map((objOther, idx) => (
-                  <Link
-                      key={idx}
-                      sx={[
-                          {
-                          fontSize: 12,
-                          color: "gray",
-                          ":hover": { color: ColorUse.colorPrimary },
-                          },
-                      ]}
-                  >
-                    {objOther.title}{" "}
-                  </Link>
-                ))}
+                {data.category.map((objOther, idx) => {
+                  return dataShow.category.map(row=>{
+                    console.log(row.id === objOther);
+                    if(row.id === objOther){
+                      return (
+                        <Link
+                            key={idx}
+                            sx={[
+                                {
+                                fontSize: 12,
+                                color: "gray",
+                                ":hover": { color: ColorUse.colorPrimary },
+                                },
+                            ]}
+                            className='t-remove-click'
+                            onClick={()=>{handleChangeCategory(row.id, row.name)}}
+                        >
+                          {row.name}{idx !== data.category.length - 1 ? ", " : ""}
+                        </Link>
+                      )
+                    }else{
+                      return null
+                    }
+                  })
+                })}
               </Box>
               <Typography
                 className='t-text-wrap-3'
@@ -121,7 +140,7 @@ export default function CardProduct({data={}, showGrid=true}) {
                   ":hover": { color: ColorUse.colorPrimary },
                 }}
               >
-              {data.product_name}
+              {data.name}
               </Typography>
             </Box>
           </Paper>
@@ -130,8 +149,9 @@ export default function CardProduct({data={}, showGrid=true}) {
     }else{
       return (
         <div
-        onClick={() => {
-            navigate(data.path);
+        onClick={(evt) => {
+          if(evt.target.classList.contains("t-remove-click")) return false;
+          navigate("/product/"+data.id);
         }}
         >
             <Paper elevation={0} sx={[styleCardList]} onMouseLeave={()=>SwiperModule.autoplay.stop()} onMouseOver={()=>SwiperModule.autoplay.start()}>
@@ -149,20 +169,12 @@ export default function CardProduct({data={}, showGrid=true}) {
                         disableOnInteraction:false
                     }}
                     className="">
-                        <SwiperSlide>
-                            <img
-                                src={data.img}
-                                alt={data.product_name}
-                                style={{ maxWidth: "100%" }}
-                                className='t-img-product list'
-                            />
-                        </SwiperSlide>
                         {/* ข้างล่าง mockup นะน้อง */}
-                        {[1,2].map((row)=>{
+                        {[data.image].map((row, idx)=>{
                             return (
-                                <SwiperSlide key={row}>
+                                <SwiperSlide key={"imgMobile_"+idx}>
                                     <img
-                                    src={'https://firebasestorage.googleapis.com/v0/b/apk-scientific.appspot.com/o/images%2FPicture1.png_1668174062232?alt=media&token=6e32f96f-424b-4ce6-b2a0-dfc00ce3ed75'}
+                                    src={row}
                                     alt={'product'}
                                     style={{ maxWidth: "100%" }}
                                     className='t-img-product'
@@ -181,20 +193,30 @@ export default function CardProduct({data={}, showGrid=true}) {
                       <small style={{color:'#797979', textAlign:'start'}}>Brand</small>
                     </Box>
                     <Box sx={[styleOtherCate]}>
-                      {data.categoryOther.map((objOther, idx) => (
-                        <Link
-                            key={idx}
-                            sx={[
-                                {
-                                fontSize: 12,
-                                color: "gray",
-                                ":hover": { color: "#f1132a" },
-                                },
-                            ]}
-                        >
-                          {objOther.title}{" "}
-                        </Link>
-                      ))}
+                    {data.category.map((objOther, idx) => {
+                      return dataShow.category.map(row=>{
+                        console.log(row.id === objOther);
+                        if(row.id === objOther){
+                          return (
+                            <Link
+                                key={idx}
+                                sx={[
+                                    {
+                                    fontSize: 12,
+                                    color: "gray",
+                                    ":hover": { color: ColorUse.colorPrimary },
+                                    },
+                                ]}
+                                onClick={()=>{handleChangeCategory(row.id, row.name)}}
+                            >
+                              {row.name}{idx !== data.category.length - 1 ? ", " : ""}
+                            </Link>
+                          )
+                        }else{
+                          return null
+                        }
+                      })
+                    })}
                     </Box>
                     <Typography
                       className='t-text-wrap-3'
@@ -204,7 +226,7 @@ export default function CardProduct({data={}, showGrid=true}) {
                         ":hover": { color: "#f1132a" },
                       }}
                     >
-                    {data.product_name}
+                    {data.name}
                     </Typography>
                   </Box>
                 </Grid>

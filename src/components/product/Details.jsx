@@ -11,8 +11,10 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import ColorUse from "../../assets/theme/ColorUse";
 
+// ======================== function main
 function Details({
   title = "",
   list = [{ id: "", name: "", size: "" }],
@@ -20,7 +22,9 @@ function Details({
   tableHead = [],
   category = [],
 }) {
-  // ======================== function main
+
+  const navigate = useNavigate();
+
   return (
     <Box>
       <Grid container>
@@ -31,7 +35,7 @@ function Details({
           >
             {title}
           </Typography>
-          <TableContainer>
+          {/* <TableContainer>
             <Table>
               <TableHead>
                 <TableRow>
@@ -69,7 +73,7 @@ function Details({
                 })}
               </TableBody>
             </Table>
-          </TableContainer>
+          </TableContainer> */}
         </Grid>
 
         {/* details */}
@@ -87,6 +91,7 @@ function Details({
                   className="t-btn-link-category"
                   key={idx}
                   component={"span"}
+                  onClick={()=>{navigate('/category/'+obj.id)}}
                 >
                   {obj.category_name}
                   {idx === 2 ? "" : ", "}

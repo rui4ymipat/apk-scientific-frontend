@@ -5,6 +5,7 @@ import Gallery from "../components/product/Gallery";
 import ProductsSlide from "../components/product/ProductsSlide";
 import { getProductById, getProducts } from "../services/product_service";
 import { getCategory } from "../services/category_service";
+import { getProductbyCategory } from "../services/product";
 
 function Product() {
   const [product, setProduct] = React.useState({});
@@ -14,6 +15,13 @@ function Product() {
   React.useEffect(() => {
     const pathname = window.location.pathname.split("/product/");
     getProductById(pathname[1]).then((res) => {
+      let concatCategory=''
+      res.category.map((concat, idx)=>{
+        concatCategory += concat + (res.category.length - 1 === idx ? "" : ",");
+      })
+      getProductbyCategory(concatCategory, 1, 10, true).then((row=>{
+        setProductRelate(row.data);
+      }))
       getCategory().then((cates) => {
         setProduct({
           title: res.name,
@@ -27,19 +35,6 @@ function Product() {
         });
         setImgList(res.image);
       });
-    });
-    getProducts().then((res) => {
-      setProductRelate(
-        res.map((product, idx) => {
-          return {
-            id: product.id,
-            product_name: product.name,
-            price: product.price,
-            img: product.image[0],
-            path: "/product/" + product.id,
-          };
-        })
-      );
     });
   }, []);
 
@@ -96,6 +91,7 @@ function Product() {
             Related products
           </Typography>
           <ProductsSlide
+            
             productRelate={productRelate}
             handleNewProduct={handleNewProduct}
           />

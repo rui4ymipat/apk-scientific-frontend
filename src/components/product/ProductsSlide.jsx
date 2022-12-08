@@ -1,10 +1,11 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Link, Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ColorUse from "../../assets/theme/ColorUse";
+import { getCategory } from "../../services/category_service";
 
 const styleCard = {
   // width: '100%',
@@ -31,19 +32,25 @@ const styleCard = {
     objectFit: 'contain'
   },
 };
-// const styleOtherCate = {
-//   marginBottom: 1,
-//   display: "block ruby",
-//   textTransform: "uppercase",
-//   whiteSpace: "nowrap",
-//   overflow: "hidden",
-//   textOverflow: "ellipsis",
-// };
+const styleOtherCate = {
+  marginBottom: 1,
+  display: "block ruby",
+  textTransform: "uppercase",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+};
 
 
 
 // ================================== function main =================================
 function ProductsSlide(props) {
+  const [listCatege, setListCatege] = useState([]);
+  React.useEffect(() => {
+    getCategory().then(row=>{
+      setListCatege(row)
+    })
+  }, []);
   return (
     <Swiper
       navigation={true}
@@ -82,7 +89,7 @@ function ProductsSlide(props) {
           <SwiperSlide key={idx}>
             <Box sx={{ px: { xs: 0, md: 2 }, pt: 3 }}>
               {/*  */}
-              <SlideHoverCard props={props} product={product}  />
+              <SlideHoverCard props={props} product={product} listCatege={listCatege} />
               {/* <div
                 onClick={() => {
                   props.handleNewProduct(product.id);
@@ -140,24 +147,26 @@ function ProductsSlide(props) {
 
 
 // component card
-const SlideHoverCard = ({props, product}) => {
+const SlideHoverCard = ({props, product, listCatege}) => {
   const navigate = useNavigate();
   const [controlEvent, setControlEvent] = useState(null);
+  console.log(listCatege);
   return(
     <div
-    onClick={() => {
+    onClick={(evt) => {
+      if(evt.target.classList.contains("t-remove-click")) return false;
       props.handleNewProduct(product.id);
-      navigate(product.path);
+      navigate("/product/"+product.id);
     }}
   >
     <Paper elevation={0} sx={[styleCard]} onMouseLeave={()=>controlEvent.autoplay.stop()} onMouseOver={()=>controlEvent.autoplay.start()}>
       <Swiper onSwiper={(swiper)=>{setControlEvent(swiper); swiper.autoplay.stop()}} loop={true} modules={[Autoplay]} autoplay={{delay:1000}} >
         {/* list image */}
-        {[1,2,3,4].map((img, idx)=>(
+        {product.image.map((img, idx)=>(
           <SwiperSlide key={"slide_"+idx}>
             <Box mb={2} className="box-img">
               <img
-                src={product.img}
+                src={img}
                 alt={`product ${product.id}`}
               />
             </Box>
@@ -165,28 +174,35 @@ const SlideHoverCard = ({props, product}) => {
         ))}
       </Swiper>
       <Box>
-        {/* <Box sx={[styleOtherCate]}>
-              {[
-                "กล้องจุลทรรศน์ (Microscope)",
-                "สินค้าขายดี (Best Seller)",
-                "เครื่องมือวิทยาศาสตร์ (Scientific instrument)",
-              ].map((objOther, idx) => (
-                <Typography
-                  key={idx}
-                  sx={[
-                    {
-                      fontSize: 12,
-                      color: "gray",
-                      ":hover": { color: "#f1132a" },
-                    },
-                  ]}
-                >
-                  {objOther}{" "}
-                </Typography>
-              ))}
-            </Box> */}
         <Box sx={{color:'#797979'}}>
           <small>Brand</small>
+        </Box>
+        <Box sx={[styleOtherCate]} textAlign={"center"}>
+          {product.category.map((objOther, idx) => {
+            return listCatege.map(row=>{
+              console.log(row);
+              if(row.id === objOther){
+                return (
+                  <Link
+                      key={idx}
+                      sx={[
+                          {
+                          fontSize: 12,
+                          color: "gray",
+                          ":hover": { color: ColorUse.colorPrimary },
+                          },
+                      ]}
+                      className='t-remove-click'
+                      onClick={()=>{navigate('/category/'+row.id)}}
+                  >
+                    {row.category_name}{idx !== product.category.length - 1 ? ", " : ""}
+                  </Link>
+                )
+              }else{
+                return null
+              }
+            })
+          })}
         </Box>
         <Typography
           component={"p"}
@@ -197,7 +213,7 @@ const SlideHoverCard = ({props, product}) => {
             ":hover": { color: "#f1132a" },
           }}
         >
-          {product.product_name}
+          {product.name}
         </Typography>
       </Box>
     </Paper>

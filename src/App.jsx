@@ -57,6 +57,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home app={app} />} />
         <Route path="/category" element={<Category app={app} />} />
+        <Route path="/category/:categoryId" element={<Category app={app} />} />
         <Route path="/new-articles" element={<ArticleNews app={app} />} />
         <Route path="/about-us" element={<AboutUs app={app} />} />
         <Route path="/contact-us" element={<ContactUs app={app} />} />

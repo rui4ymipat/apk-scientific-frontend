@@ -6,16 +6,26 @@ import ListCateItem from "../components/category/ListCateItem";
 import { getCategoryList } from "../services/list_category_service";
 import { getCategory } from "../services/category_service";
 import { getProducts } from "../services/product_service";
+import { getProductbyCategory } from "../services/product";
+import { getPublicData } from "../services/brand";
+import PaginationCategory from "../components/PaginationCategory";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRef } from "react";
 
+// ================================= function main
 function Category() {
-  // ================================= function main
   const [sortBy, setSortBy] = useState("popularity");
   const [countProductShow, setcountProductShow] = useState(10);
   const [showDataGrid, setShowDataGrid] = useState(true);
   const [categoryList, setCategoryList] = useState([]);
   const [productCategory, setProductCategory] = useState([]);
 
+  const navigate = useNavigate();
+
   const [products, setproducts] = useState([]);
+  const [pagination, setPagination] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageCategory, setPageCategory] = useState(1);
   const [menuCategory, setMenuCategory] = useState([]);
 
   const loopSetMenu = (data, idx) => {
@@ -31,27 +41,48 @@ function Category() {
     });
   };
 
-  useEffect(() => {
-    getCategory().then((res) => {
-      const cates = res;
-      setCategoryList(res);
-      getProducts().then((res) => {
-        setproducts(
-          res.map((product, idx) => {
-            return {
-              id: idx + 1,
-              product_name: product.name,
-              price: product.price,
-              img: product.image[0],
-              path: "/product/" + product.id,
-              categoryOther: product.category.map((cate, idx) => {
-                return cates.find((obj) => obj.id === cate);
-              }),
-            };
-          })
-        );
-      });
+  const [dataShow, setDataShow] = useState({
+    brand: [],
+    category: [],
+  });
+  const [loader, setLoader] = useState(false);
+  const fetchData = () => {
+    getPublicData().then((res) => {
+      setLoader(true);
+      setDataShow(res);
+      // console.log(res);
+      if (!res.brand.includes(null)) {
+        setLoader(false);
+      } else {
+        fetchData();
+      }
     });
+  };
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // getCategory().then((res) => {
+    //   const cates = res;
+    //   setCategoryList(res);
+    //   getProducts().then((res) => {
+    //     setproducts(
+    //       res.map((product, idx) => {
+    //         return {
+    //           id: idx + 1,
+    //           product_name: product.name,
+    //           price: product.price,
+    //           img: product.image[0],
+    //           path: "/product/" + product.id,
+    //           categoryOther: product.category.map((cate, idx) => {
+    //             return cates.find((obj) => obj.id === cate);
+    //           }),
+    //         };
+    //       })
+    //     );
+    //   });
+    // });
     getCategoryList().then((res) => {
       let newData = [];
       res.map((item, idx) => {
@@ -108,6 +139,36 @@ function Category() {
     });
   }, []);
 
+  const paramsCategory = useParams();
+  const categoryId = useRef(paramsCategory.categoryId);
+  useEffect(() => {
+    if(categoryId.current){
+      getProductbyCategory(categoryId.current, page, 12, false).then((res=>{
+        setproducts(res.data);
+        setPagination(res.pagination);
+      }));
+    }else{
+      getProductbyCategory("", page, 12, false).then((res=>{
+        setproducts(res.data);
+        setPagination(res.pagination);
+      }));
+    }
+  }, [page]);
+
+  const handleChangeCategory = (id, name) => {
+    navigate("/category/"+id);
+    getProductbyCategory(id, page, 12, false).then((res=>{
+      setproducts(res.data);
+      setPagination(res.pagination);
+    }));
+  };
+  const onchangeCategoryPaginate = (catePage) => {
+    getProductbyCategory(categoryId, catePage, 12, false).then((res=>{
+      setproducts(res.data);
+      setPagination(res.pagination);
+    }));
+  }
+
   return (
     <Box sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
       {/* phase 1 */}
@@ -134,7 +195,7 @@ function Category() {
                     </Box> */}
             <Box>
               {menuCategory.length > 0 ? (
-                <CategoryMenu brand={products} category={products} data={productCategory} />
+                <CategoryMenu brand={products} data={productCategory} onChangeCategory={(id, name)=>handleChangeCategory(id, name)} dataShow={dataShow} loader={loader} />
               ) : (
                 <></>
               )}
@@ -245,7 +306,12 @@ function Category() {
               {/* list product */}
               <Grid item xs={12}>
                 {products.length > 0 ? (
-                  <ListCateItem data={products} showGrid={showDataGrid} />
+                  <Box>
+                    <ListCateItem data={products} showGrid={showDataGrid} dataShow={dataShow} handleChangeCategory={(idcat, namecat)=>handleChangeCategory(idcat, namecat)} />
+                    {categoryId.current ? (<PaginationCategory pagination={pagination} value={pageCategory} onChange={(val)=>setPageCategory(val)}   />)
+                    : 
+                    (<PaginationCategory pagination={pagination} value={page} onChange={(val)=>{setPage(val);onchangeCategoryPaginate(val)}}   />)}
+                  </Box>
                 ) : (
                   <></>
                 )}
