@@ -63,7 +63,7 @@
 }
 .MuiList-root.MuiMenu-list:has(.custom-search-haed){
     max-height: 200px !important;
-    background-color: red !important;
+    /* background-color: red !important; */
 }
 #select-dd-custom-des.MuiSelect-select, #select-dd-custom-mobile.MuiSelect-select{
     color: #727272;

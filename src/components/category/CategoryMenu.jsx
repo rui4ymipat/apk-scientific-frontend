@@ -205,6 +205,27 @@ function CategoryMenu({
                         </Button>
                     </Box>
                 </Grid>
+
+                {/* products */}
+                <Grid item xs={12}>
+                    <TreeView
+                        //   aria-label="controlled"
+                            defaultCollapseIcon={<Remove />}
+                            defaultExpandIcon={<Add />}
+                        //   expanded={expanded}
+                            expanded={expanded}
+                            selected={selected}
+                        //   onNodeToggle={(e, nodeIds)=>{}}
+                        //   onNodeSelect={handleSelect}
+                            
+                    >
+                        {
+                            data.map(row=>TreeCusItem(row))
+                        }
+                    </TreeView>
+                    <Box component={'div'} sx={{height:3, width: {xs:'100%', lg:'100%'}, background:'#efefef', maxWidth: '100%', marginBottom:2}} ></Box>
+                </Grid>
+
                 {/* Brand */}
                 <Grid item xs={12} sx={{ marginBottom:2, }}>
                     <Accordion sx={style.callapseHead} expanded={expandBrand} onChange={()=>setExpandBrand(!expandBrand)} >
@@ -250,26 +271,6 @@ function CategoryMenu({
                             })}
                         </AccordionDetails>
                     </Accordion>
-                </Grid>
-
-                {/* products */}
-                <Grid item xs={12}>
-                    <Box component={'div'} sx={{height:3, width: {xs:'100%', lg:'100%'}, background:'#efefef', maxWidth: '100%', marginBottom:2}} ></Box>
-                    <TreeView
-                        //   aria-label="controlled"
-                            defaultCollapseIcon={<Remove />}
-                            defaultExpandIcon={<Add />}
-                        //   expanded={expanded}
-                            expanded={expanded}
-                            selected={selected}
-                        //   onNodeToggle={(e, nodeIds)=>{}}
-                        //   onNodeSelect={handleSelect}
-                            
-                    >
-                        {
-                            data.map(row=>TreeCusItem(row))
-                        }
-                    </TreeView>
                 </Grid>
 
             </Grid>
