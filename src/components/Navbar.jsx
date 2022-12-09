@@ -132,12 +132,6 @@ export default function Navbar() {
         list: [],
       },
       {
-        id: 3,
-        title: "สินค้า",
-        path: "/category",
-        list: [{ listTitle: "เครื่องมือทางการใช้ 1", listUrl: "/tools1" }],
-      },
-      {
         id: 4,
         title: "ข่าวสาร/บทความ (NEWS/ARTICLES)",
         path: "/new-articles",

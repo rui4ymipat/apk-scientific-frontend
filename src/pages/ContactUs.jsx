@@ -29,7 +29,7 @@ export default function ContactUs() {
     return (
         <Box sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
             <Grid container spacing={3}>
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={12} lg={5}>
                     <Box>
                         <List dense={true}>
                             <ListItem>
@@ -69,11 +69,11 @@ export default function ContactUs() {
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} lg={6} sx={styles.boxImageMaps}>
+                <Grid item xs={12} lg={7} sx={styles.boxImageMaps}>
                     {
                         isLoaded ? (
                             <GoogleMap
-                              mapContainerStyle={{width:'100%', height:500}}
+                              mapContainerStyle={{width:'100%', height:450}}
                               center={center}
                               zoom={15}
                             >

@@ -1,4 +1,4 @@
-import { Box, Link, Paper, Typography, Grid } from '@mui/material';
+import { Box, Link, Paper, Typography, Grid, Skeleton } from '@mui/material';
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Autoplay } from "swiper";
@@ -60,13 +60,30 @@ export default function CardProduct({
   }, 
 showGrid=true,
 dataShow=[],
-handleChangeCategory=()=>{}
+handleChangeCategory=()=>{},
+loader=false
 }) {
     const navigate = useNavigate();
     const [SwiperModule, setSwiperModule] = useState(null);
-    console.log(dataShow);
     if(showGrid){
-      return (
+      return loader ? (
+      <div>
+        <Paper elevation={0} sx={[styleCard, {'&:hover':{borderColor:'#efefef', boxShadow:'none'}}]}>
+          <Box mb={6}>
+            <Skeleton variant="rounded" width={'100%'} height={180} />
+          </Box>
+          <Box>
+            <Box marginBottom={1}>
+              <Skeleton variant="rounded" width={'100%'} height={20} />
+            </Box>
+            <Box sx={[styleOtherCate]} textAlign={"center"}>
+              <Skeleton variant="rounded" width={'100%'} height={20} />
+            </Box>
+            <Skeleton variant="rounded" width={'100%'} height={60} />
+          </Box>
+        </Paper>
+      </div>
+      ):(
       <div
       onClick={(evt) => {
           if(evt.target.classList.contains("t-remove-click")) return false;
@@ -106,9 +123,10 @@ handleChangeCategory=()=>{}
                 <small style={{color:'#797979', textAlign:'start'}}>Brand</small>
               </Box>
               <Box sx={[styleOtherCate]} textAlign={"center"}>
-                {data.category.map((objOther, idx) => {
+                {loader ? <Skeleton variant="rounded" width={'100%'} height={25} />
+                :
+                data.category.map((objOther, idx) => {
                   return dataShow.category.map(row=>{
-                    console.log(row.id === objOther);
                     if(row.id === objOther){
                       return (
                         <Link
@@ -130,7 +148,9 @@ handleChangeCategory=()=>{}
                       return null
                     }
                   })
-                })}
+                })
+                }
+         
               </Box>
               <Typography
                 className='t-text-wrap-3'
@@ -147,7 +167,33 @@ handleChangeCategory=()=>{}
         </div>
       )
     }else{
-      return (
+      return loader ? (
+        <div>
+            <Paper elevation={0} sx={[styleCardList, {'&:hover':{borderColor:'#efefef', boxShadow:'none'}}]}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={5} lg={4} xl={3} >
+                  <Box mb={0}>
+                    <Skeleton variant="rounded" width={'100%'} height={200} />
+                  </Box>
+                </Grid>
+    
+    
+                <Grid item xs={12} md={7} lg={8} xl={9} >
+                  <Box>
+                    <Box marginBottom={1}>
+                      <Skeleton variant="rounded" width={'100%'} height={20} />
+                    </Box>
+                    <Box sx={[styleOtherCate]}>
+                    <Skeleton variant="rounded" width={'100%'} height={20} />
+                    </Box>
+                    <Skeleton variant="rounded" width={'100%'} height={50} />
+                  </Box>
+                </Grid>
+              </Grid>
+            </Paper>
+          </div>
+
+        ):(
         <div
         onClick={(evt) => {
           if(evt.target.classList.contains("t-remove-click")) return false;
@@ -157,7 +203,7 @@ handleChangeCategory=()=>{}
             <Paper elevation={0} sx={[styleCardList]} onMouseLeave={()=>SwiperModule.autoplay.stop()} onMouseOver={()=>SwiperModule.autoplay.start()}>
               <Grid container spacing={2}>
                 <Grid item xs={12} md={5} lg={4} xl={3} >
-                  <Box mb={2}>
+                  <Box mb={0}>
                     <Swiper
                     onSwiper={(swiper) => {setSwiperModule(swiper); swiper.autoplay.stop()}}
                     loop={true}
@@ -193,30 +239,34 @@ handleChangeCategory=()=>{}
                       <small style={{color:'#797979', textAlign:'start'}}>Brand</small>
                     </Box>
                     <Box sx={[styleOtherCate]}>
-                    {data.category.map((objOther, idx) => {
-                      return dataShow.category.map(row=>{
-                        console.log(row.id === objOther);
-                        if(row.id === objOther){
-                          return (
-                            <Link
-                                key={idx}
-                                sx={[
-                                    {
-                                    fontSize: 12,
-                                    color: "gray",
-                                    ":hover": { color: ColorUse.colorPrimary },
-                                    },
-                                ]}
-                                onClick={()=>{handleChangeCategory(row.id, row.name)}}
-                            >
-                              {row.name}{idx !== data.category.length - 1 ? ", " : ""}
-                            </Link>
-                          )
-                        }else{
-                          return null
-                        }
+                    {loader ? <Skeleton variant="rounded" width={'100%'} height={25} />
+                      :
+                      data.category.map((objOther, idx) => {
+                        return dataShow.category.map(row=>{
+                          if(row.id === objOther){
+                            return (
+                              <Link
+                                  key={idx}
+                                  sx={[
+                                      {
+                                      fontSize: 12,
+                                      color: "gray",
+                                      ":hover": { color: ColorUse.colorPrimary },
+                                      },
+                                  ]}
+                                  className='t-remove-click'
+                                  onClick={()=>{handleChangeCategory(row.id, row.name)}}
+                              >
+                                {row.name}{idx !== data.category.length - 1 ? ", " : ""}
+                              </Link>
+                            )
+                          }else{
+                            return null
+                          }
+                        })
                       })
-                    })}
+                      }
+              
                     </Box>
                     <Typography
                       className='t-text-wrap-3'

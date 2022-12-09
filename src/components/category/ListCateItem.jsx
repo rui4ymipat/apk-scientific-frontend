@@ -18,7 +18,8 @@ function ListCateItem({
   }],
   showGrid = true,
   dataShow = [],
-  handleChangeCategory=()=>{}
+  handleChangeCategory=()=>{},
+  loader=false
 }) {
   return data.length > 0 ? (
     <Box>
@@ -28,7 +29,7 @@ function ListCateItem({
           {data.map((obj) => {
             return (
               <Grid key={obj.id} item xs={6} md={4} lg={3} mb={3}>
-                <CardProduct showGrid={true} data={obj} dataShow={dataShow} handleChangeCategory={(id, name)=>{handleChangeCategory(id, name)}} />
+                <CardProduct loader={loader} showGrid={true} data={obj} dataShow={dataShow} handleChangeCategory={(id, name)=>{handleChangeCategory(id, name)}} />
               </Grid>
             );
           })}
@@ -39,7 +40,7 @@ function ListCateItem({
           {data.map((obj) => {
             return (
               <Grid key={obj.id} item xs={12} mb={3}>
-                <CardProduct showGrid={false} data={obj} dataShow={dataShow} handleChangeCategory={(id, name)=>{handleChangeCategory(id, name)}} />
+                <CardProduct loader={loader} showGrid={false} data={obj} dataShow={dataShow} handleChangeCategory={(id, name)=>{handleChangeCategory(id, name)}} />
                 {/* <div
                   onClick={() => {
                     navigate(obj.path);

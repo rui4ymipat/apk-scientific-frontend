@@ -153,17 +153,20 @@ function Category() {
         setPagination(res.pagination);
       }));
     }
+    console.log(categoryId)
   }, [page]);
 
   const handleChangeCategory = (id, name) => {
+    setPageCategory(1);
     navigate("/category/"+id);
-    getProductbyCategory(id, page, 12, false).then((res=>{
+    categoryId.current = id;
+    getProductbyCategory(id, 1, 12, false).then((res=>{
       setproducts(res.data);
       setPagination(res.pagination);
     }));
   };
   const onchangeCategoryPaginate = (catePage) => {
-    getProductbyCategory(categoryId, catePage, 12, false).then((res=>{
+    getProductbyCategory(categoryId.current, catePage, 12, false).then((res=>{
       setproducts(res.data);
       setPagination(res.pagination);
     }));
@@ -180,8 +183,8 @@ function Category() {
       >
         {/* Category Menu */}
         <Grid item xs={12} lg={3}>
-          <Box>
-            {/* <Box p={2} border={'0.5px solid #e0e0e0'} borderBottom={'none'} >
+          {/* <Box>
+            <Box p={2} border={'0.5px solid #e0e0e0'} borderBottom={'none'} >
                         <Typography sx={{fontSize:18, fontWeight: 600, mb:1}}>ค้นหาสินค้า</Typography>
                         <TextField 
                         sx={{
@@ -192,15 +195,15 @@ function Category() {
                         <Button sx={{backgroundColor:'#f1132a', color:'#fff', ':hover': {backgroundColor:'#00009f'}}}>
                             <Typography>ค้าหา</Typography>
                         </Button>
-                    </Box> */}
-            <Box>
+                    </Box>
+          </Box> */}
+          <Box sx={{height:'100%'}}>
               {menuCategory.length > 0 ? (
                 <CategoryMenu brand={products} data={productCategory} onChangeCategory={(id, name)=>handleChangeCategory(id, name)} dataShow={dataShow} loader={loader} />
               ) : (
                 <></>
               )}
             </Box>
-          </Box>
         </Grid>
 
         {/* Content Products Show */}
@@ -307,10 +310,10 @@ function Category() {
               <Grid item xs={12}>
                 {products.length > 0 ? (
                   <Box>
-                    <ListCateItem data={products} showGrid={showDataGrid} dataShow={dataShow} handleChangeCategory={(idcat, namecat)=>handleChangeCategory(idcat, namecat)} />
-                    {categoryId.current ? (<PaginationCategory pagination={pagination} value={pageCategory} onChange={(val)=>setPageCategory(val)}   />)
+                    <ListCateItem data={products} showGrid={showDataGrid} loader={loader} dataShow={dataShow} handleChangeCategory={(idcat, namecat)=>handleChangeCategory(idcat, namecat)} />
+                    {categoryId.current ? (<PaginationCategory key={1} pagination={pagination} value={pageCategory} onChange={(val)=>{setPageCategory(val);onchangeCategoryPaginate(val)}}   />)
                     : 
-                    (<PaginationCategory pagination={pagination} value={page} onChange={(val)=>{setPage(val);onchangeCategoryPaginate(val)}}   />)}
+                    (<PaginationCategory key={2} pagination={pagination} value={page} onChange={(val)=>{setPage(val);}}   />)}
                   </Box>
                 ) : (
                   <></>

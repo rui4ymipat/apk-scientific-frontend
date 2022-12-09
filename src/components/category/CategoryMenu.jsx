@@ -11,6 +11,7 @@ import {
   Autocomplete,
   TextField,
   Button,
+  Skeleton,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -125,11 +126,13 @@ function CategoryMenu({
     );
   };
 
-  if (loader) return <div>Load</div>;
 
   return data.length > 0 ? (
-    <Box className="content-menu-category">
-      <Grid container>
+    <Box className="content-menu-category " sx={{height:'100%'}}>
+      {
+        loader ? <Skeleton variant="rounded" width={'100%'} height={'100%'} />
+        :
+        <Grid container>
         <Grid item xs={12} sx={{ marginBottom: 3 }}>
           <Box display={"flex"} alignItems="center" flexDirection={"row"}>
             <Box sx={{ width: "80%" }}>
@@ -232,10 +235,14 @@ function CategoryMenu({
               {dataShow.brand.map((listBrand, idx) => {
                 return (
                   <MenuItem key={"brand_" + idx} onClick={()=>{onChangeCategory(listBrand.id, listBrand.name)}} className="t-brand-link">
-                    <Typography noWrap={true}>
-                      {listBrand.name}{""}
-                      <span style={{ marginLeft: 5 }}>({listBrand.total})</span>
-                    </Typography>
+                    <Box sx={{maxWidth:'100%', display:'flex'}}>
+                      <Typography noWrap={true}>
+                        {listBrand.name}{" "}
+                      </Typography>
+                      <span style={{ marginLeft: 5 }}>
+                        ({listBrand.total})
+                      </span>
+                    </Box>
                   </MenuItem>
                 );
               })}
@@ -281,12 +288,14 @@ function CategoryMenu({
                 // console.log(listproduct);
                 return (
                   <MenuItem key={"brand_" + idx} onClick={()=>onChangeCategory(listproduct.id, listproduct.name)}  className="t-brand-link">
-                    <Typography noWrap={true}>
-                      {listproduct.name}{" "}
+                    <Box sx={{maxWidth:'100%', display:'flex'}}>
+                      <Typography noWrap={true}>
+                        {listproduct.name}{" "}
+                      </Typography>
                       <span style={{ marginLeft: 5 }}>
                         ({listproduct.total})
                       </span>
-                    </Typography>
+                    </Box>
                   </MenuItem>
                 );
               })}
@@ -295,6 +304,8 @@ function CategoryMenu({
         </Grid>
 
       </Grid>
+      }
+
     </Box>
   ) : (
     <Box></Box>
