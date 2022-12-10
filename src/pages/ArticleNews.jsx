@@ -33,7 +33,7 @@ const styleUse = {
 
 export default function ArticleNews() {
     return (
-        <Box sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
+        <Box className="container-main" sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
             <Grid container spacing={7} >
                 {[1,2,3,4,5,7,8,9,14,12,41].map((row, idx)=>(
                 <Grid key={"article_"+idx} item sx={12} md={6} lg={3}>

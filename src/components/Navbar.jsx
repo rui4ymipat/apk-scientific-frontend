@@ -162,6 +162,7 @@ export default function Navbar() {
         boxShadow: "none",
         borderTop: "0.75px solid #e0e0e0",
         borderBottom: "0.75px solid #e0e0e0",
+        height:60,
       }}
     >
       <Container

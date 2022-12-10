@@ -2,6 +2,9 @@
     --color-primary: #f1132a;
     --color-gray: #4c4c4c;
 }
+.container-main{
+    min-height: calc(100vh - (130px + 60px + 210px))
+}
 .t-text-primary{
     color: var(--color-primary) !important;
 }

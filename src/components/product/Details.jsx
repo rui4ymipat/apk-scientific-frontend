@@ -78,7 +78,7 @@ function Details({
 
         {/* details */}
         <Grid item xs={12} mb={3}>
-          <Typography>{details}</Typography>
+          <Typography>{details} Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, et reprehenderit neque culpa sit officia dolorem quis nobis laborum beatae repudiandae dolore asperiores libero a enim hic deleniti eius atque odio, ad autem aut ducimus. Animi hic dolorum vero similique, mollitia provident error voluptate deserunt iste quisquam, laborum debitis nostrum libero labore nisi ipsa. Dolorem, impedit perspiciatis exercitationem et repellat rem earum id corrupti illum fuga dicta eum ex magnam quia laboriosam placeat voluptate at. Rerum odio, atque quisquam harum quia et ex cum natus iure non ratione repellendus ad veritatis voluptatibus tempora culpa adipisci repudiandae explicabo dignissimos? Veritatis, cum. </Typography>
         </Grid>
 
         {/* categories */}

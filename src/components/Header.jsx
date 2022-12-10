@@ -44,7 +44,7 @@ function Header() {// ============= function main
 
   if (path.search("admin") === 1) return null;
   return (
-    <Box className="" >
+    <Box className="" height={130} >
 
       {/*  mobile */}
       {/* <Grid
@@ -219,7 +219,7 @@ function Header() {// ============= function main
                         anchorOrigin:{ horizontal: "center", vertical: 'bottom' },
                         PaperProps:{
                           sx:{
-                            maxHeight:300,
+                            maxHeight:400,
                             mt:1,
                             '& .MuiButtonBase-root.Mui-selected':{
                               backgroundColor: ColorUse.colorPrimary,

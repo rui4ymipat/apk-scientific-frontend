@@ -39,7 +39,7 @@ export default function AboutUs() {
     }, []);
     
     return (
-        <Box sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
+        <Box className="container-main" sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
             <Grid container spacing={5}>
                 <Grid item xs={12} lg={5} sx={styles.boxImageSlide}>
                     <Box className='box-img-slide' display='flex'alignItems={'center'}>

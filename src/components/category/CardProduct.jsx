@@ -19,8 +19,12 @@ const styleCard = {
     },
     ":hover": {
       // transform: "translate(0px, -5px)",
+      transform: "scale(1.015)",
       border: '1px solid '+ColorUse.colorPrimary,
-      boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.1)",
+      boxShadow: "2px 15px 10px 0px rgba(0,0,0,0.1)",
+      '& .t-text-wrap-3':{
+        color: ColorUse.colorPrimary,
+      }
     },
 };
 
@@ -32,8 +36,12 @@ const styleCardList = {
     p: 2,
     ":hover": {
       // transform: "translate(0px, -5px)",
+      transform: "scale(1.015)",
       border: '1px solid '+ColorUse.colorPrimary,
       boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.05)",
+      '& .t-text-wrap-3':{
+        color: ColorUse.colorPrimary,
+      }
     },
 };
 const styleOtherCate = {

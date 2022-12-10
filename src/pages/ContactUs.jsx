@@ -27,7 +27,7 @@ export default function ContactUs() {
         googleMapsApiKey: "AIzaSyC6j-S3iTqdyRCOfY9e31zvF37Qz1U34DA"
     })
     return (
-        <Box sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
+        <Box className="container-main" sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} lg={5}>
                     <Box>

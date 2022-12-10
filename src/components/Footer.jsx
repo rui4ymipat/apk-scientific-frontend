@@ -31,7 +31,7 @@ function Footer() {
 
   if (path.search("admin") === 1) return null;
   return (
-    <footer>
+    <footer style={{minHeight:210}}>
       <Box sx={{}}>
         <Grid
           container

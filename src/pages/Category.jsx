@@ -173,7 +173,7 @@ function Category() {
   }
 
   return (
-    <Box sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
+    <Box className="container-main" sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
       {/* phase 1 */}
       <Grid
         container

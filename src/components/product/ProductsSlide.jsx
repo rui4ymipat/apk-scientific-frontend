@@ -1,4 +1,4 @@
-import { Box, Link, Paper, Typography } from "@mui/material";
+import { Box, Link, Paper, Skeleton, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -20,8 +20,12 @@ const styleCard = {
   },
   ":hover": {
     // transform: "translate(0px, -5px)",
+    transform: "scale(1)",
     border: '1px solid '+ColorUse.colorPrimary,
-    boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.1)",
+    boxShadow: "2px 15px 10px 0px rgba(0,0,0,0.1)",
+    '& .t-text-wrap-3':{
+      color: ColorUse.colorPrimary,
+    }
   },
   '& .box-img > img':{
     width: '100%',
@@ -46,9 +50,12 @@ const styleOtherCate = {
 // ================================== function main =================================
 function ProductsSlide(props) {
   const [listCatege, setListCatege] = useState([]);
+  const [loader, setLoader] = useState(false);
   React.useEffect(() => {
+    setLoader(true)
     getCategory().then(row=>{
-      setListCatege(row)
+      setListCatege(row);
+      setLoader(false)
     })
   }, []);
   return (
@@ -89,7 +96,7 @@ function ProductsSlide(props) {
           <SwiperSlide key={idx}>
             <Box sx={{ px: { xs: 0, md: 2 }, pt: 3 }}>
               {/*  */}
-              <SlideHoverCard props={props} product={product} listCatege={listCatege} />
+              <SlideHoverCard props={props} product={product} listCatege={listCatege} loader={loader} />
               {/* <div
                 onClick={() => {
                   props.handleNewProduct(product.id);
@@ -147,11 +154,10 @@ function ProductsSlide(props) {
 
 
 // component card
-const SlideHoverCard = ({props, product, listCatege}) => {
+const SlideHoverCard = ({props, product, listCatege, loader}) => {
   const navigate = useNavigate();
   const [controlEvent, setControlEvent] = useState(null);
-  console.log(listCatege);
-  return(
+  return !loader ?(
     <div
     onClick={(evt) => {
       if(evt.target.classList.contains("t-remove-click")) return false;
@@ -215,6 +221,23 @@ const SlideHoverCard = ({props, product, listCatege}) => {
         >
           {product.name}
         </Typography>
+      </Box>
+    </Paper>
+  </div>
+  ):(
+    <div>
+    <Paper elevation={0} sx={[styleCard, {'&:hover':{borderColor:'#efefef', boxShadow:'none'}}]}>
+      <Box mb={6}>
+        <Skeleton variant="rounded" width={'100%'} height={180} />
+      </Box>
+      <Box>
+        <Box marginBottom={1}>
+          <Skeleton variant="rounded" width={'100%'} height={20} />
+        </Box>
+        <Box sx={[styleOtherCate]} textAlign={"center"}>
+          <Skeleton variant="rounded" width={'100%'} height={20} />
+        </Box>
+        <Skeleton variant="rounded" width={'100%'} height={60} />
       </Box>
     </Paper>
   </div>
