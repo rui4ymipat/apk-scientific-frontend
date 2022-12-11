@@ -127,7 +127,7 @@ export default function Navbar() {
       },
       {
         id: 2,
-        title: "สินค้าใหม่ (NEW PRODUCTS)",
+        title: "สินค้า",
         path: "/category",
         list: [],
       },
