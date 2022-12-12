@@ -63,26 +63,11 @@ function Category() {
   }, []);
 
   useEffect(() => {
-    // getCategory().then((res) => {
-    //   const cates = res;
-    //   setCategoryList(res);
-    //   getProducts().then((res) => {
-    //     setproducts(
-    //       res.map((product, idx) => {
-    //         return {
-    //           id: idx + 1,
-    //           product_name: product.name,
-    //           price: product.price,
-    //           img: product.image[0],
-    //           path: "/product/" + product.id,
-    //           categoryOther: product.category.map((cate, idx) => {
-    //             return cates.find((obj) => obj.id === cate);
-    //           }),
-    //         };
-    //       })
-    //     );
-    //   });
-    // });
+    getCategory().then((res) => {
+      const cates = res;
+      setCategoryList(res);
+      console.log(res);
+    });
     getCategoryList().then((res) => {
       let newData = [];
       res.map((item, idx) => {
@@ -103,8 +88,9 @@ function Category() {
             };
           }),
         });
-      }); setProductCategory(newData);
-      
+      });
+      setProductCategory(newData);
+
       // console.log(res);
       setMenuCategory(
         res.map((list, idx) => {
@@ -142,38 +128,43 @@ function Category() {
   const paramsCategory = useParams();
   const categoryId = useRef(paramsCategory.categoryId);
   useEffect(() => {
-    if(categoryId.current){
-      getProductbyCategory(categoryId.current, page, 12, false).then((res=>{
+    if (categoryId.current) {
+      getProductbyCategory(categoryId.current, page, 12, false).then((res) => {
         setproducts(res.data);
         setPagination(res.pagination);
-      }));
-    }else{
-      getProductbyCategory("", page, 12, false).then((res=>{
+      });
+    } else {
+      getProductbyCategory("", page, 12, false).then((res) => {
         setproducts(res.data);
         setPagination(res.pagination);
-      }));
+      });
     }
-    console.log(categoryId)
+    console.log(categoryId);
   }, [page]);
 
   const handleChangeCategory = (id, name) => {
     setPageCategory(1);
-    navigate("/category/"+id);
+    navigate("/category/" + id);
     categoryId.current = id;
-    getProductbyCategory(id, 1, 12, false).then((res=>{
+    getProductbyCategory(id, 1, 12, false).then((res) => {
       setproducts(res.data);
       setPagination(res.pagination);
-    }));
+    });
   };
   const onchangeCategoryPaginate = (catePage) => {
-    getProductbyCategory(categoryId.current, catePage, 12, false).then((res=>{
-      setproducts(res.data);
-      setPagination(res.pagination);
-    }));
-  }
+    getProductbyCategory(categoryId.current, catePage, 12, false).then(
+      (res) => {
+        setproducts(res.data);
+        setPagination(res.pagination);
+      }
+    );
+  };
 
   return (
-    <Box className="container-main" sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}>
+    <Box
+      className="container-main"
+      sx={{ paddingX: { xs: 3, xl: 5 }, paddingY: { xs: 3, xl: 5 } }}
+    >
       {/* phase 1 */}
       <Grid
         container
@@ -197,13 +188,20 @@ function Category() {
                         </Button>
                     </Box>
           </Box> */}
-          <Box sx={{height:'100%'}}>
-              {menuCategory.length > 0 ? (
-                <CategoryMenu brand={products} data={productCategory} onChangeCategory={(id, name)=>handleChangeCategory(id, name)} dataShow={dataShow} loader={loader} />
-              ) : (
-                <></>
-              )}
-            </Box>
+          <Box sx={{ height: "100%" }}>
+            {menuCategory.length > 0 ? (
+              <CategoryMenu
+                brand={products}
+                data={productCategory}
+                onChangeCategory={(id, name) => handleChangeCategory(id, name)}
+                dataShow={dataShow}
+                loader={loader}
+                allCategory={categoryList}
+              />
+            ) : (
+              <></>
+            )}
+          </Box>
         </Grid>
 
         {/* Content Products Show */}
@@ -299,8 +297,15 @@ function Category() {
                         </option>
                       ))}
                     </TextField> */}
-                    <Button onClick={() => setShowDataGrid(!showDataGrid)} className={'t-text-primary'} >
-                      {showDataGrid ? <FormatListBulleted sx={{color:'inherit'}} /> : <Widgets sx={{color:'inherit'}} />}
+                    <Button
+                      onClick={() => setShowDataGrid(!showDataGrid)}
+                      className={"t-text-primary"}
+                    >
+                      {showDataGrid ? (
+                        <FormatListBulleted sx={{ color: "inherit" }} />
+                      ) : (
+                        <Widgets sx={{ color: "inherit" }} />
+                      )}
                     </Button>
                   </div>
                 </Box>
@@ -310,10 +315,35 @@ function Category() {
               <Grid item xs={12}>
                 {products.length > 0 ? (
                   <Box>
-                    <ListCateItem data={products} showGrid={showDataGrid} loader={loader} dataShow={dataShow} handleChangeCategory={(idcat, namecat)=>handleChangeCategory(idcat, namecat)} />
-                    {categoryId.current ? (<PaginationCategory key={1} pagination={pagination} value={pageCategory} onChange={(val)=>{setPageCategory(val);onchangeCategoryPaginate(val)}}   />)
-                    : 
-                    (<PaginationCategory key={2} pagination={pagination} value={page} onChange={(val)=>{setPage(val);}}   />)}
+                    <ListCateItem
+                      data={products}
+                      showGrid={showDataGrid}
+                      loader={loader}
+                      dataShow={dataShow}
+                      handleChangeCategory={(idcat, namecat) =>
+                        handleChangeCategory(idcat, namecat)
+                      }
+                    />
+                    {categoryId.current ? (
+                      <PaginationCategory
+                        key={1}
+                        pagination={pagination}
+                        value={pageCategory}
+                        onChange={(val) => {
+                          setPageCategory(val);
+                          onchangeCategoryPaginate(val);
+                        }}
+                      />
+                    ) : (
+                      <PaginationCategory
+                        key={2}
+                        pagination={pagination}
+                        value={page}
+                        onChange={(val) => {
+                          setPage(val);
+                        }}
+                      />
+                    )}
                   </Box>
                 ) : (
                   <></>
