@@ -50,7 +50,7 @@ function Category() {
     getPublicData().then((res) => {
       setLoader(true);
       setDataShow(res);
-      // console.log(res);
+      console.log(res);
       if (!res.brand.includes(null)) {
         setLoader(false);
       } else {
@@ -66,7 +66,7 @@ function Category() {
     getCategory().then((res) => {
       const cates = res;
       setCategoryList(res);
-      console.log(res);
+      console.log("Category => ", res);
     });
     getCategoryList().then((res) => {
       let newData = [];

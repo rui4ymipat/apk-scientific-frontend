@@ -1,4 +1,4 @@
-import { ExpandMore, Add, Remove, Search } from "@mui/icons-material";
+import { ExpandMore, Add, Remove, Search, ExpandCircleDown, Expand, ExpandLess } from "@mui/icons-material";
 import { TreeItem, TreeView } from "@mui/lab";
 import {
   Box,
@@ -12,9 +12,16 @@ import {
   TextField,
   Button,
   Skeleton,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemButton,
+  IconButton,
+  Collapse,
+  List,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ColorUse from "../../assets/theme/ColorUse";
 // import $ from 'jquery';
 
@@ -173,8 +180,8 @@ function CategoryMenu({
           </Grid>
 
           {/* products */}
-          <Grid item xs={12}>
-            <TreeView
+          <Grid item xs={12} marginBottom={3}>
+            {/* <TreeView
               //   aria-label="controlled"
               defaultCollapseIcon={<Remove />}
               defaultExpandIcon={<Add />}
@@ -185,8 +192,22 @@ function CategoryMenu({
               //   onNodeSelect={handleSelect}
             >
               {data.map((row) => TreeCusItem(row))}
-            </TreeView>
-            <Box
+            </TreeView> */}
+            <List>
+
+             {
+              data.map((row, idx)=>{
+                return (
+                  <MultiMenu 
+                    key={"menu_"+idx}
+                    item={row}
+                  />
+                )
+              })
+             }
+
+            </List>
+            {/* <Box
               component={"div"}
               sx={{
                 height: 3,
@@ -195,7 +216,7 @@ function CategoryMenu({
                 maxWidth: "100%",
                 marginBottom: 2,
               }}
-            ></Box>
+            ></Box> */}
           </Grid>
 
           {/* Brand */}
@@ -320,4 +341,43 @@ function CategoryMenu({
   );
 }
 
+
+const MultiMenu = ({item={ id_node: "", node_parent: "", id: 0, title: "", path: "", sub_menu: [] }}) => {
+  const [expandCollapse, setExpandCollapse] = useState(false);
+  return (
+    <ListItem dense={true} className={'items-list'} sx={{width:"100%", paddingRight:0, paddingY:0}} >
+      <Box sx={{width:'100%'}} className="t-border-bottom">
+        <Grid container className="border-list-item" sx={{paddingY:.35}}>
+          <Grid item xs={10}>
+            <Link className="link-category" to={item.path} ><Typography className="text-typo" noWrap={true} >{ item.title }</Typography></Link>
+          </Grid>
+          {
+            item.sub_menu.length > 0 ? (
+              <Grid item xs={2} sx={{display:'flex', justifyContent:'end', paddingX:1}} >
+                <IconButton onClick={()=>setExpandCollapse(!expandCollapse)} size="small"sx={{padding:0}}>
+                  {expandCollapse ? (<ExpandLess />):(<ExpandMore />)}
+                </IconButton>
+              </Grid>
+            ): null
+          }
+        </Grid>
+        {
+          item.sub_menu.length > 0 ? (
+            <Box>
+              <Collapse in={expandCollapse} timeout={'auto'} unmountOnExit >
+                <List className="t-submenu-list" disablePadding>
+                  {
+                    item.sub_menu.map((row, idx)=>(
+                      <MultiMenu key={"submenu_"+idx} item={row} />
+                    ))
+                  }
+                </List>
+              </Collapse>
+            </Box>
+          ): null
+        }
+      </Box>
+    </ListItem>
+  )
+}
 export default CategoryMenu;

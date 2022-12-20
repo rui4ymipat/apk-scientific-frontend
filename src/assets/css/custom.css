@@ -200,8 +200,33 @@ img.t-img-fluid, .t-img-fluid > img{
     object-fit: scale-down;
 }
 
-
-
+.t-submenu-list .border-list-item .text-typo{
+    font-size: 15px;
+}
+.t-submenu-list .border-list-item{
+    border-left: 1px solid #dfdfdf;
+}
+.t-submenu-list .border-list-item .text-typo{
+    padding-left: .65rem;
+}
+.link-category{
+    color: var(--color-gray);
+    text-decoration: none;
+}
+.link-category:hover, .link-category.active{
+    color: var(--color-primary);
+}
+.t-border-bottom{
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #efefef;
+}
+.items-list:last-child .t-border-bottom{
+    border-bottom: none;
+}
+.t-submenu-list .t-border-bottom{
+    padding: 0;
+    border-bottom: none;
+}
 /* animated */
 @keyframes fadeLeftShow{
     from{

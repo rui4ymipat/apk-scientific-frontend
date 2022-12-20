@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ColorUse from '../../assets/theme/ColorUse';
+import { getCategory } from '../../services/category_service';
 
 
 const styleCard = {
@@ -67,12 +68,23 @@ export default function CardProduct({
     tableRow: []
   }, 
 showGrid=true,
-dataShow=[],
+// dataShow=[],
 handleChangeCategory=()=>{},
-loader=false
+// loader=false
 }) {
     const navigate = useNavigate();
     const [SwiperModule, setSwiperModule] = useState(null);
+    const [loader, setLoader] = useState(false);
+    const [dataShow, setDataShow] = useState([]);
+
+    React.useEffect(() => {
+      setLoader(true)
+      getCategory().then( res =>{
+        setDataShow(res);
+        setLoader(false)
+      })      
+    }, []);
+
     if(showGrid){
       return loader ? (
       <div>
@@ -134,7 +146,8 @@ loader=false
                 {loader ? <Skeleton variant="rounded" width={'100%'} height={25} />
                 :
                 data.category.map((objOther, idx) => {
-                  return dataShow.category.map(row=>{
+                  return dataShow.map(row=>{
+                    console.log("card=>", row);
                     if(row.id === objOther){
                       return (
                         <Link
@@ -147,9 +160,9 @@ loader=false
                                 },
                             ]}
                             className='t-remove-click'
-                            onClick={()=>{handleChangeCategory(row.id, row.name)}}
+                            onClick={()=>{handleChangeCategory(row.id, row.category_name)}}
                         >
-                          {row.name}{idx !== data.category.length - 1 ? ", " : ""}
+                          {row.category_name}{idx !== data.length - 1 ? ", " : ""}
                         </Link>
                       )
                     }else{
@@ -250,7 +263,7 @@ loader=false
                     {loader ? <Skeleton variant="rounded" width={'100%'} height={25} />
                       :
                       data.category.map((objOther, idx) => {
-                        return dataShow.category.map(row=>{
+                        return dataShow.map(row=>{
                           if(row.id === objOther){
                             return (
                               <Link
@@ -263,9 +276,9 @@ loader=false
                                       },
                                   ]}
                                   className='t-remove-click'
-                                  onClick={()=>{handleChangeCategory(row.id, row.name)}}
+                                  onClick={()=>{handleChangeCategory(row.id, row.category_name)}}
                               >
-                                {row.name}{idx !== data.category.length - 1 ? ", " : ""}
+                                {row.category_name}{idx !== data.length - 1 ? ", " : ""}
                               </Link>
                             )
                           }else{
