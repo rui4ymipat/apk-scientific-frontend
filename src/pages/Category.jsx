@@ -50,7 +50,7 @@ function Category() {
     getPublicData().then((res) => {
       setLoader(true);
       setDataShow(res);
-      console.log(res);
+      // console.log(res);
       if (!res.brand.includes(null)) {
         setLoader(false);
       } else {
@@ -66,7 +66,7 @@ function Category() {
     getCategory().then((res) => {
       const cates = res;
       setCategoryList(res);
-      console.log("Category => ", res);
+      // console.log("Category => ", res);
     });
     getCategoryList().then((res) => {
       let newData = [];
@@ -127,33 +127,40 @@ function Category() {
 
   const paramsCategory = useParams();
   const categoryId = useRef(paramsCategory.categoryId);
+  const [nextPage, setNextPage] = useState(false);
+  const [nextPageNewCate, setNextPageNewCate] = useState(false);
   useEffect(() => {
     if (categoryId.current) {
-      getProductbyCategory(categoryId.current, page, 12, false).then((res) => {
+      getProductbyCategory(categoryId.current, page, 12, false, nextPage).then((res) => {
         setproducts(res.data);
         setPagination(res.pagination);
       });
     } else {
-      getProductbyCategory("", page, 12, false).then((res) => {
+      getProductbyCategory("", page, 12, false, nextPage).then((res) => {
+        console.log(res);
+        setNextPage(res.pagination.nextPage)
         setproducts(res.data);
         setPagination(res.pagination);
       });
     }
+    console.log(nextPage);
     console.log(categoryId);
   }, [page]);
 
   const handleChangeCategory = (id, name) => {
+    setNextPageNewCate(false)
     setPageCategory(1);
     navigate("/category/" + id);
     categoryId.current = id;
-    getProductbyCategory(id, 1, 12, false).then((res) => {
+    getProductbyCategory(id, 1, 12, false, false).then((res) => {
       setproducts(res.data);
       setPagination(res.pagination);
     });
   };
   const onchangeCategoryPaginate = (catePage) => {
-    getProductbyCategory(categoryId.current, catePage, 12, false).then(
+    getProductbyCategory(categoryId.current, catePage, 12, false, nextPageNewCate).then(
       (res) => {
+        setNextPageNewCate(res.pagination.nextPage)
         setproducts(res.data);
         setPagination(res.pagination);
       }

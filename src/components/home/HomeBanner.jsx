@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCreative, Navigation, Pagination } from "swiper";
-import { ImageListItem } from "@mui/material";
+import { Box, ImageListItem } from "@mui/material";
 function HomeBanner(props) {
   return (
     <Swiper
@@ -33,14 +33,14 @@ function HomeBanner(props) {
       {props.data.map((item, idx) => {
         return (
           <SwiperSlide key={idx}>
-            <ImageListItem sx={{ height: { xs: "auto" } }}>
+            <Box sx={{ height: {xs:'auto', lg:550} }}>
               <img
                 src={item.img}
                 style={{ width: "100%", maxHeight: "100%" }}
                 alt="logo"
                 loading="lazy"
               />
-            </ImageListItem>
+            </Box>
           </SwiperSlide>
         );
       })}

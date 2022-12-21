@@ -17,6 +17,7 @@ import {
   Tooltip,
   Avatar,
   ListItemIcon,
+  ImageListItem,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import DrawerMenu from "./DrawerMenu";
@@ -162,20 +163,31 @@ export default function Navbar() {
         boxShadow: "none",
         borderTop: "0.75px solid #e0e0e0",
         borderBottom: "0.75px solid #e0e0e0",
-        height:60,
+        height:80,
       }}
     >
       <Container
-        maxWidth={"100%"}
+        // maxWidth={"100%"}
         sx={{
           borderRight: "none",
           borderLeft: "none",
-          paddingX: { xs: 3, xl: 5 },
         }}
       >
         <Box sx={{ display: { xs: "none", lg: "block" }}}>
           <Grid container>
-            <Grid item xs={12} md={10}>
+            <Grid item xs={12} md={2}>
+              <Box sx={{ display: "flex", alignItems: "center" }} marginY={1} borderRight="1px solid #e0e0e0" >
+                <Typography component={"a"} href={"/"}>
+                  <img
+                    src="assets/images/logos/logo.jpg"
+                    style={{ width: 100, objectFit:'cover' }}
+                    alt="logo"
+                    loading="lazy"
+                  />
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={10} display={"flex"} alignItems="center" >
               <Box sx={{overflowX:'auto', maxWidth: '100%' }}>
                 {data.map((obj) => {
                   return obj.list.length < 1 ? (
@@ -203,7 +215,7 @@ export default function Navbar() {
                 })}
               </Box>
             </Grid>
-            <Grid item xs={12} md={2} sx={{py:1}}>
+            {/* <Grid item xs={12} md={2} sx={{py:1}}>
               <Box sx={{display:'flex', justifyContent:'center', alignItems: 'center', height:'100%', borderLeft:'1px solid #efefef'}}>
                 <React.Fragment>
                   <Box id="elm_box_userAccount" ref={refElmAccount} sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -254,7 +266,7 @@ export default function Navbar() {
                   </Menu>
                 </React.Fragment>
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
 

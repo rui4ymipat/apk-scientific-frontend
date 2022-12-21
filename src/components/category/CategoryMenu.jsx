@@ -347,7 +347,7 @@ const MultiMenu = ({item={ id_node: "", node_parent: "", id: 0, title: "", path:
   return (
     <ListItem dense={true} className={'items-list'} sx={{width:"100%", paddingRight:0, paddingY:0}} >
       <Box sx={{width:'100%'}} className="t-border-bottom">
-        <Grid container className="border-list-item" sx={{paddingY:.35}}>
+        <Grid container className="border-list-item" sx={{paddingY:1}}>
           <Grid item xs={10}>
             <Link className="link-category" to={item.path} ><Typography className="text-typo" noWrap={true} >{ item.title }</Typography></Link>
           </Grid>

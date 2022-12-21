@@ -21,8 +21,8 @@ const styleCard = {
   ":hover": {
     // transform: "translate(0px, -5px)",
     transform: "scale(1)",
-    border: '1px solid '+ColorUse.colorPrimary,
-    boxShadow: "2px 15px 10px 0px rgba(0,0,0,0.1)",
+    // border: '1px solid '+ColorUse.colorPrimary,
+    boxShadow: "2px 5px 10px 0px rgba(0,0,0,0.05)",
     '& .t-text-wrap-3':{
       color: ColorUse.colorPrimary,
     }
@@ -97,53 +97,6 @@ function ProductsSlide(props) {
             <Box sx={{ px: { xs: 0, md: 2 }, pt: 3 }}>
               {/*  */}
               <SlideHoverCard props={props} product={product} listCatege={listCatege} loader={loader} />
-              {/* <div
-                onClick={() => {
-                  props.handleNewProduct(product.id);
-                  navigate(product.path);
-                }}
-              >
-                <Paper elevation={0} sx={[styleCard]}>
-                  <Box mb={2} className="box-img">
-                    <img
-                      src={product.img}
-                      alt={`product ${product.id}`}
-                    />
-                  </Box>
-                  <Box textAlign={"center"}>
-                    <Box sx={[styleOtherCate]}>
-                          {[
-                            "กล้องจุลทรรศน์ (Microscope)",
-                            "สินค้าขายดี (Best Seller)",
-                            "เครื่องมือวิทยาศาสตร์ (Scientific instrument)",
-                          ].map((objOther, idx) => (
-                            <Typography
-                              key={idx}
-                              sx={[
-                                {
-                                  fontSize: 12,
-                                  color: "gray",
-                                  ":hover": { color: "#f1132a" },
-                                },
-                              ]}
-                            >
-                              {objOther}{" "}
-                            </Typography>
-                          ))}
-                        </Box>
-                    <Typography
-                      component={"p"}
-                      sx={{
-                        fontSize: 14,
-                        color: "#444",
-                        ":hover": { color: "#f1132a" },
-                      }}
-                    >
-                      {product.product_name}
-                    </Typography>
-                  </Box>
-                </Paper>
-              </div> */}
             </Box>
           </SwiperSlide>
         );

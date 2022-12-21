@@ -19,13 +19,13 @@ const styleCard = {
       lg: 380
     },
     ":hover": {
-      // transform: "translate(0px, -5px)",
+      transform: "translate(0px, -5px)",
       transform: "scale(1.015)",
-      border: '1px solid '+ColorUse.colorPrimary,
-      boxShadow: "2px 15px 10px 0px rgba(0,0,0,0.1)",
+      // border: '1px solid '+ColorUse.colorPrimary,
+      boxShadow: "2px 5px 10px 0px rgba(0,0,0,0.05)",
       '& .t-text-wrap-3':{
         color: ColorUse.colorPrimary,
-      }
+      },
     },
 };
 
@@ -36,10 +36,10 @@ const styleCardList = {
     border: '1px solid #efefef',
     p: 2,
     ":hover": {
-      // transform: "translate(0px, -5px)",
+      transform: "translate(0px, -5px)",
       transform: "scale(1.015)",
-      border: '1px solid '+ColorUse.colorPrimary,
-      boxShadow: "2px 2px 10px 0px rgba(0,0,0,0.05)",
+      // border: '1px solid '+ColorUse.colorPrimary,
+      boxShadow: "2px 5px 10px 0px rgba(0,0,0,0.05)",
       '& .t-text-wrap-3':{
         color: ColorUse.colorPrimary,
       }
@@ -130,7 +130,7 @@ handleChangeCategory=()=>{},
                               <img
                                 src={row}
                                 alt={'product'}
-                                style={{ maxWidth: "100%" }}
+                                style={{ maxWidth: "100%", transition:'all .35s' }}
                                 className='t-img-product'
                               />
                           </SwiperSlide>
@@ -147,7 +147,7 @@ handleChangeCategory=()=>{},
                 :
                 data.category.map((objOther, idx) => {
                   return dataShow.map(row=>{
-                    console.log("card=>", row);
+                    // console.log("card=>", row);
                     if(row.id === objOther){
                       return (
                         <Link
